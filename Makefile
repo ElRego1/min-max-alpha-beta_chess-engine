@@ -1,9 +1,15 @@
+CC=g++ -std=c++11 
+CFLAGS=-Wall -Wextra
+CFLAGS_OPTIM=-funit-at-a-time
+CFLAGS_TEMP=-Og
+
+OUT_NAME=main
 
 build:
-	g++ -std=c++11 -Wall -Wextra -funit-at-a-time -O0 -g matrix_transformation.cpp main.cpp
+	$(CC) $(CFLAGS) $(CFLAGS_OPTIM) $(CFLAGS_TEMP) -o $(OUT_NAME) main.cpp
 
 test_engine:
-	xboard -fcp "./main" -fd "`pwd`" -debug
+	xboard -fcp "./$(OUT_NAME)" -fd "`pwd`" -debug
 
 clean:
 	rm main
