@@ -1,103 +1,53 @@
+locale = LC_CTYPE=en_US.UTF-8;LC_NUMERIC=ro_RO.UTF-8;LC_TIME=ro_RO.UTF-8;LC_COLLATE=C;LC_MONETARY=ro_RO.UTF-8;LC_MESSAGES=en_US.UTF-8;LC_PAPER=ro_RO.UTF-8;LC_NAME=ro_RO.UTF-8;LC_ADDRESS=ro_RO.UTF-8;LC_TELEPHONE=ro_RO.UTF-8;LC_MEASUREMENT=ro_RO.UTF-8;LC_IDENTIFICATION=ro_RO.UTF-8
 recognized 'normal' (-1) as variant normal
 recognized 'normal' (-1) as variant normal
 recognized 'normal' (-1) as variant normal
 shuffleOpenings = 0
-Requested font set for list -*-helvetica-medium-r-normal--12-*-*-*-*-*-*-*,-misc-fixed-medium-r-normal--12-*-*-*-*-*-*-*,-*-*-*-*-*-*-12-*-*-*-*-*-*-*
- got list -*-helvetica-medium-r-normal--12-*-*-*-*-*-*-*,-misc-fixed-medium-r-normal--12-*-*-*-*-*-*-*,-*-*-*-*-*-*-12-*-*-*-*-*-*-*, locale en_US.UTF-8
- got charset -misc-fixed-medium-r-normal--12-87-100-100-c-0-iso8859-1
- got charset -misc-fixed-medium-r-normal--12-87-100-100-c-0-iso8859-1
- got charset -misc-fixed-medium-r-normal--12-87-100-100-c-0-iso8859-2
- got charset -misc-fixed-medium-r-normal--12-87-100-100-c-0-iso8859-3
- got charset -misc-fixed-medium-r-normal--12-87-100-100-c-0-iso8859-4
- got charset -misc-fixed-medium-r-normal--12-87-100-100-c-0-iso8859-5
- got charset -misc-fixed-medium-r-normal--12-87-100-100-c-0-koi8-r
- got charset -misc-fixed-medium-r-normal--12-87-100-100-c-0-iso8859-7
- got charset -misc-fixed-medium-r-normal--12-87-100-100-c-0-iso8859-9
- got charset -misc-fixed-medium-r-normal--12-87-100-100-c-0-iso8859-13
- got charset -misc-fixed-medium-r-normal--12-87-100-100-c-0-iso8859-14
- got charset -misc-fixed-medium-r-normal--12-87-100-100-c-0-iso8859-15
- got charset -misc-fixed-medium-r-normal--12-87-100-100-c-0-jisx0208.1983-0
- got charset -daewoo-gothic-medium-r-normal--12-87-100-100-c-0-ksc5601.1987-0
- got charset -isas-fangsong ti-medium-r-normal--12-87-100-100-c-0-gb2312.1980-0
- got charset -misc-fixed-medium-r-normal--12-87-100-100-c-0-jisx0201.1976-0
- got charset -misc-fixed-medium-r-normal--12-87-100-100-c-0-iso10646-1
-Requested font set for list -*-helvetica-bold-r-normal--24-*-*-*-*-*-*-*,-misc-fixed-bold-r-normal--24-*-*-*-*-*-*-*,-*-*-*-*-*-*-24-*-*-*-*-*-*-*
- got list -*-helvetica-bold-r-normal--24-*-*-*-*-*-*-*,-misc-fixed-bold-r-normal--24-*-*-*-*-*-*-*,-*-*-*-*-*-*-24-*-*-*-*-*-*-*, locale en_US.UTF-8
- got charset -misc-fixed-bold-r-normal--24-173-100-100-c-0-iso8859-1
- got charset -misc-fixed-bold-r-normal--24-173-100-100-c-0-iso8859-1
- got charset -misc-fixed-bold-r-normal--24-173-100-100-c-0-iso8859-2
- got charset -misc-fixed-bold-r-normal--24-173-100-100-c-0-iso8859-3
- got charset -misc-fixed-bold-r-normal--24-173-100-100-c-0-iso8859-4
- got charset -misc-fixed-bold-r-normal--24-173-100-100-c-0-iso8859-5
- got charset -misc-fixed-medium-r-normal--24-173-100-100-c-0-koi8-r
- got charset -misc-fixed-bold-r-normal--24-173-100-100-c-0-iso8859-7
- got charset -misc-fixed-bold-r-normal--24-173-100-100-c-0-iso8859-9
- got charset -misc-fixed-bold-r-normal--24-173-100-100-c-0-iso8859-13
- got charset -misc-fixed-bold-r-normal--24-173-100-100-c-0-iso8859-14
- got charset -misc-fixed-bold-r-normal--24-173-100-100-c-0-iso8859-15
- got charset -jis-fixed-medium-r-normal--24-170-100-100-c-240-jisx0208.1983-0
- got charset -daewoo-mincho-medium-r-normal--24-170-100-100-c-240-ksc5601.1987-0
- got charset -isas-song ti-medium-r-normal--24-240-72-72-c-240-gb2312.1980-0
- got charset -sony-fixed-medium-r-normal--24-170-100-100-c-120-jisx0201.1976-0
- got charset -misc-fixed-bold-r-normal--24-173-100-100-c-0-iso10646-1
-Requested font set for list -*-helvetica-bold-r-normal--10-*-*-*-*-*-*-*,-misc-fixed-bold-r-normal--10-*-*-*-*-*-*-*,-*-*-*-*-*-*-10-*-*-*-*-*-*-*
- got list -*-helvetica-bold-r-normal--10-*-*-*-*-*-*-*,-misc-fixed-bold-r-normal--10-*-*-*-*-*-*-*,-*-*-*-*-*-*-10-*-*-*-*-*-*-*, locale en_US.UTF-8
- got charset -misc-fixed-bold-r-normal--10-72-100-100-c-0-iso8859-1
- got charset -misc-fixed-bold-r-normal--10-72-100-100-c-0-iso8859-1
- got charset -misc-fixed-bold-r-normal--10-72-100-100-c-0-iso8859-2
- got charset -misc-fixed-bold-r-normal--10-72-100-100-c-0-iso8859-3
- got charset -misc-fixed-bold-r-normal--10-72-100-100-c-0-iso8859-4
- got charset -misc-fixed-bold-r-normal--10-72-100-100-c-0-iso8859-5
- got charset -misc-fixed-medium-r-normal--10-100-75-75-c-60-koi8-r
- got charset -misc-fixed-bold-r-normal--10-72-100-100-c-0-iso8859-7
- got charset -misc-fixed-bold-r-normal--10-72-100-100-c-0-iso8859-9
- got charset -misc-fixed-bold-r-normal--10-72-100-100-c-0-iso8859-13
- got charset -misc-fixed-bold-r-normal--10-72-100-100-c-0-iso8859-14
- got charset -misc-fixed-bold-r-normal--10-72-100-100-c-0-iso8859-15
- got charset -jis-fixed-medium-r-normal--10-72-100-100-c-0-jisx0208.1983-0
- got charset -daewoo-gothic-medium-r-normal--10-72-100-100-c-0-ksc5601.1987-0
- got charset -isas-fangsong ti-medium-r-normal--10-72-100-100-c-0-gb2312.1980-0
- got charset -misc-fixed-medium-r-normal--10-72-100-100-c-0-jisx0201.1976-0
- got charset -misc-fixed-bold-r-normal--10-72-100-100-c-0-iso10646-1
 shuffleOpenings = 0
-Version: xboard 4.8.0 + main ()
+Version: xboard 4.9.1 + main ()
 Reset(1, 0) from gameMode 0
 recognized 'normal' (-1) as variant normal
 GameEnds(0, (null), 2)
 shuffleOpenings = 0
-StartChildProcess (dir="/home/robert/School/PA/Proiect/engine") ./main
-1029 >first : xboard
+StartChildProcess (dir="/home/student/Desktop/Etapa1/min-max-alpha-beta_chess-engine-etapa1_robert") ./main
+258 >first : xboard
 protover 2
-1079 <first : A2A3
-1080 <first : A2A3
-1080 <first : A2A3
-1080 <first : A2A3
-11031 >first : new
+264 <first : 
+265 <first : feature done=1
+265 >first : accepted done
+266 >first : new
 random
-11031 >first : level 40 5 0
-11031 >first : post
-11031 >first : hard
-11031 <first : A2A3
-11031 <first : A2A3
-11031 <first : A2A3
-11031 <first : A2A3
-11031 <first : A2A3
-11031 <first : A2A3
-11031 <first : A2A3
-11031 <first : A2A3
+266 >first : level 40 5 0
+266 >first : post
+266 >first : hard
 nps: w=-1, b=-1
 nps: w=-1, b=-1
-41588 >first : time 30000
-41588 >first : otim 30000
+198478 >first : time 30000
+198478 >first : otim 30000
 book hit = (NULL)
-41588 >first : d2d4
-41725 <first : A2A3
-41725 <first : A2A3
-41725 <first : A2A3
-41725 <first : A2A3
-41725 <first : A2A3
-GameEnds(29, xboard exit, 2)
+198478 >first : f2f4
+198551 <first : move b8c6
 Interrupting first
-73076 >first : result * {xboard exit}
-73128 >first : force
-73128 >first : quit
+201515 >first : time 29992
+201515 >first : otim 29703
+book hit = (NULL)
+201515 >first : g2g4
+201588 <first : move c6a5
+Interrupting first
+204207 >first : time 29985
+204207 >first : otim 29441
+book hit = (NULL)
+204207 >first : e2e4
+204281 <first : move a5b3
+Interrupting first
+207316 >first : time 29978
+207316 >first : otim 29138
+book hit = (NULL)
+207316 >first : d2d4
+207390 <first : resign
+GameEnds(26, Black resigns, 1)
+Interrupting first
+207390 >first : result 1-0 {Black resigns}
+207390 >first : force
+GameEnds(26, Black resigns, 2)
+335923 >first : quit

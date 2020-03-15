@@ -14,7 +14,8 @@
 #ifndef PIECES_H
 #define PIECES_H
 
-void get_piece_directions(char p);
+int check_validity(int i, int j);
+std::vector<std::vector<char>> get_piece_directions(char p);
 void move_piece(char p, char x, char y, int d);
 
 
