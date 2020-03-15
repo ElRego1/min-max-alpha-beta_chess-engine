@@ -1,0 +1,53 @@
+locale = LC_CTYPE=en_US.UTF-8;LC_NUMERIC=ro_RO.UTF-8;LC_TIME=ro_RO.UTF-8;LC_COLLATE=C;LC_MONETARY=ro_RO.UTF-8;LC_MESSAGES=en_US.UTF-8;LC_PAPER=ro_RO.UTF-8;LC_NAME=ro_RO.UTF-8;LC_ADDRESS=ro_RO.UTF-8;LC_TELEPHONE=ro_RO.UTF-8;LC_MEASUREMENT=ro_RO.UTF-8;LC_IDENTIFICATION=ro_RO.UTF-8
+recognized 'normal' (-1) as variant normal
+recognized 'normal' (-1) as variant normal
+recognized 'normal' (-1) as variant normal
+shuffleOpenings = 0
+shuffleOpenings = 0
+Version: xboard 4.9.1 + main ()
+Reset(1, 0) from gameMode 0
+recognized 'normal' (-1) as variant normal
+GameEnds(0, (null), 2)
+shuffleOpenings = 0
+StartChildProcess (dir="/home/student/Desktop/Etapa1/min-max-alpha-beta_chess-engine-etapa1_robert") ./main
+258 >first : xboard
+protover 2
+264 <first : 
+265 <first : feature done=1
+265 >first : accepted done
+266 >first : new
+random
+266 >first : level 40 5 0
+266 >first : post
+266 >first : hard
+nps: w=-1, b=-1
+nps: w=-1, b=-1
+198478 >first : time 30000
+198478 >first : otim 30000
+book hit = (NULL)
+198478 >first : f2f4
+198551 <first : move b8c6
+Interrupting first
+201515 >first : time 29992
+201515 >first : otim 29703
+book hit = (NULL)
+201515 >first : g2g4
+201588 <first : move c6a5
+Interrupting first
+204207 >first : time 29985
+204207 >first : otim 29441
+book hit = (NULL)
+204207 >first : e2e4
+204281 <first : move a5b3
+Interrupting first
+207316 >first : time 29978
+207316 >first : otim 29138
+book hit = (NULL)
+207316 >first : d2d4
+207390 <first : resign
+GameEnds(26, Black resigns, 1)
+Interrupting first
+207390 >first : result 1-0 {Black resigns}
+207390 >first : force
+GameEnds(26, Black resigns, 2)
+335923 >first : quit
