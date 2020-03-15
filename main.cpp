@@ -6,8 +6,14 @@
 
 int main() {
 
-	
-	
+	Log log;
+	make_print_board_matrix(1);
+
+	protocol_begin(log);
+	// char x, y;
+	// std::string s = "a1";
+	// get_matrix_coordonates(s, x, y);
+
 	// while (1) {
 	// 	std::cout << "A2A3" << std::endl;
 	// 	log.write("sent: A2A3\n");

@@ -22,7 +22,7 @@ collor: 0 - white
 #define BOX_SQUARES 64
 #define BOX_LENGTH 8
 
-char _collor = -1;
+char _color = -1;
 std::vector<std::vector<char*>> _print_board;
 
 
@@ -55,7 +55,7 @@ std::vector<std::vector<char>> get_initial_board_matrix() {
 	v[7][5] = 14; // enemy's black
 
 	// the position of the king and queen depends on the collor
-	if (_collor == 0) { //play as white
+	if (_color == 0) { //play as white
 		v[0][3] = 6; // my queen
 		v[0][4] = 7; // my king
 		v[7][3] = 16; // enemy's queen
@@ -70,11 +70,11 @@ std::vector<std::vector<char>> get_initial_board_matrix() {
 }
 
 // saves the made print board into the variable print_board
-void make_print_board_matrix(char collor) {
+void make_print_board_matrix(char color) {
 	std::vector<std::vector<char*>> p(BOX_LENGTH, 
 		std::vector<char*>(BOX_LENGTH));
 	// if collor is different from -1, we are at the first run and do not free the memory
-	if (_collor != -1) {
+	if (_color != -1) {
 		for (char i = 0; i < BOX_LENGTH; ++i) {
 			for (char j = 0; j < BOX_LENGTH; ++j) {
 				free(_print_board[i][j]);
@@ -82,9 +82,9 @@ void make_print_board_matrix(char collor) {
 		}
 	}
 	
-	_collor = collor;
+	_color = color;
 
-	if (collor == 0) { // white
+	if (color == 0) { // white
 		for (char number = '1'; number <= '8'; ++number) {
 			for (char letter = 'a'; letter <= 'h'; ++letter) {
 				p[number - '1'][letter - 'a'] = (char*)malloc(sizeof(char) * 3);

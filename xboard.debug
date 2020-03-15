@@ -65,39 +65,17 @@ Reset(1, 0) from gameMode 0
 recognized 'normal' (-1) as variant normal
 GameEnds(0, (null), 2)
 shuffleOpenings = 0
-StartChildProcess (dir="/home/robert/School/PA/Proiect/engine") ./main
-1029 >first : xboard
+StartChildProcess (dir="/media/sf_PA/Proiect/engine/min-max-alpha-beta_chess-engine") ./main
+607 >first : xboard
 protover 2
-1079 <first : A2A3
-1080 <first : A2A3
-1080 <first : A2A3
-1080 <first : A2A3
-11031 >first : new
+615 <first : feature collor=1
+615 >first : rejected collor
+10614 >first : new
 random
-11031 >first : level 40 5 0
-11031 >first : post
-11031 >first : hard
-11031 <first : A2A3
-11031 <first : A2A3
-11031 <first : A2A3
-11031 <first : A2A3
-11031 <first : A2A3
-11031 <first : A2A3
-11031 <first : A2A3
-11031 <first : A2A3
-nps: w=-1, b=-1
-nps: w=-1, b=-1
-41588 >first : time 30000
-41588 >first : otim 30000
-book hit = (NULL)
-41588 >first : d2d4
-41725 <first : A2A3
-41725 <first : A2A3
-41725 <first : A2A3
-41725 <first : A2A3
-41725 <first : A2A3
-GameEnds(29, xboard exit, 2)
-Interrupting first
-73076 >first : result * {xboard exit}
-73128 >first : force
-73128 >first : quit
+10614 >first : level 40 5 0
+10614 >first : post
+10615 >first : hard
+GameEnds(27, Error: first chess program (./main) exited unexpectedly, 2)
+12422 >first : result 0-1 {Error: first chess program (./main) exited unexpectedly}
+12422 >first : force
+12422 >first : quit
