@@ -5,9 +5,12 @@
 
 #include <bits/stdc++.h>
 
+
+
+// object for logging the communications
 class Log {
 
-	std::ofstream out;
+	static std::ofstream out;
 
 public:
 	Log() {
