@@ -17,15 +17,19 @@ int protocol_begin(Log &log) {
 
 	//TO_DO
 	// now we can send the features
-	std::cout << "feature color=1\n";
-	log.write("Sent: feature color=1\n");
+	std::cout << "feature colors=1\n";
+	log.write("Sent: feature colors=1\n");
+
+	std::cin >>  s; // now we should get accepted collors
+	log.write("Received: ");
+	log.write(s);
+	std::cin >>  s;
+	log.write(s);
+	log.write("\n");
 
 	// now we take the new game parameters
-	std::cin >>  s;
+	
 	log.write("Received: ");
-	log.write(" ");
-	log.write(s);
-
 	std::cin >>  s;
 	log.write(" ");
 	log.write(s);
@@ -46,5 +50,20 @@ int protocol_begin(Log &log) {
 	log.write(" ");
 	log.write(s);
 
+	std::cin >>  s;
+	log.write(" ");
+	log.write(s);
+
+	std::cin >>  s;
+	log.write(" ");
+	log.write(s);
+
+	std::cin >>  s;
+	log.write(" ");
+	log.write(s);
+
+	std::cin >>  s;
+	log.write(" ");
+	log.write(s);
 	return 1;
 }

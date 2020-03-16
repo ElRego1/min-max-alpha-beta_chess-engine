@@ -1,0 +1,4 @@
+Received: xboard protover 2
+Sent: feature colors=1
+Received: acceptedcolors
+Received:  new random level 40 5 0 post hard time

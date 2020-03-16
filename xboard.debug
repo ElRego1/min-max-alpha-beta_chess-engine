@@ -66,16 +66,23 @@ recognized 'normal' (-1) as variant normal
 GameEnds(0, (null), 2)
 shuffleOpenings = 0
 StartChildProcess (dir="/media/sf_PA/Proiect/engine/min-max-alpha-beta_chess-engine") ./main
-607 >first : xboard
+593 >first : xboard
 protover 2
-615 <first : feature collor=1
-615 >first : rejected collor
-10614 >first : new
+606 <first : feature colors=1
+606 >first : accepted colors
+10603 >first : new
 random
-10614 >first : level 40 5 0
-10614 >first : post
-10615 >first : hard
+10608 >first : level 40 5 0
+10608 >first : post
+10609 >first : hard
+nps: w=-1, b=-1
+nps: w=-1, b=-1
+21752 >first : time 30000
+21753 >first : otim 30000
+book hit = (NULL)
+21753 >first : e2e4
 GameEnds(27, Error: first chess program (./main) exited unexpectedly, 2)
-12422 >first : result 0-1 {Error: first chess program (./main) exited unexpectedly}
-12422 >first : force
-12422 >first : quit
+Interrupting first
+25003 >first : result 0-1 {Error: first chess program (./main) exited unexpectedly}
+25003 >first : force
+25004 >first : quit
