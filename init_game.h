@@ -28,11 +28,6 @@ char _color = -1;
 std::vector<std::vector<char*>> _print_board;
 std::vector<std::vector<char>> positions;
 
-char _color = -1;
-std::vector<std::vector<char*>> _print_board;
-std::vector<std::vector<char>> positions;
-
-
 
 std::vector<std::vector<char>> get_initial_board_matrix() {
 	std::vector<std::vector<char>> v(BOX_LENGTH,
