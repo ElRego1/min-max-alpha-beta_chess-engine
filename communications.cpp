@@ -15,14 +15,15 @@ int protocol_begin(Log &log) {
 	log.write(s);
 	log.write("\n");
 
-	//TO_DO
+	//TODO
 	// now we can send the features
-	std::cout << "feature colors=1\n";
-	log.write("Sent: feature colors=1\n");
+	std::cout << "feature sigint=0\n";
+	log.write("Sent: feature sigint=0\n");
 
 	std::cin >>  s; // now we should get accepted collors
 	log.write("Received: ");
 	log.write(s);
+	log.write(" ");
 	std::cin >>  s;
 	log.write(s);
 	log.write("\n");
@@ -61,9 +62,8 @@ int protocol_begin(Log &log) {
 	std::cin >>  s;
 	log.write(" ");
 	log.write(s);
+	// finished the init
 
-	std::cin >>  s;
-	log.write(" ");
-	log.write(s);
+	log.write("\n\t*****\n");
 	return 1;
 }

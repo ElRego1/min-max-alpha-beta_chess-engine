@@ -9,8 +9,8 @@
 6 - my queen         | 16 - enemy queen
 7 - my king          | 17 - enemy king
 
-collor: 0 - white
-        1 - black
+color: 0 - white
+       1 - black
 
 */
 
@@ -22,9 +22,8 @@ collor: 0 - white
 #define BOX_SQUARES 64
 #define BOX_LENGTH 8
 
-char _collor = -1;
+char _color = -1;
 std::vector<std::vector<char*>> _print_board;
-std::vector<std::vector<char>> chess_board;
 std::vector<std::vector<char>> positions;
 
 
@@ -56,7 +55,7 @@ std::vector<std::vector<char>> get_initial_board_matrix() {
 	v[7][2] = 15; // enemy's white
 	v[7][5] = 14; // enemy's black
 
-	// the position of the king and queen depends on the collor
+	// the position of the king and queen depends on the color
 	if (_color == 0) { //play as white
 		v[0][3] = 6; // my queen
 		v[0][4] = 7; // my king
@@ -68,8 +67,6 @@ std::vector<std::vector<char>> get_initial_board_matrix() {
 		v[7][3] = 17; // enemy's king
 		v[7][4] = 16; // enemy's queen
 	}
-
-	chess_board = v;
 	return v;
 }
 
@@ -77,7 +74,7 @@ std::vector<std::vector<char>> get_initial_board_matrix() {
 void make_print_board_matrix(char color) {
 	std::vector<std::vector<char*>> p(BOX_LENGTH,
 		std::vector<char*>(BOX_LENGTH));
-	// if collor is different from -1, we are at the first run and do not free the memory
+	// if color is different from -1, we are at the first run and do not free the memory
 	if (_color != -1) {
 		for (char i = 0; i < BOX_LENGTH; ++i) {
 			for (char j = 0; j < BOX_LENGTH; ++j) {
@@ -111,7 +108,7 @@ void make_print_board_matrix(char color) {
 }
 
 // TO_DO
-// std::vector<char> make_board(char collor) {
+// std::vector<char> make_board(char color) {
 // 	std::vector<char> b(BOX_SQUARES);
 // 	return b;
 // }
