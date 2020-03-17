@@ -5,33 +5,109 @@ Received:  new random level 40 5 0 post hard
 	*****
 
 passes: 0
-time
-30000 otim 30000 Received: we got the move a2a4
-move h7h5
+force
 
 passes: 0
 
 passes: 1
-time
-29991 otim 1 Received: we got the move a4a5
-move h5h4
+analyze
 
 passes: 1
 
 passes: 2
-time
-29983 otim 1 Received: we got the move a5a6
-move h4h3
+e2e3
 
 passes: 2
 
 passes: 3
-time
-29975 otim 1 Received: we got the move a6b7
-move h3h2
+.
 
 passes: 3
 
 passes: 4
+e7e6
+
+passes: 4
+
+passes: 5
+c2c3
+
+passes: 5
+
+passes: 6
+c7c6
+
+passes: 6
+
+passes: 7
+exit
+
+passes: 7
+
+passes: 8
+force
+
+passes: 8
+
+passes: 9
+black
+
+passes: 9
+
+passes: 10
+time
+
+passes: 10
+
+passes: 11
+30000
+
+passes: 11
+
+passes: 12
+otim
+
+passes: 12
+
+passes: 13
+30000
+
+passes: 13
+
+passes: 14
+white
+
+passes: 14
+
+passes: 15
+go
+
+passes: 15
+
+passes: 16
 result
- 
+
+passes: 16
+
+passes: 17
+*
+
+passes: 17
+
+passes: 18
+{xboard
+
+passes: 18
+
+passes: 19
+exit}
+
+passes: 19
+
+passes: 20
+force
+
+passes: 20
+
+passes: 21
+quit

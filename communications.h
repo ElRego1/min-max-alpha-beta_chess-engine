@@ -24,10 +24,10 @@ public:
 
 	[[gnu::always_inline]] inline
 	void write(std::string msg) {
-#if DEBUG	
+#if DEBUG
 		out << msg;
 		out.flush();
-#endif	
+#endif
 	}
 };
 
