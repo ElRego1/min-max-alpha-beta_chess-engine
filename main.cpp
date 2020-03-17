@@ -83,9 +83,9 @@ white_engine:
 			} else if (force == 1 && !isdigit(s[0]) && isdigit(s[1])) {
 					//std::cin >> s;
 					get_matrix_coordonates(s, x_s, y_s); // now we have in x_s and y_s the coordonates of the source of the moved piece
-		    	s = s.substr(2, 2); // we take the chess destinations on the board
-		    	get_matrix_coordonates(s, x_d, y_d); // now we have in x_d and y_d the coordonates of the destination of the moved piece
-		    	move_piece(x_s, y_s, x_d, y_d, chess_board, playing_pieces_mine);
+		    		s = s.substr(2, 2); // we take the chess destinations on the board
+		    		get_matrix_coordonates(s, x_d, y_d); // now we have in x_d and y_d the coordonates of the destination of the moved piece
+		    		move_piece(x_s, y_s, x_d, y_d, chess_board, playing_pieces_mine);
 					//std::cout << "move b6b5" << '\n';
 
 	    } else if (s.compare("time") == 0 && force == 0) {
@@ -115,18 +115,35 @@ white_engine:
 	    	get_matrix_coordonates(s, x_s, y_s); // now we have in x_s and y_s the coordonates of the source of the moved piece
 	    	s = s.substr(2, 2); // we take the chess destinations on the board
 	    	get_matrix_coordonates(s, x_d, y_d); // now we have in x_d and y_d the coordonates of the destination of the moved piece
+	    	// std::cout << "# x_s: " << (int)x_s << " | y_s: " << (int)y_s << " | x_d: " << (int)x_d << " | y_d: " << (int)y_d << "\n";
 	    	move_piece(x_s, y_s, x_d, y_d, chess_board, playing_pieces_mine);
 
 				if (wb == 1) {
 		    	if (pawn_move != -1) {
 		    		if (!playing_pieces_mine.empty() && playing_pieces_mine[0].first == 1) { // we move the pawn if exists
+		    			// check if pawn can move forward
+		    			if (chess_board[pawn_moves[pawn_move].first][pawn_moves[pawn_move].second] != 0) {
+		    				x_s = playing_pieces_mine[0].second.first;
+		    				y_s = playing_pieces_mine[0].second.second;
+
+		    				std::vector<std::pair<char, std::pair<char, char>>>::iterator it
+                				= std::find(playing_pieces_mine.begin(), playing_pieces_mine.end(),
+				                std::pair<char, std::pair<char, char>>(std::make_pair(
+				                chess_board[x_s][y_s], std::make_pair(x_s, y_s))));
+				            if (it != playing_pieces_mine.end()) {
+				                playing_pieces_mine.erase(it);
+				            }
+				            pawn_move = -1;
+				            goto pawn_cant_move;
+		    			}
+
 		    			std::cout << "move " << get_chess_coordonates(playing_pieces_mine[0].second.first, playing_pieces_mine[0].second.second)
 		    			<< get_chess_coordonates(pawn_moves[pawn_move].first, pawn_moves[pawn_move].second) << std::endl;
 
 		    			log.write(get_chess_coordonates(playing_pieces_mine[0].second.first, playing_pieces_mine[0].second.second));
 		    			log.write(get_chess_coordonates(pawn_moves[pawn_move].first, pawn_moves[pawn_move].second));
 		    			log.write("\n");
-
+		    			
 		    			move_piece(playing_pieces_mine[0].second.first,
 		    				playing_pieces_mine[0].second.second,
 		    				pawn_moves[pawn_move].first,
@@ -134,8 +151,9 @@ white_engine:
 		    				chess_board, playing_pieces_mine);
 		    			++pawn_move;
 		    		} else if (!playing_pieces_mine.empty() && playing_pieces_mine[0].first == 3) { // we move the knight if exists
+pawn_cant_move:
 		    			pawn_move = -1;
-		    			std::cout << "move" << get_chess_coordonates(playing_pieces_mine[0].second.first, playing_pieces_mine[0].second.second)
+		    			std::cout << "move " << get_chess_coordonates(playing_pieces_mine[0].second.first, playing_pieces_mine[0].second.second)
 		    			<< get_chess_coordonates(knight_moves[knight_move].first, knight_moves[knight_move].second) << std::endl;
 
 		    			log.write(get_chess_coordonates(playing_pieces_mine[0].second.first, playing_pieces_mine[0].second.second));
@@ -152,7 +170,7 @@ white_engine:
 		    			log.write("\n\tWOT???\n");
 		    		}
 		    	} else if (knight_move != -1 && (!playing_pieces_mine.empty() && playing_pieces_mine[0].first == 3)) { // we move the knight if exists
-		    		std::cout << "move" << get_chess_coordonates(playing_pieces_mine[0].second.first, playing_pieces_mine[0].second.second)
+		    		std::cout << "move " << get_chess_coordonates(playing_pieces_mine[0].second.first, playing_pieces_mine[0].second.second)
 		    		<< get_chess_coordonates(knight_moves[knight_move].first, knight_moves[knight_move].second) << std::endl;
 
 		    		log.write(get_chess_coordonates(playing_pieces_mine[0].second.first, playing_pieces_mine[0].second.second));

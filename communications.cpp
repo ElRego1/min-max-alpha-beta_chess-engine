@@ -16,12 +16,13 @@ int protocol_begin(Log &log) {
 	log.write("\n");
 
 	//TODO
-	std::vector<std::string> features = {"feature sigint=0", "feature color=1"};
+	std::vector<std::string> features = {"feature sigint=0", " colors=1", " done=1"};
 	for (int i = 0; i < features.size(); ++i) {
-		std::cout << features[i] << "\n";
+		std::cout << features[i] << " ";
 		log.write("Sent: ");
 		log.write(features[i]);
 	}
+	std::cout << "\n";
 
 	for (int i = 0; i < features.size(); ++i) {
 		std::cin >>  s;
