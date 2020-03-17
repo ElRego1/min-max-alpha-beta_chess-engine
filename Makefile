@@ -1,9 +1,16 @@
+CC=g++ -std=c++11
+CFLAGS=-Wall -Wextra
+CFLAGS_OPTIM=-funit-at-a-time
+CFLAGS_TEMP=-Og
+CFILES=communications.cpp pieces.cpp main.cpp
+
+OUT_NAME=main
 
 build:
-	g++ -std=c++11 -Wall -Wextra -O0 -g -o main main.cpp
+	$(CC) $(CFLAGS) $(CFLAGS_OPTIM) $(CFLAGS_TEMP) -o $(OUT_NAME) $(CFILES)
 
-test_engine:
-	xboard -fcp "./main" -fd "`pwd`" -debug
+run:
+	xboard -fcp "./$(OUT_NAME)" -fd "`pwd`" -debug
 
 clean:
 	rm main
