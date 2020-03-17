@@ -1,0 +1,58 @@
+# min-max-alpha-beta_chess-engine
+Team Betelgeuse
+
+Moraru Teodora 325CA
+Lica Robert Mihai 321CA
+Oprea Olivia Maria 323CA
+
+~Etapa 1~
+
+~Instructiuni de compilare~
+- "make build" pentru compilare
+- "make run" pentru rulare
+
+Structura si algoritmi:
+- main.cpp: se realizeaza interfatarea cu xboard, utilizand si interpretand
+  mai multe comenzi. Testarea comenzilor de mutare se face pe mai multe cazuri:
+  in cazul in care engine-ul joaca pe culoarea negru, se construiesc initial 2
+  vectori pentru pozitiile in care dorim sa mutam un pion si un cal. Se citeste
+  mutarea de la xboard, se interpreteaza pentru a converti coordonatele din
+  xboard in coordonatele matricii interne si se salveaza mutarea. Apoi se
+  verifica pe rand vectorii de miscari posibile si se traduc invers
+  coordonatele pentru a fi transmise la xboard. Cand nu se mai afla miscari
+  valide in vectori, engine-ul da resign. Pentru verificarea cazului de culoare
+  white, am definit un vector cu coordonatele scrise direct pentru xboard, iar
+  engine-ul face prima miscare in joc. Cand se termina toate miscarile, se da
+  resign.
+
+Observatie: nu se trateaza in functii separate miscarile pe negru fata de
+miscarile pe alb, ci se foloseste varianta intoarsa a matricii de tranzitie
+in coordonate xboard.
+
+- init_game.h: functii folosite pentru initializarea tablei interne de sah,
+pentru initializarea vectorului de pozitii ale pieselor, pentru construirea
+matricilor de tranzitie de coordonate in functie de culoarea de joc.
+
+- matrix_transformation.cpp: se realizeaza traducerea propriu-zisa din coordonate
+xboard in coordonatele matricii interne care difera pentru alb si negru, coltul din
+stanga jos a perspectivei playerului fiind coordonatele (0, 0).
+
+- pieces.cpp: functii pentru verificarea unei miscari valide, pentru returnarea
+unui vector cu toate miscarile valide ale unei piese date si pentru realizarea
+miscarii unei piese (dandu-se sursa si destinatia)
+TO_DO: de extins si verificat, de facut mutarea mai eleganta si testata
+si corectitudinea miscarii.
+
+- communications.cpp: o folosim pentru a face debug intr-un fisier separat de
+log (am aflat ulterior de #, dar e bun si log-ul). Funcita "protocol_begin" se ocupa
+si de initializarea comunicarii si a jocului, dat feature-uri si asa mai departe.
+
+~Surse~
+https://www.gnu.org/software/xboard/engine-intf.html#8
+Forumul ACS
+
+~Responsabilitati~
+Moraru Teodora - main.cpp, pieces.cpp, debugging
+Lica Robert Mihai - main.cpp, init_game.h, matrix_transformations.cpp, debugging
+Oprea Olivia Maria - communications.cpp, debugging
+
