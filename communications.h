@@ -11,14 +11,18 @@ class Log {
 	std::ofstream out;
 public:
 	Log() {
+#if DEBUG
 		out = std::ofstream("log.txt");
+#endif
 	}
 
 	~Log() {
+#if DEBUG
 		out.close();
+#endif
 	}
 
-	[[gnu::always_inline]] inline
+	//[[gnu::always_inline]] inline
 	void write(std::string msg) {
 #if DEBUG	
 		out << msg;

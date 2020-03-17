@@ -1,4 +1,35 @@
 Received: xboard protover 2
-Sent: feature colors=1
-Received: acceptedcolors
-Received:  new random level 40 5 0 post hard time
+Sent: feature sigint=0
+Received: accepted sigint
+Received:  new random level 40 5 0 post hard
+	*****
+
+passes: 0
+time
+30000 otim 30000 Received: we got the move b2b4
+move h7h5
+
+passes: 0
+
+passes: 1
+time
+29991 otim 29846 Received: we got the move b4b5
+move h5h4
+
+passes: 1
+
+passes: 2
+time
+29983 otim 29753 Received: we got the move b5b6
+move h4h3
+
+passes: 2
+
+passes: 3
+time
+29974 otim 29384 Received: we got the move b6c7
+move h3h2
+
+passes: 3
+
+passes: 4
