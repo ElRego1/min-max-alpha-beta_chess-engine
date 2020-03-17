@@ -113,10 +113,10 @@ void move_piece(char x_s, char y_s, char x_d, char y_d,
 
     if (chess_board[x_s][y_s] < 10) { //it's my piece
         // a one liner to take the iterator to the position of my piece in the vector
-        std::vector<std::pair<char, std::pair<char, char>>>::iterator it
-            = std::find(playing_pieces_mine.begin(), playing_pieces_mine.end(),
-            std::pair<char, std::pair<char, char>>(std::make_pair(
-                chess_board[x_d][y_d], std::make_pair(x_d, y_d))));
+        // std::vector<std::pair<char, std::pair<char, char>>>::iterator it
+        //     = std::find(playing_pieces_mine.begin(), playing_pieces_mine.end(),
+        //     std::pair<char, std::pair<char, char>>(std::make_pair(
+        //         chess_board[x_d][y_d], std::make_pair(x_d, y_d))));
         playing_pieces_mine[0].second.first = x_d;
         playing_pieces_mine[0].second.second = y_d;
         // (*it).second.first = x_d;

@@ -9,35 +9,39 @@ Reset(1, 0) from gameMode 0
 recognized 'normal' (-1) as variant normal
 GameEnds(0, (null), 2)
 shuffleOpenings = 0
-StartChildProcess (dir="/home/student/Desktop/Etapa11/min-max-alpha-beta_chess-engine-Etapa1_Teo") ./main
-314 >first : xboard
+StartChildProcess (dir="/media/sf_PA/Proiect/engine/min-max-alpha-beta_chess-engine") ./main
+766 >first : xboard
 protover 2
-321 <first : feature sigint=0
-321 >first : accepted sigint
-10317 >first : new
+781 <first : feature sigint=0
+781 >first : accepted sigint
+10769 >first : new
 random
-10317 >first : level 40 5 0
-10317 >first : post
-10317 >first : hard
-Impossible move , type = 0
-18292 >first : force
-18292 >first : analyze
-Impossible move , type = 0
-19631 >first : e2e3
-20294 >first : .
-22589 >first : e7e6
-24038 >first : c2c3
-25503 >first : c7c6
-34816 >first : exit
-34816 >first : force
-34817 >first : black
-34817 >first : time 30000
-34817 >first : otim 30000
-34818 >first : white
-book hit = (NULL)
-34818 >first : go
+10770 >first : level 40 5 0
+10770 >first : post
+10770 >first : hard
 nps: w=-1, b=-1
+nps: w=-1, b=-1
+22512 >first : time 30000
+22512 >first : otim 30000
+book hit = (NULL)
+22513 >first : a2a4
+22594 <first : move h7h5
+384418 >first : time 29991
+384418 >first : otim 1
+book hit = (NULL)
+384419 >first : a4a5
+384499 <first : move h5h4
+396289 >first : time 29983
+396290 >first : otim 1
+book hit = (NULL)
+396290 >first : a5a6
+396370 <first : move h4h3
+397712 >first : time 29975
+397712 >first : otim 1
+book hit = (NULL)
+397713 >first : a6b7
+397793 <first : move h3h2
 GameEnds(29, xboard exit, 2)
-47717 >first : result * {xboard exit}
-47718 >first : force
-47718 >first : quit
+400557 >first : result * {xboard exit}
+400557 >first : force
+400558 >first : quit
