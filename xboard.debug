@@ -66,34 +66,38 @@ recognized 'normal' (-1) as variant normal
 GameEnds(0, (null), 2)
 shuffleOpenings = 0
 StartChildProcess (dir="/media/sf_PA/Proiect/engine/min-max-alpha-beta_chess-engine") ./main
-760 >first : xboard
+766 >first : xboard
 protover 2
-773 <first : feature sigint=0
-773 >first : accepted sigint
-10761 >first : new
+781 <first : feature sigint=0
+781 >first : accepted sigint
+10769 >first : new
 random
-10762 >first : level 40 5 0
-10762 >first : post
-10762 >first : hard
+10770 >first : level 40 5 0
+10770 >first : post
+10770 >first : hard
 nps: w=-1, b=-1
 nps: w=-1, b=-1
-11652 >first : time 30000
-11652 >first : otim 30000
+22512 >first : time 30000
+22512 >first : otim 30000
 book hit = (NULL)
-11652 >first : b2b4
-11732 <first : move h7h5
-13264 >first : time 29991
-13265 >first : otim 29846
+22513 >first : a2a4
+22594 <first : move h7h5
+384418 >first : time 29991
+384418 >first : otim 1
 book hit = (NULL)
-13265 >first : b4b5
-13347 <first : move h5h4
-14281 >first : time 29983
-14282 >first : otim 29753
+384419 >first : a4a5
+384499 <first : move h5h4
+396289 >first : time 29983
+396290 >first : otim 1
 book hit = (NULL)
-14282 >first : b5b6
-14367 <first : move h4h3
-18058 >first : time 29974
-18058 >first : otim 29384
+396290 >first : a5a6
+396370 <first : move h4h3
+397712 >first : time 29975
+397712 >first : otim 1
 book hit = (NULL)
-18059 >first : b6c7
-18139 <first : move h3h2
+397713 >first : a6b7
+397793 <first : move h3h2
+GameEnds(29, xboard exit, 2)
+400557 >first : result * {xboard exit}
+400557 >first : force
+400558 >first : quit

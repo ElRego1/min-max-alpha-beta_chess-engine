@@ -22,7 +22,7 @@ public:
 #endif
 	}
 
-	//[[gnu::always_inline]] inline
+	[[gnu::always_inline]] inline
 	void write(std::string msg) {
 #if DEBUG	
 		out << msg;
