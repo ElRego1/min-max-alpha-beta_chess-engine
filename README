@@ -1,24 +1,6 @@
 # min-max-alpha-beta_chess-engine
-Team Betelgeuse
 
-Moraru Teodora 325CA
-Lica Robert Mihai 321CA
-Oprea Olivia Maria 323CA
-
-~Etapa 1~
-
-~Instructiuni de compilare~
-- "make build" pentru compilare
-- "make run" pentru rulare
-
-Structura si algoritmi:
-- main.cpp: se realizeaza interfatarea cu xboard, utilizand si interpretand
-  mai multe comenzi. Testarea comenzilor de mutare se face pe mai multe cazuri:
-  in cazul in care engine-ul joaca pe culoarea negru, se construiesc initial 2
-  vectori pentru pozitiile in care dorim sa mutam un pion si un cal. Se citeste
-  mutarea de la xboard, se interpreteaza pentru a converti coordonatele din
-  xboard in coordonatele matricii interne si se salveaza mutarea. Apoi se
-  verifica pe rand vectorii de miscari posibile si se traduc invers
+// aceasta e o chestie in plus pusa de robert pentru a fi stearsa si a face un conflict la merge pe git ca sa invete oli cum sa se descurce cu un conflict
   coordonatele pentru a fi transmise la xboard. Cand nu se mai afla miscari
   valide in vectori, engine-ul da resign. Pentru verificarea cazului de culoare
   white, am definit un vector cu coordonatele scrise direct pentru xboard, iar
