@@ -10,6 +10,9 @@ build:
 	$(CC) $(CFLAGS) $(CFLAGS_OPTIM) $(CFLAGS_TEMP) -o $(OUT_NAME) $(CFILES)
 
 run:
+	./$(OUT_NAME)
+
+run_test:
 	xboard -fcp "./$(OUT_NAME)" -fd "`pwd`" -debug
 
 clean:
