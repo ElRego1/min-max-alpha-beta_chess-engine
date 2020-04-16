@@ -11,10 +11,7 @@ Oprea Olivia Maria 323CA
 - "make build" pentru compilare
 - "make run" pentru rulare
 
-Structura si algoritmi:
-- main.cpp: se realizeaza interfatarea cu xboard, utilizand si interpretand
-  mai multe comenzi. Testarea comenzilor de mutare se face pe mai multe cazuri:
-  in cazul in care engine-ul joaca pe culoarea negru, se construiesc initial 2
+ Si eu am modificat alte chestii pe aici
   vectori pentru pozitiile in care dorim sa mutam un pion si un cal. Se citeste
   mutarea de la xboard, se interpreteaza pentru a converti coordonatele din
   xboard in coordonatele matricii interne si se salveaza mutarea. Apoi se
