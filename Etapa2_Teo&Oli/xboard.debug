@@ -1,0 +1,51 @@
+locale = LC_CTYPE=en_US.UTF-8;LC_NUMERIC=ro_RO.UTF-8;LC_TIME=ro_RO.UTF-8;LC_COLLATE=C;LC_MONETARY=ro_RO.UTF-8;LC_MESSAGES=en_US.UTF-8;LC_PAPER=ro_RO.UTF-8;LC_NAME=ro_RO.UTF-8;LC_ADDRESS=ro_RO.UTF-8;LC_TELEPHONE=ro_RO.UTF-8;LC_MEASUREMENT=ro_RO.UTF-8;LC_IDENTIFICATION=ro_RO.UTF-8
+recognized 'normal' (-1) as variant normal
+recognized 'normal' (-1) as variant normal
+recognized 'normal' (-1) as variant normal
+shuffleOpenings = 0
+shuffleOpenings = 0
+Version: xboard 4.9.1 + main ()
+Reset(1, 0) from gameMode 0
+recognized 'normal' (-1) as variant normal
+GameEnds(0, (null), 2)
+shuffleOpenings = 0
+StartChildProcess (dir="/home/student/Desktop/Etapa2") ./main
+281 >first : xboard
+protover 2
+288 <first : feature sigint=0  colors=1  done=1 
+288 >first : accepted sigint
+288 >first : accepted colors
+288 >first : accepted done
+290 >first : new
+random
+290 >first : level 40 5 0
+290 >first : post
+290 >first : hard
+nps: w=-1, b=-1
+nps: w=-1, b=-1
+11625 >first : time 30000
+11625 >first : otim 30000
+book hit = (NULL)
+11625 >first : e2e3
+11700 <first : move h7h5
+19404 >first : force
+19406 >first : analyze
+19437 >first : .
+AutoPlayOneMove(): current 2
+20438 >first : exit
+20438 >first : force
+Impossible move h7h5, type = 0
+24549 >first : d2d3
+26050 >first : e7e6
+27912 >first : force
+27913 >first : black
+27913 >first : time 30000
+27913 >first : otim 29992
+27913 >first : white
+book hit = (NULL)
+27913 >first : go
+nps: w=-1, b=-1
+GameEnds(29, xboard exit, 2)
+45788 >first : result * {xboard exit}
+45788 >first : force
+45788 >first : quit
