@@ -35,6 +35,7 @@ int main() {
 	positions = get_initial_positions();
 
 	int passes = 0;
+	int idx_move = 0;
 
 	while(true){
 		log.write("\npasses: ");
@@ -62,6 +63,11 @@ int main() {
 					make_print_board_matrix(wb);
 	    } else if (s.compare("go") == 0) {
 	        force = 0;
+					if (idx_move % 2 == 1 || idx_move == 0) {
+							goto black_engine;
+					} else {
+							goto white_engine;
+					}
 	    } else if (s.compare("white") == 0) {
 black_engine:
 	        wb = 1;
@@ -87,6 +93,7 @@ white_engine:
 		    		get_matrix_coordonates(s, x_d, y_d); // now we have in x_d and y_d the coordonates of the destination of the moved piece
 		    		move_piece(x_s, y_s, x_d, y_d, chess_board, playing_pieces_mine);
 					//std::cout << "move b6b5" << '\n';
+					idx_move++;
 
 	    } else if (s.compare("time") == 0 && force == 0) {
 
@@ -143,7 +150,7 @@ white_engine:
 		    			log.write(get_chess_coordonates(playing_pieces_mine[0].second.first, playing_pieces_mine[0].second.second));
 		    			log.write(get_chess_coordonates(pawn_moves[pawn_move].first, pawn_moves[pawn_move].second));
 		    			log.write("\n");
-		    			
+
 		    			move_piece(playing_pieces_mine[0].second.first,
 		    				playing_pieces_mine[0].second.second,
 		    				pawn_moves[pawn_move].first,
@@ -206,6 +213,7 @@ pawn_cant_move:
 							}
 			}
 
+			++idx_move;
 		}
 
 		log.write("\npasses: ");

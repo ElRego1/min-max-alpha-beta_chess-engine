@@ -21,11 +21,22 @@
 
 extern std::vector<std::vector<char>> positions;
 
-int check_validity(char i, char j);
-std::vector<std::vector<char>> get_piece_directions(char p);
+int check_validity(char i, char j, std::vector<std::vector<char>> &chess_board);
+int check_validity_pawn(char i, char j, std::vector<std::vector<char>> &chess_board);
+
+std::vector<std::vector<char>> get_piece_directions(char p, int d,
+  std::vector<std::vector<char>> &positions, std::vector<std::vector<char>> &chess_board) 
+
 void move_piece(char x_s, char y_s, char x_d, char y_d,
 	std::vector<std::vector<char>> &chess_board,
 	std::vector<std::pair<char, std::pair<char, char>>> &playing_pieces_mine);
+
+// --------------------------------------------- diagonal moves --------------------------------
+
+void right_diag_up(char i, char j, std::vector<std::vector<char>> &possible_moves, std::vector<std::vector<char>> &chess_board);
+void left_diag_up(char i, char j, std::vector<std::vector<char>> &possible_moves, std::vector<std::vector<char>> &chess_board);
+void right_diag_down(char i, char j, std::vector<std::vector<char>> &possible_moves, std::vector<std::vector<char>> &chess_board);
+void left_diag_down(char i, char j, std::vector<std::vector<char>> &possible_moves, std::vector<std::vector<char>> &chess_board);
 
 
 #endif // PIECES_H
