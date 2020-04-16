@@ -1,6 +1,21 @@
 # min-max-alpha-beta_chess-engine
+Team Betelgeuse
 
-// aceasta e o chestie in plus pusa de robert pentru a fi stearsa si a face un conflict la merge pe git ca sa invete oli cum sa se descurce cu un conflict
+Moraru Teodora 325CA
+Lica Robert Mihai 321CA
+Oprea Olivia Maria 323CA
+
+~Etapa 1~
+
+~Instructiuni de compilare~
+- "make build" pentru compilare
+- "make run" pentru rulare
+
+ Si eu am modificat alte chestii pe aici
+  vectori pentru pozitiile in care dorim sa mutam un pion si un cal. Se citeste
+  mutarea de la xboard, se interpreteaza pentru a converti coordonatele din
+  xboard in coordonatele matricii interne si se salveaza mutarea. Apoi se
+  verifica pe rand vectorii de miscari posibile si se traduc invers
   coordonatele pentru a fi transmise la xboard. Cand nu se mai afla miscari
   valide in vectori, engine-ul da resign. Pentru verificarea cazului de culoare
   white, am definit un vector cu coordonatele scrise direct pentru xboard, iar

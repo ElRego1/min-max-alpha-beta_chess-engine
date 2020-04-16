@@ -1,35 +1,54 @@
 #include "pieces.h"
 
+// chess board:
+// 0 - empty;
+// 1 - 7 - my pieces
+// 11 - 17 - enemy pieces
+
 int check_validity(char i, char j, std::vector<std::vector<char>> &chess_board) {
       if (i < 0 || i >= BOX_LENGTH || j < 0 || j >= BOX_LENGTH) return 0;
-      if (chess_board[i][j]!=0 && chess_board[i][j]/10 == 0) return 0;
-      return 1;
+      if (chess_board[i][j] == 0) return 1;
+      if (chess_board[i][j] > 10) return 2;
+      return 0;
 }
 
 int check_validity_pawn(char i, char j, std::vector<std::vector<char>> &chess_board) {
   if (i < 0 || i >= BOX_LENGTH || j < 0 || j >= BOX_LENGTH) return 0;
-  if (chess_board[i][j]!=0) return 0;
-  return 1;
+  if (chess_board[i][j] != 0 && chess_board[i][j] / 10 != 0) return 1;
+  return 0;
 }
 
 std::vector<std::vector<char>> get_piece_directions(char p, int d,
   std::vector<std::vector<char>> &positions, std::vector<std::vector<char>> &chess_board) {
     std::vector<std::vector<char>> possible_moves;
     char i, j; // piece positions;
-    int no_moves = 0;
     switch (p) {
         case 1: // pawn
             i = positions[d][0];
             j = positions[d][1];
             if (i == 2 && chess_board[3][j] == 0) {
-                possible_moves[no_moves][0] = 4;
-                possible_moves[no_moves][1] = j;
-                no_moves++;
+                std::vector<char> move;
+                move.push_back(4);
+                move.push_back(j);
+                possible_moves.push_back(move);
             }
-            if (check_validity(i+1,j, chess_board)) {
-                possible_moves[no_moves][0] = i - 1;
-                possible_moves[no_moves][1] = j;
-                no_moves++;
+            if (check_validity(i + 1,j, chess_board)) {
+                std::vector<char> move;
+                move.push_back(i + 1);
+                move.push_back(j);
+                possible_moves.push_back(move);
+            }
+            if (check_validity_pawn(i + 1, j - 1, chess_board)) {
+                std::vector<char> move;
+                move.push_back(i + 1);
+                move.push_back(j - 1);
+                possible_moves.push_back(move);
+            }
+            if (check_validity_pawn(i + 1, j + 1, chess_board)) {
+                std::vector<char> move;
+                move.push_back(i + 1);
+                move.push_back(j + 1);
+                possible_moves.push_back(move);
             }
             break;
 
@@ -43,59 +62,77 @@ std::vector<std::vector<char>> get_piece_directions(char p, int d,
             j = positions[10 + d][1];
             // front moves
             if (check_validity(i + 2, j - 1, chess_board)) {
-              possible_moves[no_moves][0] = i + 2;
-              possible_moves[no_moves][1] = j - 1;
-              no_moves++;
+              std::vector<char> move;
+              move.push_back(i + 2);
+              move.push_back(j - 1);
+              possible_moves.push_back(move);
             }
             if (check_validity(i + 2, j + 1, chess_board)) {
-              possible_moves[no_moves][0] = i + 2;
-              possible_moves[no_moves][1] = j + 1;
-              no_moves++;
+              std::vector<char> move;
+              move.push_back(i + 2);
+              move.push_back(j + 1);
+              possible_moves.push_back(move);
             }
             if (check_validity(i + 1, j - 2, chess_board)) {
-              possible_moves[no_moves][0] = i + 1;
-              possible_moves[no_moves][1] = j - 2;
-              no_moves++;
+              std::vector<char> move;
+              move.push_back(i + 1);
+              move.push_back(j - 2);
+              possible_moves.push_back(move);
             }
             if (check_validity(i + 1, j + 2, chess_board)) {
-              possible_moves[no_moves][0] = i + 1;
-              possible_moves[no_moves][1] = j + 2;
-              no_moves++;
+              std::vector<char> move;
+              move.push_back(i + 1);
+              move.push_back(j + 1);
+              possible_moves.push_back(move);
             }
             // back moves
             if (check_validity(i - 2, j - 1, chess_board)) {
-              possible_moves[no_moves][0] = i - 2;
-              possible_moves[no_moves][1] = j - 1;
-              no_moves++;
+              std::vector<char> move;
+              move.push_back(i - 2);
+              move.push_back(j - 1);
+              possible_moves.push_back(move);
             }
             if (check_validity(i - 2, j + 1, chess_board)) {
-              possible_moves[no_moves][0] = i - 2;
-              possible_moves[no_moves][1] = j + 1;
-              no_moves++;
+              std::vector<char> move;
+              move.push_back(i - 2);
+              move.push_back(j + 1);
+              possible_moves.push_back(move);
             }
             if (check_validity(i - 1, j - 2, chess_board)) {
-              possible_moves[no_moves][0] = i - 1;
-              possible_moves[no_moves][1] = j - 2;
-              no_moves++;
+              std::vector<char> move;
+              move.push_back(i - 1);
+              move.push_back(j - 2);
+              possible_moves.push_back(move);
             }
             if (check_validity(i - 1, j + 2, chess_board)) {
-              possible_moves[no_moves][0] = i - 1;
-              possible_moves[no_moves][1] = j + 2;
-              no_moves++;
+              std::vector<char> move;
+              move.push_back(i - 1);
+              move.push_back(j + 2);
+              possible_moves.push_back(move);
             }
             break;
 
         case 4: // black bishop
             i = positions[12 + d][0];
+            j = positions[12 + d][1];
+
+            right_diag_up(i, j, possible_moves, chess_board);
+            left_diag_up(i, j, possible_moves, chess_board);
+            right_diag_down(i, j, possible_moves, chess_board);
+            left_diag_down(i, j, possible_moves, chess_board);
+
             break;
         case 5: // white bishop
             i = positions[13 + d][0];
+            j = positions[13 + d][1];
             break;
         case 6: // queen
             i = positions[14 + d][0];
+            j = positions[14 + d][1];
             break;
         case 7: // king
             i = positions[15 + d][0];
+            j = positions[15 + d][1];
             break;
         default:
             break;
@@ -134,4 +171,63 @@ void move_piece(char x_s, char y_s, char x_d, char y_d,
             }
         }
     }
+}
+
+// --------------------------------------------- diagonal moves --------------------------------
+
+void right_diag_up(char i, char j, std::vector<std::vector<char>> &possible_moves, std::vector<std::vector<char>> &chess_board) {
+  while (true) {
+    int temp = check_validity(i + 1, j + 1, chess_board); // 1 - empty ; 2 - enemy
+    if (temp == 0) break;
+    std::vector<char> move;
+    move.push_back(i + 1);
+    move.push_back(j + 1);
+    move.push_back(temp);
+    possible_moves.push_back(move);
+    if (temp == 2) break;
+    ++i;
+    ++j;
+  }
+}
+
+void left_diag_up(char i, char j, std::vector<std::vector<char>> &possible_moves, std::vector<std::vector<char>> &chess_board) {
+  while (true) {
+    int temp = check_validity(i + 1, j - 1, chess_board);
+    if (temp == 0) break;
+    std::vector<char> move;
+    move.push_back(i + 1);
+    move.push_back(j - 1);
+    possible_moves.push_back(move);
+    if (temp == 2) break;
+    ++i;
+    --j;
+  }
+}
+
+void right_diag_down(char i, char j, std::vector<std::vector<char>> &possible_moves, std::vector<std::vector<char>> &chess_board) {
+  while (true) {
+    int temp = check_validity(i - 1, j + 1, chess_board);
+    if (temp == 0) break;
+    std::vector<char> move;
+    move.push_back(i - 1);
+    move.push_back(j + 1);
+    possible_moves.push_back(move);
+    if (temp == 2) break;
+    --i;
+    ++j;
+  }
+}
+
+void left_diag_down(char i, char j, std::vector<std::vector<char>> &possible_moves, std::vector<std::vector<char>> &chess_board) {
+  while (true) {
+    int temp = check_validity(i - 1, j - 1, chess_board);
+    if (temp == 0) break;
+    std::vector<char> move;
+    move.push_back(i - 1);
+    move.push_back(j - 1);
+    possible_moves.push_back(move);
+    if (temp == 2) break;
+    --i;
+    --j;
+  }
 }
