@@ -173,6 +173,105 @@ void move_piece(char x_s, char y_s, char x_d, char y_d,
     }
 }
 
+// --------------------------------------------- Robert's attemp --------------------------------
+
+// get directional moves
+// pair d<x, y> gives the direction in whitch to search for moves
+// good for the following pieces:
+// -rook
+// -bishop
+// -queen
+// example: (1, 0) = goes forward; (-1, -1) = goes on the down left diagonal
+void get_direct_moves(char i, char j, std::pair<char, char> &d,
+std::vector<std::vector<char>> &possible_moves,
+std::vector<std::vector<char>> &chess_board) {
+  char x = d.first;
+  char y = d.second;
+  while (true) {
+    int temp = check_validity(i + x, j + y, chess_board);
+    if (temp == 0) break; // our piece and is an invalid move
+    std::vector<char> move;
+    move.push_back(i + x);
+    move.push_back(j + y);
+    move.push_back(temp);
+    possible_moves.push_back(move);
+    if (temp == 2) break; // it's an enemy piece and we can not jump over it
+    i += x;
+    j += y;
+  }
+}
+
+// --------------------------------------------- Teo's moves --------------------------------
+
+void check_move_up(char i, char j, std::vector<std::vector<char>> &possible_moves,
+  std::vector<std::vector<char>> &chess_board) {
+    while (true) {
+      int temp = check_validity(i + 1, j, chess_board);
+      if (temp == 0) break;
+      std::vector<char> move;
+      move.push_back(i + 1);
+      move.push_back(j);
+      possible_moves.push_back(move);
+      if (temp == 2) break;
+      ++i;
+    }
+}
+
+void check_move_down(char i, char j, std::vector<std::vector<char>> &possible_moves,
+  std::vector<std::vector<char>> &chess_board) {
+    while (true) {
+      int temp = check_validity(i - 1, j, chess_board);
+      if (temp == 0) break;
+      std::vector<char> move;
+      move.push_back(i - 1);
+      move.push_back(j);
+      possible_moves.push_back(move);
+      if (temp == 2) break;
+      --i;
+    }
+}
+
+void check_move_left(char i, char j, std::vector<std::vector<char>> &possible_moves,
+  std::vector<std::vector<char>> &chess_board) {
+    while (true) {
+      int temp = check_validity(i, j - 1, chess_board);
+      if (temp == 0) break;
+      std::vector<char> move;
+      move.push_back(i);
+      move.push_back(j - 1);
+      possible_moves.push_back(move);
+      if (temp == 2) break;
+      --j;
+    }
+
+}
+
+void check_move_right(char i, char j, std::vector<std::vector<char>> &possible_moves,
+  std::vector<std::vector<char>> &chess_board) {
+    while (true) {
+      int temp = check_validity(i, j + 1, chess_board);
+      if (temp == 0) break;
+      std::vector<char> move;
+      move.push_back(i);
+      move.push_back(j + 1);
+      possible_moves.push_back(move);
+      if (temp == 2) break;
+      ++j;
+    }
+}
+
+void check_move(char i, char j, int i_depl, int j_depl, std::vector<std::vector<char>> &possible_moves,
+  std::vector<std::vector<char>> &chess_board) {
+    int temp = check_validity(i + i_depl, j + j_depl, chess_board);
+    if (temp) {
+      std::vector<char> move;
+      move.push_back(i + i_depl);
+      move.push_back(j + j_depl);
+      move.push_back(temp);
+      possible_moves.push_back(move);
+    }
+  }
+
 // --------------------------------------------- diagonal moves --------------------------------
 
 void right_diag_up(char i, char j, std::vector<std::vector<char>> &possible_moves, std::vector<std::vector<char>> &chess_board) {
