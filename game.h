@@ -21,5 +21,9 @@ class Game {
 
   void remake_print_board(char wb);
 
+  void apply_move(std::vector<char> &move);
+  void undo_move(std::vector<char> &move);
+  
+  bool game_over();
 };
 #endif // GAME_H
