@@ -21,9 +21,18 @@ class Game {
 
   void remake_print_board(char wb);
 
-  void apply_move(std::vector<char> &move);
-  void undo_move(std::vector<char> &move);
+  // TODO
+  void apply_move_m(std::vector<char> &move);
+  // TODO
+  void undo_move_m(std::vector<char> &move);
   
+  // TODO
+  void apply_move_e(std::vector<char> &move);
+  // TODO
+  void undo_move_e(std::vector<char> &move);
+
   bool game_over();
+  bool is_check_m();
+  bool is_check_e();
 };
 #endif // GAME_H

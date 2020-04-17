@@ -73,8 +73,8 @@ std::vector<std::vector<char>> get_initial_positions(char _color) {
 		for (int i = 0; i < BOX_LENGTH; ++i) {
 			p[i][0] = 1; // mine
 			p[i][1] = i;
-			p[2 * BOX_LENGTH + i][0] = 6;
-			p[2 * BOX_LENGTH + i][1] = i;
+			// p[2 * BOX_LENGTH + i][0] = 6;
+			// p[2 * BOX_LENGTH + i][1] = i;
 		}
 
 		// rooks positions
