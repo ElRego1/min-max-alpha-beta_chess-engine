@@ -19,9 +19,9 @@ int check_validity_pawn(char i, char j, std::vector<std::vector<char>> &chess_bo
 }
 
 std::vector<char> get_piece_position(char p, int d,
-  std::vector<std::vector<char>> &positions) {
+std::vector<std::vector<char>> &positions) {
     std::vector<char> piece_position;
-    char i, j; // piece positions;
+    char i, j; // piece positions
     switch (p) {
         case 1: // pawn
             i = positions[d][0];

@@ -83,10 +83,10 @@ std::vector<std::vector<char>> get_initial_positions(char _color) {
 		p[BOX_LENGTH + 1][0] = 0;
 		p[BOX_LENGTH + 1][1] = 7;
 
-		p[3 * BOX_LENGTH + 0][0] = 7;
-		p[3 * BOX_LENGTH + 0][1] = 0;
-		p[3 * BOX_LENGTH + 1][0] = 7;
-		p[3 * BOX_LENGTH + 1][1] = 7;
+		// p[3 * BOX_LENGTH + 0][0] = 7;
+		// p[3 * BOX_LENGTH + 0][1] = 0;
+		// p[3 * BOX_LENGTH + 1][0] = 7;
+		// p[3 * BOX_LENGTH + 1][1] = 7;
 
 		// knights positions
 		p[BOX_LENGTH + 2][0] = 0;
@@ -94,10 +94,10 @@ std::vector<std::vector<char>> get_initial_positions(char _color) {
 		p[BOX_LENGTH + 3][0] = 0;
 		p[BOX_LENGTH + 3][1] = 6;
 
-		p[3 * BOX_LENGTH + 2][0] = 7;
-		p[3 * BOX_LENGTH + 2][1] = 1;
-		p[3 * BOX_LENGTH + 3][0] = 7;
-		p[3 * BOX_LENGTH + 3][1] = 6;
+		// p[3 * BOX_LENGTH + 2][0] = 7;
+		// p[3 * BOX_LENGTH + 2][1] = 1;
+		// p[3 * BOX_LENGTH + 3][0] = 7;
+		// p[3 * BOX_LENGTH + 3][1] = 6;
 
 		// bishops positions
 		// mine black
@@ -106,12 +106,12 @@ std::vector<std::vector<char>> get_initial_positions(char _color) {
 		// mine white
 		p[BOX_LENGTH + 5][0] = 0;
 		p[BOX_LENGTH + 5][1] = 5;
-		// enemy's black
-		p[3 * BOX_LENGTH + 4][0] = 7;
-		p[3 * BOX_LENGTH + 4][1] = 5;
-		// enemy's white
-		p[3 * BOX_LENGTH + 5][0] = 7;
-		p[3 * BOX_LENGTH + 5][1] = 2;
+		// // enemy's black
+		// p[3 * BOX_LENGTH + 4][0] = 7;
+		// p[3 * BOX_LENGTH + 4][1] = 5;
+		// // enemy's white
+		// p[3 * BOX_LENGTH + 5][0] = 7;
+		// p[3 * BOX_LENGTH + 5][1] = 2;
 
 		// king & queen positions
 		// the position of the king and queen depends on the color
@@ -121,10 +121,10 @@ std::vector<std::vector<char>> get_initial_positions(char _color) {
 			p[BOX_LENGTH + 7][0] = 0; // my king
 			p[BOX_LENGTH + 7][1] = 4; // my king
 
-			p[3 * BOX_LENGTH + 6][0] = 7; // enemy's queen
-			p[3 * BOX_LENGTH + 6][1] = 3; // enemy's queen
-			p[3 * BOX_LENGTH + 7][0] = 7; // enemy's king
-			p[3 * BOX_LENGTH + 7][1] = 4; // enemy's king
+			// p[3 * BOX_LENGTH + 6][0] = 7; // enemy's queen
+			// p[3 * BOX_LENGTH + 6][1] = 3; // enemy's queen
+			// p[3 * BOX_LENGTH + 7][0] = 7; // enemy's king
+			// p[3 * BOX_LENGTH + 7][1] = 4; // enemy's king
 
 		} else { // play as black
 			p[BOX_LENGTH + 6][0] = 0; // my queen
@@ -132,10 +132,10 @@ std::vector<std::vector<char>> get_initial_positions(char _color) {
 			p[BOX_LENGTH + 7][0] = 0; // my king
 			p[BOX_LENGTH + 7][1] = 3; // my king
 
-			p[3 * BOX_LENGTH + 6][0] = 7; // enemy's queen
-			p[3 * BOX_LENGTH + 6][1] = 4; // enemy's queen
-			p[3 * BOX_LENGTH + 7][0] = 7; // enemy's king
-			p[3 * BOX_LENGTH + 7][1] = 3; // enemy's king
+			// p[3 * BOX_LENGTH + 6][0] = 7; // enemy's queen
+			// p[3 * BOX_LENGTH + 6][1] = 4; // enemy's queen
+			// p[3 * BOX_LENGTH + 7][0] = 7; // enemy's king
+			// p[3 * BOX_LENGTH + 7][1] = 3; // enemy's king
 		}
 
 		return p;
