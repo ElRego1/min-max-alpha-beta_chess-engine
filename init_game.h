@@ -18,18 +18,11 @@ color: 0 - white
 #define INIT_GAME_H
 
 #include <bits/stdc++.h>
+#include "constants.h"
+#include "game.h"
 
-#define BOX_SQUARES 64
-#define BOX_LENGTH 8
-#define NO_PIECES 32
-#define NO_COORD 2
-
-char _color = -1;
-std::vector<std::vector<char*>> _print_board;
-std::vector<std::vector<char>> positions;
-
-
-std::vector<std::vector<char>> get_initial_board_matrix() {
+// the matrix that is the actual board
+std::vector<std::vector<char>> get_initial_board_matrix(char _color) {
 	std::vector<std::vector<char>> v(BOX_LENGTH,
 		std::vector<char>(BOX_LENGTH, 0));
 
@@ -72,13 +65,15 @@ std::vector<std::vector<char>> get_initial_board_matrix() {
 	return v;
 }
 
-std::vector<std::vector<char>> get_initial_positions() {
-	std::vector<std::vector<char>> p(NO_PIECES,
-		std::vector<char>(NO_COORD, 0));
+// a vector with the pieces
+std::vector<std::vector<char>> get_initial_positions(char _color) {
+	std::vector<std::vector<char>> p(NO_PIECES / 2,
+		std::vector<char>(NO_COORD + 1, 0));
 		// pawns positions
 		for (int i = 0; i < BOX_LENGTH; ++i) {
 			p[i][0] = 1; // mine
 			p[i][1] = i;
+			p[i][2] = 1;
 			p[2 * BOX_LENGTH + i][0] = 6;
 			p[2 * BOX_LENGTH + i][1] = i;
 		}
@@ -86,81 +81,90 @@ std::vector<std::vector<char>> get_initial_positions() {
 		// rooks positions
 		p[BOX_LENGTH + 0][0] = 0;
 		p[BOX_LENGTH + 0][1] = 0;
+		p[BOX_LENGTH + 0][2] = 2;
 		p[BOX_LENGTH + 1][0] = 0;
 		p[BOX_LENGTH + 1][1] = 7;
+		p[BOX_LENGTH + 1][2] = 2;
 
-		p[3 * BOX_LENGTH + 0][0] = 7;
-		p[3 * BOX_LENGTH + 0][1] = 0;
-		p[3 * BOX_LENGTH + 1][0] = 7;
-		p[3 * BOX_LENGTH + 1][1] = 7;
+		// p[3 * BOX_LENGTH + 0][0] = 7;
+		// p[3 * BOX_LENGTH + 0][1] = 0;
+		// p[3 * BOX_LENGTH + 1][0] = 7;
+		// p[3 * BOX_LENGTH + 1][1] = 7;
 
 		// knights positions
 		p[BOX_LENGTH + 2][0] = 0;
 		p[BOX_LENGTH + 2][1] = 1;
+		p[BOX_LENGTH + 2][2] = 3;
 		p[BOX_LENGTH + 3][0] = 0;
 		p[BOX_LENGTH + 3][1] = 6;
+		p[BOX_LENGTH + 3][2] = 3;
 
-		p[3 * BOX_LENGTH + 2][0] = 7;
-		p[3 * BOX_LENGTH + 2][1] = 1;
-		p[3 * BOX_LENGTH + 3][0] = 7;
-		p[3 * BOX_LENGTH + 3][1] = 6;
+		// p[3 * BOX_LENGTH + 2][0] = 7;
+		// p[3 * BOX_LENGTH + 2][1] = 1;
+		// p[3 * BOX_LENGTH + 3][0] = 7;
+		// p[3 * BOX_LENGTH + 3][1] = 6;
 
 		// bishops positions
 		// mine black
 		p[BOX_LENGTH + 4][0] = 0;
 		p[BOX_LENGTH + 4][1] = 2;
+		p[BOX_LENGTH + 4][2] = 4;
 		// mine white
 		p[BOX_LENGTH + 5][0] = 0;
 		p[BOX_LENGTH + 5][1] = 5;
-		// enemy's black
-		p[3 * BOX_LENGTH + 4][0] = 7;
-		p[3 * BOX_LENGTH + 4][1] = 5;
-		// enemy's white
-		p[3 * BOX_LENGTH + 5][0] = 7;
-		p[3 * BOX_LENGTH + 5][1] = 2;
+		p[BOX_LENGTH + 5][2] = 5;
+		// // enemy's black
+		// p[3 * BOX_LENGTH + 4][0] = 7;
+		// p[3 * BOX_LENGTH + 4][1] = 5;
+		// // enemy's white
+		// p[3 * BOX_LENGTH + 5][0] = 7;
+		// p[3 * BOX_LENGTH + 5][1] = 2;
 
 		// king & queen positions
 		// the position of the king and queen depends on the color
 		if (_color == 0) { //play as white
 			p[BOX_LENGTH + 6][0] = 0; // my queen
 			p[BOX_LENGTH + 6][1] = 3; // my queen
+			p[BOX_LENGTH + 6][2] = 6; // my queen
 			p[BOX_LENGTH + 7][0] = 0; // my king
 			p[BOX_LENGTH + 7][1] = 4; // my king
+			p[BOX_LENGTH + 7][2] = 7; // my king
 
-			p[3 * BOX_LENGTH + 6][0] = 7; // enemy's queen
-			p[3 * BOX_LENGTH + 6][1] = 3; // enemy's queen
-			p[3 * BOX_LENGTH + 7][0] = 7; // enemy's king
-			p[3 * BOX_LENGTH + 7][1] = 4; // enemy's king
+			// p[3 * BOX_LENGTH + 6][0] = 7; // enemy's queen
+			// p[3 * BOX_LENGTH + 6][1] = 3; // enemy's queen
+			// p[3 * BOX_LENGTH + 7][0] = 7; // enemy's king
+			// p[3 * BOX_LENGTH + 7][1] = 4; // enemy's king
 
 		} else { // play as black
 			p[BOX_LENGTH + 6][0] = 0; // my queen
 			p[BOX_LENGTH + 6][1] = 4; // my queen
+			p[BOX_LENGTH + 6][2] = 6; // my queen
 			p[BOX_LENGTH + 7][0] = 0; // my king
 			p[BOX_LENGTH + 7][1] = 3; // my king
+			p[BOX_LENGTH + 7][2] = 7; // my king
 
-			p[3 * BOX_LENGTH + 6][0] = 7; // enemy's queen
-			p[3 * BOX_LENGTH + 6][1] = 4; // enemy's queen
-			p[3 * BOX_LENGTH + 7][0] = 7; // enemy's king
-			p[3 * BOX_LENGTH + 7][1] = 3; // enemy's king
+			// p[3 * BOX_LENGTH + 6][0] = 7; // enemy's queen
+			// p[3 * BOX_LENGTH + 6][1] = 4; // enemy's queen
+			// p[3 * BOX_LENGTH + 7][0] = 7; // enemy's king
+			// p[3 * BOX_LENGTH + 7][1] = 3; // enemy's king
 		}
 
 		return p;
 }
 
 // saves the made print board into the variable print_board
-void make_print_board_matrix(char color) {
-	std::vector<std::vector<char*>> p(BOX_LENGTH,
-		std::vector<char*>(BOX_LENGTH));
+void make_print_board_matrix(Game &g, char color) {
+	std::vector<std::vector<char*>> p(BOX_LENGTH, std::vector<char*>(BOX_LENGTH));
 	// if color is different from -1, we are at the first run and do not free the memory
-	if (_color != -1) {
+	if (g.m_color != -1) {
 		for (char i = 0; i < BOX_LENGTH; ++i) {
 			for (char j = 0; j < BOX_LENGTH; ++j) {
-				free(_print_board[i][j]);
+				free(g._print_board[i][j]);
 			}
 		}
 	}
 
-	_color = color;
+	g.m_color = color;
 
 	if (color == 0) { // white
 		for (char number = '1'; number <= '8'; ++number) {
@@ -181,13 +185,7 @@ void make_print_board_matrix(char color) {
 			}
 		}
 	}
-	_print_board = p;
+	g._print_board = p;
 }
-
-// TO_DO
-// std::vector<char> make_board(char color) {
-// 	std::vector<char> b(BOX_SQUARES);
-// 	return b;
-// }
 
 #endif // INIT_GAME_H
