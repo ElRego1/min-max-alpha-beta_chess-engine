@@ -125,6 +125,7 @@ std::vector<std::vector<char>> get_piece_directions(char p, int d,
         case 5: // white bishop
             i = positions[13 + d][0];
             j = positions[13 + d][1];
+            bishop_moves(i, j, possible_moves, chess_board);
             break;
         case 6: // queen
             i = positions[14 + d][0];
@@ -174,6 +175,25 @@ void move_piece(char x_s, char y_s, char x_d, char y_d,
 }
 
 // --------------------------------------------- Robert's attemp --------------------------------
+
+// here we get the moves for the bishop
+void rook_moves(char &i, char &j,
+std::vector<std::vector<char>> &possible_moves,
+std::vector<std::vector<char>> &chess_board) {
+  get_direct_moves(i, j, up, possible_moves, chess_board);
+  get_direct_moves(i, j, dw, possible_moves, chess_board);
+  get_direct_moves(i, j, rg, possible_moves, chess_board);
+  get_direct_moves(i, j, lf, possible_moves, chess_board);
+}
+
+void bishop_moves(char &i, char &j,
+std::vector<std::vector<char>> &possible_moves,
+std::vector<std::vector<char>> &chess_board) {
+  get_direct_moves(i, j, ur, possible_moves, chess_board);
+  get_direct_moves(i, j, ul, possible_moves, chess_board);
+  get_direct_moves(i, j, dr, possible_moves, chess_board);
+  get_direct_moves(i, j, dl, possible_moves, chess_board);
+}
 
 // get directional moves
 // pair d<x, y> gives the direction in whitch to search for moves

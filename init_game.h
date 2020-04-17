@@ -18,18 +18,11 @@ color: 0 - white
 #define INIT_GAME_H
 
 #include <bits/stdc++.h>
+#include "constants.h"
+#include "game.h"
 
-#define BOX_SQUARES 64
-#define BOX_LENGTH 8
-#define NO_PIECES 32
-#define NO_COORD 2
-
-char _color = -1;
-std::vector<std::vector<char*>> _print_board;
-std::vector<std::vector<char>> positions;
-
-
-std::vector<std::vector<char>> get_initial_board_matrix() {
+// the matrix that is the actual board
+std::vector<std::vector<char>> get_initial_board_matrix(char _color) {
 	std::vector<std::vector<char>> v(BOX_LENGTH,
 		std::vector<char>(BOX_LENGTH, 0));
 
@@ -72,7 +65,8 @@ std::vector<std::vector<char>> get_initial_board_matrix() {
 	return v;
 }
 
-std::vector<std::vector<char>> get_initial_positions() {
+// a vector with the pieces
+std::vector<std::vector<char>> get_initial_positions(char _color) {
 	std::vector<std::vector<char>> p(NO_PIECES,
 		std::vector<char>(NO_COORD, 0));
 		// pawns positions
@@ -148,19 +142,18 @@ std::vector<std::vector<char>> get_initial_positions() {
 }
 
 // saves the made print board into the variable print_board
-void make_print_board_matrix(char color) {
-	std::vector<std::vector<char*>> p(BOX_LENGTH,
-		std::vector<char*>(BOX_LENGTH));
+void make_print_board_matrix(Game &g, char color) {
+	std::vector<std::vector<char*>> p(BOX_LENGTH, std::vector<char*>(BOX_LENGTH));
 	// if color is different from -1, we are at the first run and do not free the memory
-	if (_color != -1) {
+	if (g.m_color != -1) {
 		for (char i = 0; i < BOX_LENGTH; ++i) {
 			for (char j = 0; j < BOX_LENGTH; ++j) {
-				free(_print_board[i][j]);
+				free(g._print_board[i][j]);
 			}
 		}
 	}
 
-	_color = color;
+	g.m_color = color;
 
 	if (color == 0) { // white
 		for (char number = '1'; number <= '8'; ++number) {
@@ -181,13 +174,7 @@ void make_print_board_matrix(char color) {
 			}
 		}
 	}
-	_print_board = p;
+	g._print_board = p;
 }
-
-// TO_DO
-// std::vector<char> make_board(char color) {
-// 	std::vector<char> b(BOX_SQUARES);
-// 	return b;
-// }
 
 #endif // INIT_GAME_H

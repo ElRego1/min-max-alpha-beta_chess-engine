@@ -21,6 +21,15 @@
 
 extern std::vector<std::vector<char>> positions;
 
+std::pair<char, char> up( 1,  0); // up
+std::pair<char, char> dw(-1,  0); // down
+std::pair<char, char> rg( 0,  1); // right
+std::pair<char, char> lf( 0, -1); // left
+std::pair<char, char> ur( 1,  1); // up-right
+std::pair<char, char> ul( 1, -1); // up-left
+std::pair<char, char> dr(-1,  1); // down-right
+std::pair<char, char> dl(-1, -1); // down-left
+
 int check_validity(char i, char j, std::vector<std::vector<char>> &chess_board);
 int check_validity_pawn(char i, char j, std::vector<std::vector<char>> &chess_board);
 
@@ -32,6 +41,8 @@ void move_piece(char x_s, char y_s, char x_d, char y_d,
 	std::vector<std::pair<char, std::pair<char, char>>> &playing_pieces_mine);
 
 // --------------------------------------------- Robert's attemp --------------------------------
+void rook_moves(char &i, char &j, std::vector<std::vector<char>> &possible_moves, std::vector<std::vector<char>> &chess_board);
+void bishop_moves(char &i, char &j, std::vector<std::vector<char>> &possible_moves, std::vector<std::vector<char>> &chess_board);
 void get_direct_moves(char i, char j, std::pair<char, char> &d, std::vector<std::vector<char>> &possible_moves, std::vector<std::vector<char>> &chess_board);
 
 // --------------------------------------------- Teo's moves --------------------------------

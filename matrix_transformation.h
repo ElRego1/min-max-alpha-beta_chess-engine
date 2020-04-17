@@ -5,22 +5,21 @@
 #define MATRIX_TRANSFORMATIONS_H
 
 #include <bits/stdc++.h>
-
-extern char _collor;
-extern std::vector<std::vector<char*>> _print_board;
+#include "constants.h"
+#include "game.h"
 
 [[gnu::always_inline]] inline
-std::string get_chess_coordonates(char x, char y) {
-	return std::string(_print_board[x][y]);
+std::string get_chess_coordonates(char x, char y, Game &g) {
+	return std::string(g._print_board[x][y]);
 }
 
 [[gnu::always_inline]] inline
-void get_matrix_coordonates(std::string &input, char &x, char &y) {
+void get_matrix_coordonates(std::string &input, char &x, char &y, Game &g) {
 	x = input[1] - '1';
-    y = input[0] - 'a';
+  y = input[0] - 'a';
 
 	// if we are playing black, we have to convert to the black coordonates
-	if (_color == 1) {
+	if (g.m_color == 1) {
 		x = 7 - x;
 		y = 7 - y;
 	}
