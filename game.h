@@ -26,6 +26,7 @@ class Game {
   bool is_check_e();
 };
 
-int check_check(char i, char j, std::pair<char, char> &d, std::vector<std::vector<char>> &chess_board);
+int check_check(char i, char j, std::vector<std::vector<char>> &chess_board);
 int check_check_validity(char i, char j, std::vector<std::vector<char>> &chess_board);
+int check_knight(char i, char j, std::vector<std::vector<char>> &chess_board);
 #endif // GAME_H

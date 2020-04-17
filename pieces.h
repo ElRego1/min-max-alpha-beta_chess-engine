@@ -21,6 +21,8 @@
 
 extern std::vector<std::vector<char>> positions;
 
+std::vector<std::pair<char, char>> all_directions{up, dw, rg, lf, ur, ul, dr, dl};
+
 std::pair<char, char> up( 1,  0); // up
 std::pair<char, char> dw(-1,  0); // down
 std::pair<char, char> rg( 0,  1); // right
