@@ -6,4 +6,8 @@
 #define NO_PIECES 16
 #define NO_COORD 2
 
+// minimax
+#define LOW -10000
+#define HIGH 10000
+
 #endif // CONSTANTS_H

@@ -46,7 +46,7 @@ int protocol_begin(Log &log) {
 	// log.write("\n");
 
 	// now we take the new game parameters
-	
+
 	log.write("Received: ");
 	std::cin >>  s;
 	log.write(" ");
