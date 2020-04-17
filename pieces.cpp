@@ -13,43 +13,19 @@ int check_validity(char i, char j, std::vector<std::vector<char>> &chess_board) 
 }
 
 int check_validity_pawn(char i, char j, std::vector<std::vector<char>> &chess_board) {
-  if (i < 0 || i >= BOX_LENGTH || j < 0 || j >= BOX_LENGTH) return 0;
-  if (chess_board[i][j] != 0 && chess_board[i][j] / 10 != 0) return 1;
-  return 0;
+    if (i < 0 || i >= BOX_LENGTH || j < 0 || j >= BOX_LENGTH) return 0;
+    if (chess_board[i][j]!=0 && chess_board[i][j] > 10) return 2;
+    return 0;
 }
 
-std::vector<std::vector<char>> get_piece_directions(char p, int d,
-  std::vector<std::vector<char>> &positions, std::vector<std::vector<char>> &chess_board) {
-    std::vector<std::vector<char>> possible_moves;
+std::vector<char> get_piece_position(char p, int d,
+  std::vector<std::vector<char>> &positions) {
+    std::vector<char> piece_position;
     char i, j; // piece positions;
     switch (p) {
         case 1: // pawn
             i = positions[d][0];
             j = positions[d][1];
-            if (i == 2 && chess_board[3][j] == 0) {
-                std::vector<char> move;
-                move.push_back(4);
-                move.push_back(j);
-                possible_moves.push_back(move);
-            }
-            if (check_validity(i + 1,j, chess_board)) {
-                std::vector<char> move;
-                move.push_back(i + 1);
-                move.push_back(j);
-                possible_moves.push_back(move);
-            }
-            if (check_validity_pawn(i + 1, j - 1, chess_board)) {
-                std::vector<char> move;
-                move.push_back(i + 1);
-                move.push_back(j - 1);
-                possible_moves.push_back(move);
-            }
-            if (check_validity_pawn(i + 1, j + 1, chess_board)) {
-                std::vector<char> move;
-                move.push_back(i + 1);
-                move.push_back(j + 1);
-                possible_moves.push_back(move);
-            }
             break;
 
         case 2: // rook
@@ -60,81 +36,117 @@ std::vector<std::vector<char>> get_piece_directions(char p, int d,
         case 3: // knight
             i = positions[10 + d][0];
             j = positions[10 + d][1];
-            // front moves
-            if (check_validity(i + 2, j - 1, chess_board)) {
-              std::vector<char> move;
-              move.push_back(i + 2);
-              move.push_back(j - 1);
-              possible_moves.push_back(move);
-            }
-            if (check_validity(i + 2, j + 1, chess_board)) {
-              std::vector<char> move;
-              move.push_back(i + 2);
-              move.push_back(j + 1);
-              possible_moves.push_back(move);
-            }
-            if (check_validity(i + 1, j - 2, chess_board)) {
-              std::vector<char> move;
-              move.push_back(i + 1);
-              move.push_back(j - 2);
-              possible_moves.push_back(move);
-            }
-            if (check_validity(i + 1, j + 2, chess_board)) {
-              std::vector<char> move;
-              move.push_back(i + 1);
-              move.push_back(j + 1);
-              possible_moves.push_back(move);
-            }
-            // back moves
-            if (check_validity(i - 2, j - 1, chess_board)) {
-              std::vector<char> move;
-              move.push_back(i - 2);
-              move.push_back(j - 1);
-              possible_moves.push_back(move);
-            }
-            if (check_validity(i - 2, j + 1, chess_board)) {
-              std::vector<char> move;
-              move.push_back(i - 2);
-              move.push_back(j + 1);
-              possible_moves.push_back(move);
-            }
-            if (check_validity(i - 1, j - 2, chess_board)) {
-              std::vector<char> move;
-              move.push_back(i - 1);
-              move.push_back(j - 2);
-              possible_moves.push_back(move);
-            }
-            if (check_validity(i - 1, j + 2, chess_board)) {
-              std::vector<char> move;
-              move.push_back(i - 1);
-              move.push_back(j + 2);
-              possible_moves.push_back(move);
-            }
             break;
 
         case 4: // black bishop
             i = positions[12 + d][0];
             j = positions[12 + d][1];
-
-            right_diag_up(i, j, possible_moves, chess_board);
-            left_diag_up(i, j, possible_moves, chess_board);
-            right_diag_down(i, j, possible_moves, chess_board);
-            left_diag_down(i, j, possible_moves, chess_board);
-
             break;
+
         case 5: // white bishop
             i = positions[13 + d][0];
             j = positions[13 + d][1];
-            bishop_moves(i, j, possible_moves, chess_board);
             break;
+
         case 6: // queen
             i = positions[14 + d][0];
             j = positions[14 + d][1];
             break;
+
         case 7: // king
             i = positions[15 + d][0];
             j = positions[15 + d][1];
             break;
+        default:
+            break;
+    }
+    piece_position.push_back(i);
+    piece_position.push_back(j);
+
+    return piece_position;
+}
+
+std::vector<std::vector<char>> get_piece_directions(char i, char j, std::vector<std::vector<char>> &chess_board) {
+    std::vector<std::vector<char>> possible_moves;
+    char piece_type = chess_board[i][j];
+    switch (piece_type) {
+        case 1: {// pawn
+            if (i == 1 && chess_board[2][j] == 0) { // pt cand pionul se misca 2 patratele
+                check_move(i, j, 2, 0, possible_moves, chess_board);
+            }
+
+            check_move(i, j, 1, 0, possible_moves, chess_board);
+
+            int temp = check_validity_pawn(i + 1, j - 1, chess_board); // adversar pe diagonala stanga
+            if (temp) {
+                std::vector<char> move;
+                move.push_back(i + 1);
+                move.push_back(j - 1);
+                move.push_back(temp);
+                possible_moves.push_back(move);
+            }
+            temp = check_validity_pawn(i + 1, j + 1, chess_board); // adversar pe diagonala dreapta
+            if (temp) {
+                std::vector<char> move;
+                move.push_back(i + 1);
+                move.push_back(j + 1);
+                move.push_back(temp);
+                possible_moves.push_back(move);
+            }
+            break;
+          }
+
+        case 2: // rook
+            check_move_up(i, j, possible_moves, chess_board);
+            check_move_down(i, j, possible_moves, chess_board);
+            check_move_left(i, j, possible_moves, chess_board);
+            check_move_right(i, j, possible_moves, chess_board);
+            break;
+
+        case 3: // knight
+            // front moves
+            check_move(i, j, 2, -1, possible_moves, chess_board);
+            check_move(i, j, 2, 1, possible_moves, chess_board);
+            check_move(i, j, 1, -2, possible_moves, chess_board);
+            check_move(i, j, 1, 2, possible_moves, chess_board);
+
+            // back moves
+            check_move(i, j, -2, -1, possible_moves, chess_board);
+            check_move(i, j, -2, 1, possible_moves, chess_board);
+            check_move(i, j, -1, -2, possible_moves, chess_board);
+            check_move(i, j, -1, 2, possible_moves, chess_board);
+            break;
+
+        case 4: // black bishop
+        case 5: // white bishop
+            right_diag_up(i, j, possible_moves, chess_board);
+            left_diag_up(i, j, possible_moves, chess_board);
+            right_diag_down(i, j, possible_moves, chess_board);
+            left_diag_down(i, j, possible_moves, chess_board);
+            break;
+
+        case 6: // queen
+            check_move_up(i, j, possible_moves, chess_board);
+            check_move_down(i, j, possible_moves, chess_board);
+            check_move_left(i, j, possible_moves, chess_board);
+            check_move_right(i, j, possible_moves, chess_board);
+            right_diag_up(i, j, possible_moves, chess_board);
+            left_diag_up(i, j, possible_moves, chess_board);
+            right_diag_down(i, j, possible_moves, chess_board);
+            left_diag_down(i, j, possible_moves, chess_board);
+            break;
+
+        case 7: // king
+            check_move(i, j, 1, 0, possible_moves, chess_board);
+            check_move(i, j, -1, 0, possible_moves, chess_board);
+            check_move(i, j, 0, 1, possible_moves, chess_board);
+            check_move(i, j, 0, -1, possible_moves, chess_board);
+            check_move(i, j, 1, 1, possible_moves, chess_board);
+            check_move(i, j, 1, -1, possible_moves, chess_board);
+            check_move(i, j, -1, 1, possible_moves, chess_board);
+            check_move(i, j, -1, -1, possible_moves, chess_board);
+            break;
+
         default:
             break;
     }
