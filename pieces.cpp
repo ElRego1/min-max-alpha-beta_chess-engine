@@ -21,45 +21,20 @@ int check_validity_pawn(char i, char j, std::vector<std::vector<char>> &chess_bo
 std::vector<char> get_piece_position(char p, int d,
 std::vector<std::vector<char>> &positions) {
     std::vector<char> piece_position;
-    char i, j; // piece positions
-    switch (p) {
-        case 1: // pawn
-            i = positions[d][0];
-            j = positions[d][1];
-            break;
-
-        case 2: // rook
-            i = positions[8 + d][0];
-            j = positions[8 + d][1];
-            break;
-
-        case 3: // knight
-            i = positions[10 + d][0];
-            j = positions[10 + d][1];
-            break;
-
-        case 4: // black bishop
-            i = positions[12 + d][0];
-            j = positions[12 + d][1];
-            break;
-
-        case 5: // white bishop
-            i = positions[13 + d][0];
-            j = positions[13 + d][1];
-            break;
-
-        case 6: // queen
-            i = positions[14 + d][0];
-            j = positions[14 + d][1];
-            break;
-
-        case 7: // king
-            i = positions[15 + d][0];
-            j = positions[15 + d][1];
-            break;
-        default:
-            break;
+    char i = -1, j = -1; // piece positions
+    int contor = 0;
+    for (int k = 0; k < 16; k++) {
+        if (positions[k][2] == p) {
+            if (contor == d) {
+                i = positions[k][0];
+                j = positions[k][1];
+                break;
+            } else {
+                ++contor;
+            }
+      }
     }
+
     piece_position.push_back(i);
     piece_position.push_back(j);
 
@@ -154,35 +129,64 @@ std::vector<std::vector<char>> get_piece_directions(char i, char j, std::vector<
    return possible_moves;
 }
 
-void move_piece(char x_s, char y_s, char x_d, char y_d,
-        std::vector<std::vector<char>> &chess_board,
-        std::vector<std::pair<char, std::pair<char, char>>> &playing_pieces_mine) {
+std::vector<char> move_piece(char x_s, char y_s, char x_d, char y_d,
+        std::vector<std::vector<char>> &positions,
+        std::vector<std::vector<char>> &e_positions,
+        std::vector<std::vector<char>> &chess_board) {
     if (chess_board[x_s][y_s] == 0) {
         std::cout << "#probleme\n";
+        return NULL;
     }
 
-    if (chess_board[x_s][y_s] < 10) { //it's my piece
-        playing_pieces_mine[0].second.first = x_d;
-        playing_pieces_mine[0].second.second = y_d;
+    char piece_type = chess_board[x_s][y_s];
+    if (piece_type < 10) { //it's my piece
+    std::vector<char> pos_rmv;
+        if (chess_board[x_d][y_d] != 0) { // taking enemy's piece
+            pos_rmv.push_back(x_d);
+            pos_rmv.push_back(y_d);
+            pos_rmv.push_back(chess_board[x_d][y_d]);
+            auto it = std::find(e_positions.begin(), e_positions.end(), pos);
+            e_positions.erase(it);
+        }
         chess_board[x_d][y_d] = chess_board[x_s][y_s];
         chess_board[x_s][y_s] = 0;
+        std::vector<char> pos;
+        pos.push_back(x_s);
+        pos.push_back(y_s);
+        pos.push_back(piece_type);
+        auto it = std::find(positions.begin(), positions.end(), pos);
+        positions.erase(it);
+        pos.erase();
+        pos.push_back(x_d);
+        pos.push_back(y_d);
+        pos.push_back(piece_type);
+        positions.push_back(pos);
         // TODO
-        // take piece from the enemy
         // make the special move the rook and the king
+        return pos_rmv;
     } else { // it's enemy's piece that's moving
-        if (chess_board[x_d][y_d] == 0) { // the move is on an empty square
-            chess_board[x_d][y_d] = chess_board[x_s][y_s];
-            chess_board[x_s][y_s] = 0;
-        } else { // one of my pieces is being taken
-            // a one liner to take the iterator to the position of my piece in the vector
-            std::vector<std::pair<char, std::pair<char, char>>>::iterator it
-                = std::find(playing_pieces_mine.begin(), playing_pieces_mine.end(),
-                std::pair<char, std::pair<char, char>>(std::make_pair(
-                    chess_board[x_d][y_d], std::make_pair(x_d, y_d))));
-            if (it != playing_pieces_mine.end()) {
-                playing_pieces_mine.erase(it);
-            }
+        std::vector<char> pos_rmv;
+        if (chess_board[x_d][y_d] != 0) { // taking my piece
+            pos_rmv.push_back(x_d);
+            pos_rmv.push_back(y_d);
+            pos_rmv.push_back(chess_board[x_d][y_d]);
+            auto it = std::find(positions.begin(), positions.end(), pos);
+            positions.erase(it);
         }
+        chess_board[x_d][y_d] = chess_board[x_s][y_s];
+        chess_board[x_s][y_s] = 0;
+        std::vector<char> pos;
+        pos.push_back(x_s);
+        pos.push_back(y_s);
+        pos.push_back(piece_type);
+        auto it = std::find(e_positions.begin(), e_positions.end(), pos);
+        e_positions.erase(it);
+        pos.erase();
+        pos.push_back(x_d);
+        pos.push_back(y_d);
+        pos.push_back(piece_type);
+        e_positions.push_back(pos);
+        return pos_rmv;
     }
 }
 

@@ -25,7 +25,7 @@ class Game {
   void apply_move_m(std::vector<char> &move);
   // TODO
   void undo_move_m(std::vector<char> &move);
-  
+
   // TODO
   void apply_move_e(std::vector<char> &move);
   // TODO
