@@ -68,13 +68,14 @@ std::vector<std::vector<char>> get_initial_board_matrix(char _color) {
 // a vector with the pieces
 std::vector<std::vector<char>> get_initial_positions(char _color) {
 	std::vector<std::vector<char>> p(NO_PIECES,
-		std::vector<char>(NO_COORD, 0));
+		std::vector<char>(NO_COORD + 1, 0));
 		// pawns positions
 		for (int i = 0; i < BOX_LENGTH; ++i) {
 			p[i][0] = 1; // mine
 			p[i][1] = i;
-			p[2 * BOX_LENGTH + i][0] = 6;
-			p[2 * BOX_LENGTH + i][1] = i;
+			p[i][2] = 1;
+			// p[2 * BOX_LENGTH + i][0] = 6;
+			// p[2 * BOX_LENGTH + i][1] = i;
 		}
 
 		// rooks positions
