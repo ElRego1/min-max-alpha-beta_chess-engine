@@ -326,7 +326,7 @@ void check_move(char i, char j, int i_depl, int j_depl, std::vector<std::vector<
     }
   }
 
-// --------------------------------------------- diagonal moves --------------------------------
+// ------------------------------------------ Ollie's diagonal moves 8) --------------------------------
 
 void right_diag_up(char i, char j, std::vector<std::vector<char>> &possible_moves, std::vector<std::vector<char>> &chess_board) {
   while (true) {
