@@ -1,9 +1,9 @@
 #include <bits/stdc++.h>
-#include "constants.h"
 #include "communications.h"
 #include "init_game.h"
 #include "pieces.h"
 #include "matrix_transformation.h"
+#include "constants.h"
 
 using namespace std;
 

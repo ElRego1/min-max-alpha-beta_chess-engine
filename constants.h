@@ -6,6 +6,8 @@
 #define NO_PIECES 16
 #define NO_COORD 2
 
+#define EMPTY_CELL 0
+
 // minimax
 #define LOW -10000
 #define HIGH 10000
