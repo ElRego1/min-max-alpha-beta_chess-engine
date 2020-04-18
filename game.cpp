@@ -76,7 +76,7 @@ std::vector<std::vector<char>> &h_board, std::vector<std::vector<char>> &h_piece
       }
     }
   } else if (info[0] != EMPTY_CELL){ // if something is wrong
-    std::cout << "#ERROR: apply_move illogical value in cell: " << p_board[dst_x][dst_y] << std::endl;
+    std::cout << "#ERROR: apply_move illogical value in cell: " << info[0] << std::endl;
     info.push_back(-1);
   }
 
@@ -96,9 +96,9 @@ void Game::undo_move_e(std::vector<char> &info, std::vector<char> &move) {
 }
 
 // more info about the funtion in the header file
-void undo_move(std::vector<char> &info, std::vector<char> &move,
-std::vector<std::vector<char>> &p_board,std::vector<std::vector<char>> &p_pieces,
+void undo_move(std::vector<char> &info, std::vector<char> &move, std::vector<std::vector<char>> &p_board,std::vector<std::vector<char>> &p_pieces,
 std::vector<std::vector<char>> &h_board, std::vector<std::vector<char>> &h_pieces) {
+  // structure of move: {src_x, src_y, dst_x, dst_y, piece_type, priority_code} | only the first 4 fields in the vector are mandatory
   char src_x = move[0];
   char src_y = move[1];
   char dst_x = move[2];
@@ -112,8 +112,35 @@ std::vector<std::vector<char>> &h_board, std::vector<std::vector<char>> &h_piece
       break;
     }
   }
+  // change our board
+  p_board[src_x][src_y] = p_board[dst_x][dst_y];
+  p_board[dst_x][dst_y] = info[0]; // save enemy's information
 
 
+  // prepare to change the enemy's information
+  char ep_src_x, ep_src_y; // enemy's perspective source x/y
+  change_coordonates(src_x, src_y, ep_src_x, ep_src_y); // get the source coordonates from the enemy's perspective
+  char ep_dst_x, ep_dst_y; // enemy's perspective destination x/y
+  change_coordonates(dst_x, dst_y, ep_dst_x, ep_dst_y); // get the destination coordonates from the enemy's perspective
+  char ep_taken_piece = info[0] - 10;
+
+  // change enemy's board
+  h_board[ep_src_x][ep_src_y] = h_board[ep_dst_x][ep_dst_y];
+  h_board[ep_dst_x][ep_dst_y] = info[0];
+
+  // if one of enemy's pieces was taken, now we put it's info back in the enemy's vector of pieces at the first aviable spot
+  if (info[0] > 10) {
+    // restitute the enemy's vector of pieces
+    for (auto &v : h_pieces) {
+      if (v[0] == -1 && v[1] == -1 && v[2] == ep_taken_piece) {
+        v[0] = ep_dst_x;
+        v[1] = ep_dst_y;
+        break;
+      }
+    }
+  } else if (info[0] != EMPTY_CELL) {
+    std::cout << "#ERROR: undo_move illogical value in info: " << info[0] << std::endl;
+  }
 }
 
 // --------------------------- chess check funcitons --------------------------
