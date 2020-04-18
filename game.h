@@ -25,18 +25,16 @@ class Game {
 
   void remake_print_board(char wb);
 
-  // TODO
-  // returns info to undo the move
-  // return value: {src_x, src_y, dst_x, dst_y, piece_taken}
+  // return value: {piece_taken} | info to undo the move
   std::vector<char> apply_move_m(std::vector<char> &move);
   // TODO
+  // parameters: {piece_taken}, {src_x, src_y, dst_x, dst_y, piece_type, priority_code}
   void undo_move_m(std::vector<char> &info, std::vector<char> &move);
 
-  // TODO
-  // returns info to undo the move
-  // return value: {src_x, src_y, dst_x, dst_y, piece_taken}
+  // return value: {piece_taken} | info to undo the move
   std::vector<char> apply_move_e(std::vector<char> &move);
   // TODO
+  // parameters: {piece_taken}, {src_x, src_y, dst_x, dst_y, piece_type, priority_code}
   void undo_move_e(std::vector<char> &info, std::vector<char> &move);
 
   bool game_over();
@@ -56,6 +54,19 @@ class Game {
 // return value: {piece_taken} | we use a vector for return if we want to expand later
 // --> piece_taken - the codification is for an enemy piece (11 - 17 with 0 for no piece taken) as the piece is relative to the attacker
 std::vector<char> apply_move(std::vector<char> &move, std::vector<std::vector<char>> &p_board,std::vector<std::vector<char>> &p_pieces,
+std::vector<std::vector<char>> &h_board, std::vector<std::vector<char>> &h_pieces);
+
+// MODIFIES the internal state of the game !!!
+// structure of info: {piece_taken}
+// --> piece_taken - the codification is for an enemy piece (11 - 17 with 0 for no piece taken) as the piece is relative to the attacker
+// structure of move: {src_x, src_y, dst_x, dst_y, piece_type, priority_code}
+// --> src_x, src_y, dst_x, dst_y - src and dst are as we are making the move so we want to move from dst to the src position the piece
+// p_board - personal chess board 
+// p_pieces - personal vector with pieces
+// h_board - hostile chess board
+// h_pieces - hostile vector with pieces
+void undo_move(std::vector<char> &info, std::vector<char> &move,
+std::vector<std::vector<char>> &p_board,std::vector<std::vector<char>> &p_pieces,
 std::vector<std::vector<char>> &h_board, std::vector<std::vector<char>> &h_pieces);
 
 int check_check(char i, char j, std::vector<std::vector<char>> &chess_board);

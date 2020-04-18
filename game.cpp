@@ -20,10 +20,12 @@ Game::Game(char wb) {
 
 // --------------------------- apply move functions ---------------------------
 
+// calls apply_move
 std::vector<char> Game::apply_move_m(std::vector<char> &move) {
   return apply_move(move, m_board, m_pieces, e_board, e_pieces);
 }
 
+// calls apply_move
 std::vector<char> Game::apply_move_e(std::vector<char> &move) {
   return apply_move(move, e_board, e_pieces, m_board, m_pieces);
 }
@@ -47,23 +49,24 @@ std::vector<std::vector<char>> &h_board, std::vector<std::vector<char>> &h_piece
       break;
     }
   }
-
   // change our board
-  if (p_board[dst_x][dst_y] == 0) { // is an empty cell
-    p_board[dst_x][dst_y] = p_board[src_x][src_y];
-    p_board[src_x][src_y] = EMPTY_CELL;
-    info.push_back(EMPTY_CELL);
-  } else if (p_board[dst_x][dst_y] > 10) { // is a cell with an enemy
-    info.push_back(p_board[dst_x][dst_y]);
-    p_board[dst_x][dst_y] = p_board[src_x][src_y];
-    p_board[src_x][src_y] = EMPTY_CELL;
+  info.push_back(p_board[dst_x][dst_y]); // save the info in the cell
+  p_board[dst_x][dst_y] = p_board[src_x][src_y];
+  p_board[src_x][src_y] = EMPTY_CELL;
 
-    // prepare to change the enemy's information
-    char ep_src_x, ep_src_y; // enemy's perspective source x/y
-    change_coordonates(src_x, src_y, ep_src_x, ep_src_y); // get the source coordonates from the enemy's perspective
-    char ep_dst_x, ep_dst_y; // enemy's perspective destination x/y
-    change_coordonates(dst_x, dst_y, ep_dst_x, ep_dst_y); // get the destination coordonates from the enemy's perspective
 
+  // prepare to change the enemy's information
+  char ep_src_x, ep_src_y; // enemy's perspective source x/y
+  change_coordonates(src_x, src_y, ep_src_x, ep_src_y); // get the source coordonates from the enemy's perspective
+  char ep_dst_x, ep_dst_y; // enemy's perspective destination x/y
+  change_coordonates(dst_x, dst_y, ep_dst_x, ep_dst_y); // get the destination coordonates from the enemy's perspective
+
+  // change enemy's board
+  h_board[ep_dst_x][ep_dst_y] = h_board[ep_src_x][ep_src_y];
+  h_board[ep_src_x][ep_src_y] = EMPTY_CELL;
+
+  // if an enemy piece was taken we update his vector of pieces
+  if (info[0] > 10) {
     // change the enemy's vector of pieces
     for (auto &v : h_pieces) {
       if (v[0] == ep_dst_x && v[1] == ep_dst_y) {
@@ -72,15 +75,45 @@ std::vector<std::vector<char>> &h_board, std::vector<std::vector<char>> &h_piece
         break;
       }
     }
-
-    // change the enemy's board
-    h_board[ep_dst_x][ep_dst_y] = h_board[ep_src_x][ep_src_y];
-    h_board[ep_src_x][ep_src_y] = EMPTY_CELL;
-  } else { // if something is wrong
+  } else if (info[0] != EMPTY_CELL){ // if something is wrong
     std::cout << "#ERROR: apply_move illogical value in cell: " << p_board[dst_x][dst_y] << std::endl;
     info.push_back(-1);
   }
+
   return info;
+}
+
+// --------------------------- undo move functions ----------------------------
+
+//calls undo_move
+void Game::undo_move_m(std::vector<char> &info, std::vector<char> &move) {
+  undo_move(info, move, m_board, m_pieces, e_board, e_pieces);
+}
+
+//calls undo_move
+void Game::undo_move_e(std::vector<char> &info, std::vector<char> &move) {
+  undo_move(info, move, e_board, e_pieces, m_board, e_pieces);
+}
+
+// more info about the funtion in the header file
+void undo_move(std::vector<char> &info, std::vector<char> &move,
+std::vector<std::vector<char>> &p_board,std::vector<std::vector<char>> &p_pieces,
+std::vector<std::vector<char>> &h_board, std::vector<std::vector<char>> &h_pieces) {
+  char src_x = move[0];
+  char src_y = move[1];
+  char dst_x = move[2];
+  char dst_y = move[3];
+
+  // change the personal vector of pieces
+  for (auto &v : p_pieces) {
+    if (v[0] == dst_x && v[1] == dst_y) {
+      v[0] = src_x;
+      v[1] = src_y;
+      break;
+    }
+  }
+
+
 }
 
 // --------------------------- chess check funcitons --------------------------
