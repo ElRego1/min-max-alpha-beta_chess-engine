@@ -1,9 +1,9 @@
 #include <bits/stdc++.h>
-#include "constants.h"
 #include "communications.h"
 #include "init_game.h"
 #include "pieces.h"
 #include "matrix_transformation.h"
+#include "constants.h"
 
 using namespace std;
 
@@ -27,7 +27,7 @@ int main() {
 
 	char wb = 1, force = 0, x_s = 0, y_s = 0, x_d = 0, y_d = 0; // engine default is black
 	int pawn_move = 0, knight_move = 0; // we start to move with the pawn
-	
+
 	Game g(wb);
 
 	std::vector<std::vector<char>> chess_board = g.m_board;

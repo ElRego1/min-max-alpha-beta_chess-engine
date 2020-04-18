@@ -5,17 +5,24 @@
 // 1 - 7 - my pieces
 // 11 - 17 - enemy pieces
 
+// return values:
+// 0 - invalid move
+// 1 - empty cell
+// x - enemy piece and we give a score accordinglly to the importance of the piece << TODO >>
 int check_validity(char i, char j, std::vector<std::vector<char>> &chess_board) {
       if (i < 0 || i >= BOX_LENGTH || j < 0 || j >= BOX_LENGTH) return 0;
-      if (chess_board[i][j] == 0) return 1;
-      if (chess_board[i][j] > 10) return 2;
+      if (chess_board[i][j] == 0) return 1; // empty cell
+      if (chess_board[i][j] > 10) {
+        if (chess_board[i][j] == 17) return 2; // << TODO: to be changed to return 3; to know it's check for the enemy | has to change the move functions from the bottom >>
+        else return 2;
+      }
       return 0;
 }
 
 int check_validity_pawn(char i, char j, std::vector<std::vector<char>> &chess_board) {
-    if (i < 0 || i >= BOX_LENGTH || j < 0 || j >= BOX_LENGTH) return 0;
-    if (chess_board[i][j]!=0 && chess_board[i][j] > 10) return 2;
-    return 0;
+    int temp = check_validity(i, j, chess_board);
+    if (temp <= 1) return 0;
+    else return 2; // << TODO: to be changed to return the value of temp, but not all functions are ready to accept this return value | has to change the move functions from the bottom >>
 }
 
 std::vector<char> get_piece_position(char p, int d,
@@ -41,7 +48,9 @@ std::vector<std::vector<char>> &positions) {
     return piece_position;
 }
 
+// return vector structure: {x, y, "check_validity" return value}
 std::vector<std::vector<char>> get_piece_directions(char i, char j, std::vector<std::vector<char>> &chess_board) {
+    // !!!!!!! NU E MEREU ESTE PUS SI VALOAREA DE RETURN AL LUI check_validity IN POSSIBLE_MOVES !!!!!!
     std::vector<std::vector<char>> possible_moves;
     char piece_type = chess_board[i][j];
     switch (piece_type) {
