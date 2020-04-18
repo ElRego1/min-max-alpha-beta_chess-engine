@@ -39,7 +39,7 @@ std::vector<std::vector<char>> &h_board, std::vector<std::vector<char>> &h_piece
   char dst_y = move[3];
   std::vector<char> info;
 
-  // change the personal vecotr of pieces
+  // change the personal vector of pieces
   for (auto &v : p_pieces) {
     if (v[0] == src_x && v[1] == src_y) {
       v[0] = dst_x;
@@ -47,7 +47,7 @@ std::vector<std::vector<char>> &h_board, std::vector<std::vector<char>> &h_piece
       break;
     }
   }
-  
+
   // change our board
   if (p_board[dst_x][dst_y] == 0) { // is an empty cell
     p_board[dst_x][dst_y] = p_board[src_x][src_y];
@@ -98,7 +98,7 @@ bool Game::is_check_m() {
   // true - check
   // false - king is safe
   int valid = check_check(x, y, m_board);
-  if (valid != 0) return true; 
+  if (valid != 0) return true;
   return false;
 }
 

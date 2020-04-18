@@ -13,7 +13,11 @@ int check_validity(char i, char j, std::vector<std::vector<char>> &chess_board) 
       if (i < 0 || i >= BOX_LENGTH || j < 0 || j >= BOX_LENGTH) return 0;
       if (chess_board[i][j] == 0) return 1; // empty cell
       if (chess_board[i][j] > 10) {
-        if (chess_board[i][j] == 17) return 2; // << TODO: to be changed to return 3; to know it's check for the enemy | has to change the move functions from the bottom >>
+        int temp = chess_board[i][j];
+        if (temp == 14 || temp == 15) return 3; // << TODO: to be changed to return 3; to know it's check for the enemy | has to change the move functions from the bottom >>
+        else if (temp == 12) return 4;
+        else if (temp == 17) return 7;
+        else if (temp == 16) return 6;
         else return 2;
       }
       return 0;
@@ -22,7 +26,7 @@ int check_validity(char i, char j, std::vector<std::vector<char>> &chess_board) 
 int check_validity_pawn(char i, char j, std::vector<std::vector<char>> &chess_board) {
     int temp = check_validity(i, j, chess_board);
     if (temp <= 1) return 0;
-    else return 2; // << TODO: to be changed to return the value of temp, but not all functions are ready to accept this return value | has to change the move functions from the bottom >>
+    else return temp; // << TODO: to be changed to return the value of temp, but not all functions are ready to accept this return value | has to change the move functions from the bottom >>
 }
 
 std::vector<char> get_piece_position(char p, int d,
@@ -138,66 +142,67 @@ std::vector<std::vector<char>> get_piece_directions(char i, char j, std::vector<
    return possible_moves;
 }
 
-std::vector<char> move_piece(char x_s, char y_s, char x_d, char y_d,
-        std::vector<std::vector<char>> &positions,
-        std::vector<std::vector<char>> &e_positions,
-        std::vector<std::vector<char>> &chess_board) {
-    if (chess_board[x_s][y_s] == 0) {
-        std::cout << "#probleme\n";
-        return NULL;
-    }
+// std::vector<char> move_piece(char x_s, char y_s, char x_d, char y_d,
+//         std::vector<std::vector<char>> &positions,
+//         std::vector<std::vector<char>> &e_positions,
+//         std::vector<std::vector<char>> &chess_board) {
+//     if (chess_board[x_s][y_s] == 0) {
+//         std::cout << "#probleme\n";
+//         return NULL;
+//     }
+//
+//     char piece_type = chess_board[x_s][y_s];
+//     if (piece_type < 10) { //it's my piece
+//     std::vector<char> pos_rmv;
+//         if (chess_board[x_d][y_d] != 0) { // taking enemy's piece
+//             pos_rmv.push_back(x_d);
+//             pos_rmv.push_back(y_d);
+//             pos_rmv.push_back(chess_board[x_d][y_d]);
+//             auto it = std::find(e_positions.begin(), e_positions.end(), pos_rmv);
+//             e_positions.erase(it);
+//         }
+//         chess_board[x_d][y_d] = chess_board[x_s][y_s];
+//         chess_board[x_s][y_s] = 0;
+//         std::vector<char> pos;
+//         pos.push_back(x_s);
+//         pos.push_back(y_s);
+//         pos.push_back(piece_type);
+//         auto it = std::find(positions.begin(), positions.end(), pos);
+//         positions.erase(it);
+//         pos.erase(it);
+//         pos.push_back(x_d);
+//         pos.push_back(y_d);
+//         pos.push_back(piece_type);
+//         positions.push_back(pos);
+//         // TODO
+//         // make the special move the rook and the king
+//         return pos_rmv;
+//     } else { // it's enemy's piece that's moving
+//         std::vector<char> pos_rmv;
+//         if (chess_board[x_d][y_d] != 0) { // taking my piece
+//             pos_rmv.push_back(x_d);
+//             pos_rmv.push_back(y_d);
+//             pos_rmv.push_back(chess_board[x_d][y_d]);
+//             auto it = std::find(positions.begin(), positions.end(), pos);
+//             positions.erase(it);
+//         }
+//         chess_board[x_d][y_d] = chess_board[x_s][y_s];
+//         chess_board[x_s][y_s] = 0;
+//         std::vector<char> pos;
+//         pos.push_back(x_s);
+//         pos.push_back(y_s);
+//         pos.push_back(piece_type);
+//         auto it = std::find(e_positions.begin(), e_positions.end(), pos);
+//         e_positions.erase(it);
+//         pos.erase(it);
+//         pos.push_back(x_d);
+//         pos.push_back(y_d);
+//         pos.push_back(piece_type);
+//         e_positions.push_back(pos);
+//         return pos_rmv;
+//     }
+// }
 
-    char piece_type = chess_board[x_s][y_s];
-    if (piece_type < 10) { //it's my piece
-    std::vector<char> pos_rmv;
-        if (chess_board[x_d][y_d] != 0) { // taking enemy's piece
-            pos_rmv.push_back(x_d);
-            pos_rmv.push_back(y_d);
-            pos_rmv.push_back(chess_board[x_d][y_d]);
-            auto it = std::find(e_positions.begin(), e_positions.end(), pos);
-            e_positions.erase(it);
-        }
-        chess_board[x_d][y_d] = chess_board[x_s][y_s];
-        chess_board[x_s][y_s] = 0;
-        std::vector<char> pos;
-        pos.push_back(x_s);
-        pos.push_back(y_s);
-        pos.push_back(piece_type);
-        auto it = std::find(positions.begin(), positions.end(), pos);
-        positions.erase(it);
-        pos.erase();
-        pos.push_back(x_d);
-        pos.push_back(y_d);
-        pos.push_back(piece_type);
-        positions.push_back(pos);
-        // TODO
-        // make the special move the rook and the king
-        return pos_rmv;
-    } else { // it's enemy's piece that's moving
-        std::vector<char> pos_rmv;
-        if (chess_board[x_d][y_d] != 0) { // taking my piece
-            pos_rmv.push_back(x_d);
-            pos_rmv.push_back(y_d);
-            pos_rmv.push_back(chess_board[x_d][y_d]);
-            auto it = std::find(positions.begin(), positions.end(), pos);
-            positions.erase(it);
-        }
-        chess_board[x_d][y_d] = chess_board[x_s][y_s];
-        chess_board[x_s][y_s] = 0;
-        std::vector<char> pos;
-        pos.push_back(x_s);
-        pos.push_back(y_s);
-        pos.push_back(piece_type);
-        auto it = std::find(e_positions.begin(), e_positions.end(), pos);
-        e_positions.erase(it);
-        pos.erase();
-        pos.push_back(x_d);
-        pos.push_back(y_d);
-        pos.push_back(piece_type);
-        e_positions.push_back(pos);
-        return pos_rmv;
-    }
-}
 
 // --------------------------------------------- Robert's attemp --------------------------------
 
@@ -240,7 +245,7 @@ std::vector<std::vector<char>> &chess_board) {
     move.push_back(j + y);
     move.push_back(temp);
     possible_moves.push_back(move);
-    if (temp == 2) break; // it's an enemy piece and we can not jump over it
+    if (temp >= 2) break; // it's an enemy piece and we can not jump over it
     i += x;
     j += y;
   }
@@ -273,7 +278,7 @@ void check_move_down(char i, char j, std::vector<std::vector<char>> &possible_mo
       move.push_back(j);
       move.push_back(temp);
       possible_moves.push_back(move);
-      if (temp == 2) break;
+      if (temp >= 2) break;
       --i;
     }
 }
@@ -288,7 +293,7 @@ void check_move_left(char i, char j, std::vector<std::vector<char>> &possible_mo
       move.push_back(j - 1);
       move.push_back(temp);
       possible_moves.push_back(move);
-      if (temp == 2) break;
+      if (temp >= 2) break;
       --j;
     }
 
@@ -304,7 +309,7 @@ void check_move_right(char i, char j, std::vector<std::vector<char>> &possible_m
       move.push_back(j + 1);
       move.push_back(temp);
       possible_moves.push_back(move);
-      if (temp == 2) break;
+      if (temp >= 2) break;
       ++j;
     }
 }
@@ -332,7 +337,7 @@ void right_diag_up(char i, char j, std::vector<std::vector<char>> &possible_move
     move.push_back(j + 1);
     move.push_back(temp);
     possible_moves.push_back(move);
-    if (temp == 2) break;
+    if (temp >= 2) break;
     ++i;
     ++j;
   }
@@ -347,7 +352,7 @@ void left_diag_up(char i, char j, std::vector<std::vector<char>> &possible_moves
     move.push_back(j - 1);
     move.push_back(temp);
     possible_moves.push_back(move);
-    if (temp == 2) break;
+    if (temp >= 2) break;
     ++i;
     --j;
   }
@@ -362,7 +367,7 @@ void right_diag_down(char i, char j, std::vector<std::vector<char>> &possible_mo
     move.push_back(j + 1);
     move.push_back(temp);
     possible_moves.push_back(move);
-    if (temp == 2) break;
+    if (temp >= 2) break;
     --i;
     ++j;
   }
@@ -377,7 +382,7 @@ void left_diag_down(char i, char j, std::vector<std::vector<char>> &possible_mov
     move.push_back(j - 1);
     move.push_back(temp);
     possible_moves.push_back(move);
-    if (temp == 2) break;
+    if (temp >= 2) break;
     --i;
     --j;
   }
