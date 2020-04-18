@@ -15,11 +15,7 @@
 #define PIECES_H
 
 #include <bits/stdc++.h>
-
-#define BOX_SQUARES 64
-#define BOX_LENGTH 8
-
-extern std::vector<std::vector<char>> positions;
+#include "constants.h"
 
 std::vector<std::pair<char, char>> all_directions{up, dw, rg, lf, ur, ul, dr, dl};
 
