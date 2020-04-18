@@ -249,7 +249,7 @@ void check_move_up(char i, char j, std::vector<std::vector<char>> &possible_move
       move.push_back(j);
       move.push_back(temp);
       possible_moves.push_back(move);
-      if (temp == 2) break;
+      if (temp >= 2) break;
       ++i;
     }
 }
