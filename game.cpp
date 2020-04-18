@@ -21,6 +21,7 @@ Game::Game(char wb) {
 }
 
 void Game::remake_print_board(char wb) {
+  m_color = wb;
   make_print_board_matrix(*this, wb);
 }
 
