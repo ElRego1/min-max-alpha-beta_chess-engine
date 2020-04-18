@@ -11,7 +11,7 @@ int alphabeta_maxi(int depth, int alpha, int beta, Game &g) {
   // {src_x, src_y, dst_x, dst_y, piece_type, priority_code}
   for (auto &move : all_moves) {
     int score;
-    // holds info to undo the move later: {src_x, src_y, dst_x, dst_y, piece_taken}
+    // holds info to undo the move later: {piece_taken}
     std::vector<char> info = g.apply_move_m(move);
     
     if (g.is_check_m) {
