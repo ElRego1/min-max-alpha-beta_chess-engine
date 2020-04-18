@@ -8,11 +8,11 @@ int alphabeta_maxi(int depth, int alpha, int beta, Game &g) {
   }
 
   std::vector<std::vector<char>> all_moves = get_moves_m(g);
-
+  // {src_x, src_y, dst_x, dst_y, piece_type, priority_code}
   for (auto &move : all_moves) {
     int score;
-
-    g.apply_move_m(move);
+    // holds info to undo the move later: {src_x, src_y, dst_x, dst_y, piece_taken}
+    std::vector<char> info = g.apply_move_m(move);
     
     if (g.is_check_m) {
       score = LOW - 1;
@@ -28,7 +28,7 @@ int alphabeta_maxi(int depth, int alpha, int beta, Game &g) {
       alpha = score;
     }
 
-    g.undo_move_m(move);
+    g.undo_move_m(info, move);
   }
   return alpha;
 }
@@ -38,9 +38,9 @@ int alphabeta_mini(int depth, int alpha, int beta, Game &g){
   if (depth == 0 || g.game_over()) {
     return -evaluate();
   }
-
+  
   std::vector<std::vector<char>> all_moves = get_moves_e(g);
-
+  // {src_x, src_y, dst_x, dst_y, piece_type, priority_code}
   for (auto &move : all_moves) {
     g.apply_move_e(move);
 
@@ -59,8 +59,8 @@ int alphabeta_mini(int depth, int alpha, int beta, Game &g){
     if (score < beta) {
       beta = score;
     }
-
-    g.undo_move_e(move);
+    // TODO
+    // g.undo_move_e(move);
   }
   return beta;
 }
