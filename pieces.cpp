@@ -8,7 +8,10 @@
 int check_validity(char i, char j, std::vector<std::vector<char>> &chess_board) {
       if (i < 0 || i >= BOX_LENGTH || j < 0 || j >= BOX_LENGTH) return 0;
       if (chess_board[i][j] == 0) return 1;
-      if (chess_board[i][j] > 10) return 2;
+      if (chess_board[i][j] > 10) {
+        if (chess_board[i][j] == 17) return 2; // << TODO: to be changed to return 3; to know it's check for the enemy | has to change the move functions from the bottom >>
+        else return 2;
+      }
       return 0;
 }
 
@@ -41,6 +44,7 @@ std::vector<std::vector<char>> &positions) {
     return piece_position;
 }
 
+// return vector structure: {x, y, "check_validity" return value}
 std::vector<std::vector<char>> get_piece_directions(char i, char j, std::vector<std::vector<char>> &chess_board) {
     std::vector<std::vector<char>> possible_moves;
     char piece_type = chess_board[i][j];
