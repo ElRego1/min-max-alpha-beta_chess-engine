@@ -20,11 +20,6 @@ Game::Game(char wb) {
   e_pieces = get_initial_positions(e_color);
 }
 
-void Game::remake_print_board(char wb) {
-  m_color = wb;
-  make_print_board_matrix(*this, wb);
-}
-
 bool Game::is_check_m() {
   char x, y;
   for (auto &v : m_pieces) {
@@ -125,4 +120,9 @@ int check_check_validity(char i, char j, std::vector<std::vector<char>> &chess_b
       if (chess_board[i][j] > 10) return 2; // enemy pieces
       if (chess_board[i][j] > 0) return 1; // my pieces
       return 3;
+}
+
+void Game::remake_print_board(char wb) {
+  m_color = wb;
+  make_print_board_matrix(*this, wb);
 }
