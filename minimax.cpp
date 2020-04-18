@@ -20,10 +20,10 @@ int alphabeta_maxi(int depth, int alpha, int beta, Game &g) {
       score = alphabeta_mini(depth - 1, alpha, beta, g);
     }
 
+    // partea de alpha-beta
     if (score >= beta) {
       return beta;
     }
-
     if (score > alpha) {
       alpha = score;
     }
@@ -51,10 +51,11 @@ int alphabeta_mini(int depth, int alpha, int beta, Game &g){
     }else {
       score = alphabeta_maxi(depth - 1, alpha, beta, g);
     }
+
+    // partea de alpha-beta
     if (score <= alpha) {
       return alpha;
     }
-
     if (score < beta) {
       beta = score;
     }
@@ -66,26 +67,43 @@ int alphabeta_mini(int depth, int alpha, int beta, Game &g){
 
 // --------------------------------- GET_MOVES_X -----------------------------
 
+// return vector structure: {src_x, src_y, dst_x, dst_y, piece_type, priority_code}
 std::vector<std::vector<char>> get_moves_m(Game &g) {
   std::vector<std::vector<char>> moves;
-  for (std::vector<char> piece : g.m_pieces) {
-    if (piece[0] < 0 || piece[1] < 0) {
-      continue;
-    }
-    std::vector<std::vector<char>> temp = get_piece_directions(piece[0], piece[1], g.m_board);
-    moves.insert(moves.end(), temp.begin(), temp.end());
-  }
-  return moves;
+  return get_moves(g.m_pieces, g.m_board);
 }
 
+// return vector structure: {src_x, src_y, dst_x, dst_y, piece_type, priority_code}
 std::vector<std::vector<char>> get_moves_e(Game &g) {
   std::vector<std::vector<char>> moves;
-  for (std::vector<char> piece : g.e_pieces) {
+  return get_moves(g.e_pieces, g.e_board);
+}
+
+// return vector structure: {src_x, src_y, dst_x, dst_y, piece_type, priority_code}
+// priority code:
+// 1 - an empty cell
+// 2 - an enemy piece
+// 3 - chess for the enemy << TODO >>
+std::vector<std::vector<char>> get_moves(std::vector<std::vector<char>> &pieces, std::vector<std::vector<char>> &board) {
+  std::vector<std::vector<char>> moves;
+  // structure for piece: {x, y, piece_type}
+  for (std::vector<char> piece : pieces) {
     if (piece[0] < 0 || piece[1] < 0) {
       continue;
     }
-    std::vector<std::vector<char>> temp = get_piece_directions(piece[0], piece[1], g.e_board);
-    moves.insert(moves.end(), temp.begin(), temp.end());
+    // {x, y, return code from "check_validity"}
+    std::vector<std::vector<char>> temp = get_piece_directions(piece[0], piece[1], board);
+    for (auto &x : temp) {
+      std::vector<char> v;
+      v.push_back(piece[0]); // src_x
+      v.push_back(piece[1]); // src_y
+      v.push_back(x[0]);     // dst_x
+      v.push_back(x[1]);     // dst_y
+      v.push_back(piece[2]); // piece_type
+      v.push_back(x[2]);     // priority_code
+
+      moves.push_back(v);
+    }
   }
   return moves;
 }
