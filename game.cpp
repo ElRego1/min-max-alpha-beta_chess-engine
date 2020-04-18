@@ -1,6 +1,4 @@
 #include "game.h"
-#include "init_game.h"
-#include "pieces.h"
 
 Game::Game(char wb) {
   make_print_board_matrix(*this, wb);
@@ -19,6 +17,73 @@ Game::Game(char wb) {
   e_board = get_initial_board_matrix(e_color);
   e_pieces = get_initial_positions(e_color);
 }
+
+// --------------------------- apply move functions ---------------------------
+
+std::vector<char> Game::apply_move_m(std::vector<char> &move) {
+  return apply_move(move, m_board, m_pieces, e_board, e_pieces);
+}
+
+std::vector<char> Game::apply_move_e(std::vector<char> &move) {
+  return apply_move(move, e_board, e_pieces, m_board, m_pieces);
+}
+
+// more info about the funtion in the header file
+// return value: {piece_taken}
+std::vector<char> apply_move(std::vector<char> &move, std::vector<std::vector<char>> &p_board,std::vector<std::vector<char>> &p_pieces,
+std::vector<std::vector<char>> &h_board, std::vector<std::vector<char>> &h_pieces) {
+  // structure of move: {src_x, src_y, dst_x, dst_y, piece_type, priority_code} | only the first 4 fields in the vector are mandatory
+  char src_x = move[0];
+  char src_y = move[1];
+  char dst_x = move[2];
+  char dst_y = move[3];
+  std::vector<char> info;
+
+  // change the personal vecotr of pieces
+  for (auto &v : p_pieces) {
+    if (v[0] == src_x && v[1] == src_y) {
+      v[0] = dst_x;
+      v[1] = dst_y;
+      break;
+    }
+  }
+  
+  // change our board
+  if (p_board[dst_x][dst_y] == 0) { // is an empty cell
+    p_board[dst_x][dst_y] = p_board[src_x][src_y];
+    p_board[src_x][src_y] = EMPTY_CELL;
+    info.push_back(EMPTY_CELL);
+  } else if (p_board[dst_x][dst_y] > 10) { // is a cell with an enemy
+    info.push_back(p_board[dst_x][dst_y]);
+    p_board[dst_x][dst_y] = p_board[src_x][src_y];
+    p_board[src_x][src_y] = EMPTY_CELL;
+
+    // prepare to change the enemy's information
+    char ep_src_x, ep_src_y; // enemy's perspective source x/y
+    change_coordonates(src_x, src_y, ep_src_x, ep_src_y); // get the source coordonates from the enemy's perspective
+    char ep_dst_x, ep_dst_y; // enemy's perspective destination x/y
+    change_coordonates(dst_x, dst_y, ep_dst_x, ep_dst_y); // get the destination coordonates from the enemy's perspective
+
+    // change the enemy's vector of pieces
+    for (auto &v : h_pieces) {
+      if (v[0] == ep_dst_x && v[1] == ep_dst_y) {
+        v[0] = -1;
+        v[1] = -1;
+        break;
+      }
+    }
+
+    // change the enemy's board
+    h_board[ep_dst_x][ep_dst_y] = h_board[ep_src_x][ep_src_y];
+    h_board[ep_src_x][ep_src_y] = EMPTY_CELL;
+  } else { // if something is wrong
+    std::cout << "#ERROR: apply_move illogical value in cell: " << p_board[dst_x][dst_y] << std::endl;
+    info.push_back(-1);
+  }
+  return info;
+}
+
+// --------------------------- chess check funcitons --------------------------
 
 bool Game::is_check_m() {
   char x, y;

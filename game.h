@@ -2,6 +2,10 @@
 #define GAME_H
 
 #include <bits/stdc++.h>
+#include "init_game.h"
+#include "pieces.h"
+#include "matrix_transformation.h"
+#include "constants.h"
 
 class Game {
 
@@ -39,16 +43,19 @@ class Game {
   bool is_check_m();
   bool is_check_e();
 };
+
+// MODIFIES the internal state of the game !!!
 // I didn't want to use "m_board", "m_pieces", "e_board", "e_pieces" as names for the parameters of the function
 // to not be missleading and be confused with the Game class's argument. Also because the view of the boards is relative
 // the parameters of the funciton are as fallows:
+// structure of move: {src_x, src_y, dst_x, dst_y, piece_type, priority_code} | only the first 4 fields in the vector are mandatory
 // p_board - personal chess board 
 // p_pieces - personal vector with pieces
 // h_board - hostile chess board
 // h_pieces - hostile vector with pieces
-// return value: {src_x, src_y, dst_x, dst_y, piece_taken}
+// return value: {piece_taken} | we use a vector for return if we want to expand later
 // --> piece_taken - the codification is for an enemy piece (11 - 17 with 0 for no piece taken) as the piece is relative to the attacker
-std::vector<char> apply_move(std::vector<std::vector<char>> &p_board, std::vector<std::vector<char>> &p_pieces,
+std::vector<char> apply_move(std::vector<char> &move, std::vector<std::vector<char>> &p_board,std::vector<std::vector<char>> &p_pieces,
 std::vector<std::vector<char>> &h_board, std::vector<std::vector<char>> &h_pieces);
 
 int check_check(char i, char j, std::vector<std::vector<char>> &chess_board);
