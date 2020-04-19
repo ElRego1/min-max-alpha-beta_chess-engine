@@ -1,16 +1,16 @@
 /*
 
-0 - empty sapce      |
-1 - my pawn          | 11 - enemy pawn
-2 - my rook          | 12 - enemy rook
-3 - my knight        | 13 - enemy knight
-4 - my black bishop  | 14 - enemy black bishop
-5 - my white bishop  | 15 - enemy white bishop
-6 - my queen         | 16 - enemy queen
-7 - my king          | 17 - enemy king
+0 - empty sapce                      |
+1 - my pawn   =   PAWN_M             | 11 - enemy pawn = PAWN_E
+2 - my rook   =   ROOK_M             | 12 - enemy rook = ROOK_E
+3 - my knight   =   KNIGHT_M         | 13 - enemy knight = KNIGHT_E
+4 - my black bishop = BLACK_BISHOP_M | 14 - enemy black bishop = BLACK_BISHOP_E
+5 - my white bishop = WHITE_BISHOP_M | 15 - enemy white bishop = WHITE_BISHOP_E
+6 - my queen   =   QUEEN_M           | 16 - enemy queen = QUEEN_E
+7 - my king   =   KING_M             | 17 - enemy king = KING_E
 
-color: 0 - white
-       1 - black
+color: 0 - white = WHITE
+       1 - black = BLACK
 
 */
 
@@ -23,39 +23,39 @@ std::vector<std::vector<char>> get_initial_board_matrix(char _color) {
 
 	// put the pawns
 	for (int i = 0; i < BOX_LENGTH; ++i) {
-		v[1][i] = 1;
-		v[6][i] = 11;
+		v[1][i] = PAWN_M;
+		v[6][i] = PAWN_E;
 	}
 
 	// put the rooks
-	v[0][0] = 2; // mine
-	v[0][7] = 2; // mine
-	v[7][0] = 12; // enemy's
-	v[7][7] = 12; // enemy's
+	v[0][0] = ROOK_M; // mine
+	v[0][7] = ROOK_M; // mine
+	v[7][0] = ROOK_E; // enemy's
+	v[7][7] = ROOK_E; // enemy's
 
 	// put the knights
-	v[0][1] = 3; // mine
-	v[0][6] = 3; // mine
-	v[7][1] = 13; // enemy's
-	v[7][6] = 13; // enemy's
+	v[0][1] = KNIGHT_M; // mine
+	v[0][6] = KNIGHT_M; // mine
+	v[7][1] = KNIGHT_E; // enemy's
+	v[7][6] = KNIGHT_E; // enemy's
 
 	// put the bishops
-	v[0][2] = 4; // mine black
-	v[0][5] = 5; // mine white
-	v[7][2] = 15; // enemy's white
-	v[7][5] = 14; // enemy's black
+	v[0][2] = BLACK_BISHOP_M; // mine black
+	v[0][5] = WHITE_BISHOP_M; // mine white
+	v[7][2] = WHITE_BISHOP_E; // enemy's white
+	v[7][5] = BLACK_BISHOP_E; // enemy's black
 
 	// the position of the king and queen depends on the color
-	if (_color == 0) { //play as white
-		v[0][3] = 6; // my queen
-		v[0][4] = 7; // my king
-		v[7][3] = 16; // enemy's queen
-		v[7][4] = 17; // enemy's king
+	if (_color == WHITE) { //play as white
+		v[0][3] = QUEEN_M; // my queen
+		v[0][4] = KING_M; // my king
+		v[7][3] = QUEEN_E; // enemy's queen
+		v[7][4] = KING_E; // enemy's king
 	} else { // play as black
-		v[0][3] = 7; // my king
-		v[0][4] = 6; // my queen
-		v[7][3] = 17; // enemy's king
-		v[7][4] = 16; // enemy's queen
+		v[0][3] = KING_M; // my king
+		v[0][4] = QUEEN_M; // my queen
+		v[7][3] = KING_E; // enemy's king
+		v[7][4] = QUEEN_E; // enemy's queen
 	}
 	return v;
 }
@@ -67,7 +67,7 @@ std::vector<std::vector<char>> get_initial_positions(char _color) {
 		for (int i = 0; i < BOX_LENGTH; ++i) {
 			p[i][0] = 1; // mine
 			p[i][1] = i;
-			p[i][2] = 1;
+			p[i][2] = PAWN_M;
 			// p[2 * BOX_LENGTH + i][0] = 6;
 			// p[2 * BOX_LENGTH + i][1] = i;
 		}
@@ -75,10 +75,10 @@ std::vector<std::vector<char>> get_initial_positions(char _color) {
 		// rooks positions
 		p[BOX_LENGTH + 0][0] = 0;
 		p[BOX_LENGTH + 0][1] = 0;
-		p[BOX_LENGTH + 0][2] = 2;
+		p[BOX_LENGTH + 0][2] = ROOK_M;
 		p[BOX_LENGTH + 1][0] = 0;
 		p[BOX_LENGTH + 1][1] = 7;
-		p[BOX_LENGTH + 1][2] = 2;
+		p[BOX_LENGTH + 1][2] = ROOK_M;
 
 		// p[3 * BOX_LENGTH + 0][0] = 7;
 		// p[3 * BOX_LENGTH + 0][1] = 0;
@@ -88,10 +88,10 @@ std::vector<std::vector<char>> get_initial_positions(char _color) {
 		// knights positions
 		p[BOX_LENGTH + 2][0] = 0;
 		p[BOX_LENGTH + 2][1] = 1;
-		p[BOX_LENGTH + 2][2] = 3;
+		p[BOX_LENGTH + 2][2] = KNIGHT_M;
 		p[BOX_LENGTH + 3][0] = 0;
 		p[BOX_LENGTH + 3][1] = 6;
-		p[BOX_LENGTH + 3][2] = 3;
+		p[BOX_LENGTH + 3][2] = KNIGHT_M;
 
 		// p[3 * BOX_LENGTH + 2][0] = 7;
 		// p[3 * BOX_LENGTH + 2][1] = 1;
@@ -102,11 +102,11 @@ std::vector<std::vector<char>> get_initial_positions(char _color) {
 		// mine black
 		p[BOX_LENGTH + 4][0] = 0;
 		p[BOX_LENGTH + 4][1] = 2;
-		p[BOX_LENGTH + 4][2] = 4;
+		p[BOX_LENGTH + 4][2] = BLACK_BISHOP_M;
 		// mine white
 		p[BOX_LENGTH + 5][0] = 0;
 		p[BOX_LENGTH + 5][1] = 5;
-		p[BOX_LENGTH + 5][2] = 5;
+		p[BOX_LENGTH + 5][2] = WHITE_BISHOP_M;
 		// // enemy's black
 		// p[3 * BOX_LENGTH + 4][0] = 7;
 		// p[3 * BOX_LENGTH + 4][1] = 5;
@@ -119,10 +119,10 @@ std::vector<std::vector<char>> get_initial_positions(char _color) {
 		if (_color == 0) { //play as white
 			p[BOX_LENGTH + 6][0] = 0; // my queen
 			p[BOX_LENGTH + 6][1] = 3; // my queen
-			p[BOX_LENGTH + 6][2] = 6; // my queen
+			p[BOX_LENGTH + 6][2] = QUEEN_M; // my queen
 			p[BOX_LENGTH + 7][0] = 0; // my king
 			p[BOX_LENGTH + 7][1] = 4; // my king
-			p[BOX_LENGTH + 7][2] = 7; // my king
+			p[BOX_LENGTH + 7][2] = KING_M; // my king
 
 			// p[3 * BOX_LENGTH + 6][0] = 7; // enemy's queen
 			// p[3 * BOX_LENGTH + 6][1] = 3; // enemy's queen
@@ -132,10 +132,10 @@ std::vector<std::vector<char>> get_initial_positions(char _color) {
 		} else { // play as black
 			p[BOX_LENGTH + 6][0] = 0; // my queen
 			p[BOX_LENGTH + 6][1] = 4; // my queen
-			p[BOX_LENGTH + 6][2] = 6; // my queen
+			p[BOX_LENGTH + 6][2] = QUEEN_M; // my queen
 			p[BOX_LENGTH + 7][0] = 0; // my king
 			p[BOX_LENGTH + 7][1] = 3; // my king
-			p[BOX_LENGTH + 7][2] = 7; // my king
+			p[BOX_LENGTH + 7][2] = KING_M; // my king
 
 			// p[3 * BOX_LENGTH + 6][0] = 7; // enemy's queen
 			// p[3 * BOX_LENGTH + 6][1] = 4; // enemy's queen
@@ -150,7 +150,7 @@ std::vector<std::vector<char>> get_initial_positions(char _color) {
 void make_print_board_matrix(Game &g, char color) {
 	std::vector<std::vector<char*>> p(BOX_LENGTH, std::vector<char*>(BOX_LENGTH));
 	// if color is different from -1, we are at the first run and do not free the memory
-	if (g.m_color != -1) {
+	if (g.m_color != NO_COLOR) {
 		for (char i = 0; i < BOX_LENGTH; ++i) {
 			for (char j = 0; j < BOX_LENGTH; ++j) {
 				free(g._print_board[i][j]);
@@ -160,7 +160,7 @@ void make_print_board_matrix(Game &g, char color) {
 
 	g.m_color = color;
 
-	if (color == 0) { // white
+	if (color == WHITE) { // white
 		for (char number = '1'; number <= '8'; ++number) {
 			for (char letter = 'a'; letter <= 'h'; ++letter) {
 				p[number - '1'][letter - 'a'] = (char*)malloc(sizeof(char) * 3);

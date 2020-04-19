@@ -20,7 +20,7 @@ int check_validity(char i, char j, std::vector<std::vector<char>> &chess_board) 
       if (chess_board[i][j] == 0) return 1; // empty cell
       if (chess_board[i][j] > 10) {
         int temp = chess_board[i][j];
-        if (temp == 11) return 3;
+        if (temp == 11) return 3; // pawn
         else if (temp == 12) return 6; // rook
         else if (temp == 13) return 4; // knight
         else if (temp == 14 || temp == 15) return 5; // bishop

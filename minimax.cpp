@@ -69,8 +69,44 @@ int alphabeta_mini(int depth, int alpha, int beta, Game &g){
 
 int evaluate(std::vector<std::vector<char>> &p_board,std::vector<std::vector<char>> &p_pieces,
 std::vector<std::vector<char>> &h_board, std::vector<std::vector<char>> &h_pieces) {
+  int score_p = 0;
+  int score_h = 0;
+
+  for (auto &v : p_pieces) {
+    if (v[0] != PIECE_TAKEN && v[1] != PIECE_TAKEN) {
+      score_p += get_score(v[2]);
+    }
+  }
+  for (auto &v : h_pieces) {
+    if (v[0] != PIECE_TAKEN && v[1] != PIECE_TAKEN) {
+      score_h += get_score(v[2]);
+    }
+  }
+  
 
   return 0;
+}
+
+int get_score(const int &piece_type) {
+  switch (piece_type) {
+    case PAWN_M:
+      return SCORE_PAWN;
+    case ROOK_M:
+      return SCORE_ROOK;
+    case KNIGHT_M:
+      return SCORE_KNIGHT;
+    case WHITE_BISHOP_M:
+      return SCORE_WHITE_BISHOP;
+    case BLACK_BISHOP_M:
+      return SCORE_BLACK_BISHOP;
+    case QUEEN_M:
+      return SCORE_QUEEN;
+    case KING_M:
+      return SCORE_KING;
+    default:
+      std::cout << "#ERROR: Found a piece_type that did not mach anything in \"get_score\"" << std::endl;
+      return 0;
+  }
 }
 
 // --------------------------------- GET_MOVES_X ------------------------------

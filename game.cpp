@@ -9,10 +9,10 @@ Game::Game(char wb) {
 	m_pieces = get_initial_positions(m_color);
 
   // init enemy's color, board and vector of pieces
-  if (wb == 0) { // if we are white
-    e_color = 1; // enemy is black
+  if (wb == WHITE) { // if we are white
+    e_color = BLACK; // enemy is black
   } else {       // if we are black
-    e_color = 0; // enemy is white
+    e_color = WHITE; // enemy is white
   }
   e_board = get_initial_board_matrix(e_color);
   e_pieces = get_initial_positions(e_color);
@@ -143,41 +143,7 @@ std::vector<std::vector<char>> &h_board, std::vector<std::vector<char>> &h_piece
   }
 }
 
-// --------------------------- chess check funcitons --------------------------
-
-bool Game::is_check_m() {
-  char x, y;
-  for (auto &v : m_pieces) {
-    if (v[2] == 7) {  // my king position
-      x = v[0];
-      y = v[1];
-      break;
-    }
-  }
-
-  // true - check
-  // false - king is safe
-  int valid = check_check(x, y, m_board);
-  if (valid != 0) return true;
-  return false;
-}
-
-bool Game::is_check_e() {
-  char x, y;
-  for (auto &v : e_pieces) {
-    if (v[2] == 7) {  // my king position
-      x = v[0];
-      y = v[1];
-      break;
-    }
-  }
-
-  // true - check
-  // false - king is safe
-  int valid = check_check(x, y, e_board);
-  if (valid != 0) return true;
-  return false;
-}
+// --------------------------- chess check and attack funcitons --------------------------
 
 // possible ways of what a piece can attack
 // return a vector of {x, y, piece type}
@@ -310,6 +276,40 @@ std::vector<char> attacks(char i, char j, std::vector<std::vector<char>> &chess_
   move.push_back(j);
   move.push_back(type);
   return move;
+}
+
+bool Game::is_check_m() {
+  char x, y;
+  for (auto &v : m_pieces) {
+    if (v[2] == 7) {  // my king position
+      x = v[0];
+      y = v[1];
+      break;
+    }
+  }
+
+  // true - check
+  // false - king is safe
+  int valid = check_check(x, y, m_board);
+  if (valid != 0) return true;
+  return false;
+}
+
+bool Game::is_check_e() {
+  char x, y;
+  for (auto &v : e_pieces) {
+    if (v[2] == 7) {  // my king position
+      x = v[0];
+      y = v[1];
+      break;
+    }
+  }
+
+  // true - check
+  // false - king is safe
+  int valid = check_check(x, y, e_board);
+  if (valid != 0) return true;
+  return false;
 }
 
 // 0 - safe king
