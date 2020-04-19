@@ -82,4 +82,11 @@ std::vector<char> attacks(char i, char j, std::vector<std::vector<char>> &chess_
 // all pieces that can attack my piece
 // return a vector of {x, y, piece type}
 std::vector<std::vector<char>> check_attackers(char i, char j, std::vector<std::vector<char>> &chess_board);
+
+// returns how many control zones we have
+// returns a vector of {x_des, y_des, type_dest, x_src, y_src, type_src}
+// get_control_zones returns the number of control zones
+std::vector<std::vector<char>> control_zones(std::vector<std::vector<char>> &chess_board, std::vector<std::vector<char>> &pieces_vector);
+std::vector<char> zones(char i, char j, int cod_e, char x, char y, int cod_piesa, std::vector<std::vector<char>> &chess_board);
+int get_control_zones (std::vector<std::vector<char>> &chess_board, std::vector<std::vector<char>> &pieces_vector);
 #endif // GAME_H
