@@ -6,8 +6,9 @@ int alphabeta_maxi(int depth, int alpha, int beta, Game &g) {
   if (depth == 0) {
     return evaluate(g.m_board, g.m_pieces, g.e_board, g.e_pieces);
   }
-  std::vector<std::vector<char>> all_moves = get_moves_m(g);
   // {src_x, src_y, dst_x, dst_y, piece_type, priority_code}
+  std::vector<std::vector<char>> all_moves = get_moves_m(g);
+  std::sort(all_moves.begin(), all_moves.end(), order_moves_by_priority);
   for (auto &move : all_moves) {
     int score;
     // holds info to undo the move later: {piece_taken}
@@ -37,8 +38,9 @@ int alphabeta_mini(int depth, int alpha, int beta, Game &g){
   if (depth == 0) {
     return -evaluate(g.e_board, g.e_pieces, g.m_board, g.m_pieces);
   }
-  std::vector<std::vector<char>> all_moves = get_moves_e(g);
   // {src_x, src_y, dst_x, dst_y, piece_type, priority_code}
+  std::vector<std::vector<char>> all_moves = get_moves_e(g);
+  std::sort(all_moves.begin(), all_moves.end(), order_moves_by_priority);
   for (auto &move : all_moves) {
     g.apply_move_e(move);
 
@@ -112,4 +114,13 @@ std::vector<std::vector<char>> get_moves(std::vector<std::vector<char>> &pieces,
     }
   }
   return moves;
+}
+
+// {src_x, src_y, dst_x, dst_y, piece_type, priority_code}
+bool order_moves_by_priority(const std::vector<char> &a, const std::vector<char> &b) {
+  if (a[5] != b[5]) {
+    return a[5] > b[5]; // order descending by the priority of the piece that can be taken
+  } else {
+    return a[4] < b[4]; // if priority is equal, order ascending by the type of piece doing the attack
+  }
 }

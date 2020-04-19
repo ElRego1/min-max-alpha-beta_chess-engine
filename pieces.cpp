@@ -9,15 +9,23 @@
 // 0 - invalid move
 // 1 - empty cell
 // x - enemy piece and we give a score accordinglly to the importance of the piece << TODO >>
+// 2 - king
+// 3 - pawn
+// 4 - knight
+// 5 - bishop
+// 6 - rook
+// 7 - queen
 int check_validity(char i, char j, std::vector<std::vector<char>> &chess_board) {
       if (i < 0 || i >= BOX_LENGTH || j < 0 || j >= BOX_LENGTH) return 0;
       if (chess_board[i][j] == 0) return 1; // empty cell
       if (chess_board[i][j] > 10) {
         int temp = chess_board[i][j];
-        if (temp == 14 || temp == 15) return 3;
-        else if (temp == 12) return 4;
-        else if (temp == 17) return 7;
-        else if (temp == 16) return 6;
+        if (temp == 11) return 3;
+        else if (temp == 12) return 6; // rook
+        else if (temp == 13) return 4; // knight
+        else if (temp == 14 || temp == 15) return 5; // bishop
+        else if (temp == 16) return 7; // queen
+        else if (temp == 17) return 2; // king
         else return 2;
       }
       return 0;
@@ -54,7 +62,6 @@ std::vector<std::vector<char>> &positions) {
 
 // return vector structure: {x, y, "check_validity" return value}
 std::vector<std::vector<char>> get_piece_directions(char i, char j, std::vector<std::vector<char>> &chess_board) {
-    // !!!!!!! NU E MEREU ESTE PUS SI VALOAREA DE RETURN AL LUI check_validity IN POSSIBLE_MOVES !!!!!!
     std::vector<std::vector<char>> possible_moves;
     char piece_type = chess_board[i][j];
     switch (piece_type) {
