@@ -86,9 +86,31 @@ std::vector<std::vector<char>> &h_board, std::vector<std::vector<char>> &h_piece
     }
   }
 
-  
+  // pieces that i can attack
+  for (auto &v : p_pieces) {
+    if (v[0] != PIECE_TAKEN && v[1] != PIECE_TAKEN) {
+      // a vector of {x, y, piece type}
+      std::vector<std::vector<char>> victims = check_attack(v[0], v[1], p_board);
+      for (auto &victim : victims) {
+        int victim_piece = victim[2] - 10;
+        score_p += get_score(victim_piece) * (SCORE_INV_PRO / v[2]);
+      }
+    }
+  }
 
-  return 0;
+  // pieces that are in danger
+  for (auto &v : p_pieces) {
+    if (v[0] != PIECE_TAKEN && v[1] != PIECE_TAKEN) {
+      // a vector of {x, y, piece type}
+      std::vector<std::vector<char>> perpetrators = check_attackers(v[0], v[1], p_board);
+      for (auto &perpetrator : perpetrators) {
+        int perpetrator_piece = perpetrator[2] - 10;
+        score_p -= get_score(v[2]) * (SCORE_INV_PRO / perpetrator_piece);
+      }
+    }
+  }
+
+  return (score_p - score_h);
 }
 
 int get_score(const int &piece_type) {
