@@ -145,6 +145,93 @@ std::vector<std::vector<char>> &h_board, std::vector<std::vector<char>> &h_piece
 
 // --------------------------- chess check and attack funcitons --------------------------
 
+// all pieces that can attack my piece
+// return a vector of {x, y, piece type}
+std::vector<std::vector<char>> check_attackers(char i, char j, std::vector<std::vector<char>> &chess_board) {
+  std::vector<std::vector<char>> possible_attackers;
+  int cod_piesa = chess_board[i][j];
+  // pawn
+  if (check_check_validity(i + 1, j + 1, chess_board) == 2 && chess_board[i + 1][j + 1] == 11) {
+    possible_attackers.push_back(attacks(i + 1, j + 1, chess_board));
+  }
+  if (check_check_validity(i + 1, j - 1, chess_board) == 2 && chess_board[i + 1][j - 1] == 11) {
+    possible_attackers.push_back(attacks(i + 1, j - 1, chess_board));
+  }
+  // rook and quuen for lines
+  for(auto d : all_directions) {
+    if (d != up || d != dw || d != rg || d != lf) continue;
+    char x = d.first;
+    char y = d.second;
+    int ok = 0;
+    int temp = 1;
+    while(temp != 0 && ok == 0) {
+      temp = check_check_validity(i + x, j + y, chess_board);
+      if (temp == 2 && (chess_board[i + x][j + y] == 12 || chess_board[i + x][j + y] == 16)) {
+        possible_attackers.push_back(attacks(i + x, j + y, chess_board));
+        ok = 1;
+      } else if (temp == 0) {
+        break;
+      } else {
+        i += x;
+        j += y;
+      }
+    }
+  }
+  // knight 
+  if (check_check_validity(i + 1, j + 2, chess_board) == 2 && chess_board[i + 1][j + 2] == 13) {
+    possible_attackers.push_back(attacks(i + 1, j + 2, chess_board));
+  }
+  if (check_check_validity(i + 2, j + 1, chess_board) == 2 && chess_board[i + 2][j + 1] == 13) {
+    possible_attackers.push_back(attacks(i + 2, j + 1, chess_board));
+  }
+  if (check_check_validity(i + 1, j - 2, chess_board) == 2 && chess_board[i + 1][j - 2] == 13) {
+    possible_attackers.push_back(attacks(i + 1, j - 2, chess_board));
+  }
+  if (check_check_validity(i + 2, j - 1, chess_board) == 2 && chess_board[i + 2][j - 1] == 13) {
+    possible_attackers.push_back(attacks(i + 2, j - 1, chess_board));
+  }
+  if (check_check_validity(i - 1, j + 2, chess_board) == 2 && chess_board[i - 1][j + 2] == 13) {
+    possible_attackers.push_back(attacks(i - 1, j + 2, chess_board));
+  }
+  if (check_check_validity(i - 2, j + 1, chess_board) == 2 && chess_board[i - 2][j + 1] == 13) {
+    possible_attackers.push_back(attacks(i - 2, j + 1, chess_board));
+  }
+  if (check_check_validity(i - 1, j - 2, chess_board) == 2 && chess_board[i - 1][j - 2] == 13) {
+    possible_attackers.push_back(attacks(i - 1, j - 2, chess_board));
+  }
+  if (check_check_validity(i - 2, j - 1, chess_board) == 2 && chess_board[i - 2][j - 1] == 13) {
+    possible_attackers.push_back(attacks(i - 2, j - 1, chess_board));
+  }
+  // bishop (white and black) and quuen for diagonals
+  for(auto d : all_directions) {
+    if (d != ur || d != ul || d != dr || d != dl) continue;
+    char x = d.first;
+    char y = d.second;
+    int ok = 0;
+    int temp = 1;
+    while(temp != 0 && ok == 0) {
+      temp = check_check_validity(i + x, j + y, chess_board);
+      if (temp == 2 && (chess_board[i + x][j + y] == 14 || chess_board[i + x][j + y] == 15 || chess_board[i + x][j + y] == 16)) {
+        possible_attackers.push_back(attacks(i + x, j + y, chess_board));
+        ok = 1;
+      } else if (temp == 0) {
+        break;
+      } else {
+        i += x;
+        j += y;
+      }
+    }
+  }
+  // king 
+  for (auto d: all_directions) {
+    char x = d.first;
+    char y = d.second;
+    if ((check_check_validity(i + x, j + y, chess_board) == 2) && chess_board[i + x][j + y] == 17) {
+        possible_attackers.push_back(attacks(i + x, j + y, chess_board));
+    }
+  }
+}
+
 // possible ways of what a piece can attack
 // return a vector of {x, y, piece type}
 std::vector<std::vector<char>> check_attack(char i, char j, std::vector<std::vector<char>> &chess_board) {

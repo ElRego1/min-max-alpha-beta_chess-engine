@@ -69,6 +69,7 @@ void undo_move(std::vector<char> &info, std::vector<char> &move,
 std::vector<std::vector<char>> &p_board,std::vector<std::vector<char>> &p_pieces,
 std::vector<std::vector<char>> &h_board, std::vector<std::vector<char>> &h_pieces);
 
+// checks if the king is safe or not
 int check_check(char i, char j, std::vector<std::vector<char>> &chess_board);
 int check_check_validity(char i, char j, std::vector<std::vector<char>> &chess_board);
 int check_knight(char i, char j, std::vector<std::vector<char>> &chess_board);
@@ -77,4 +78,8 @@ int check_knight(char i, char j, std::vector<std::vector<char>> &chess_board);
 // return a vector of {x, y, piece type}
 std::vector<std::vector<char>> check_attack(char i, char j, std::vector<std::vector<char>> &chess_board);
 std::vector<char> attacks(char i, char j, std::vector<std::vector<char>> &chess_board);
+
+// all pieces that can attack my piece
+// return a vector of {x, y, piece type}
+std::vector<std::vector<char>> check_attackers(char i, char j, std::vector<std::vector<char>> &chess_board);
 #endif // GAME_H
