@@ -179,6 +179,139 @@ bool Game::is_check_e() {
   return false;
 }
 
+// possible ways of what a piece can attack
+// return a vector of {x, y, piece type}
+std::vector<std::vector<char>> check_attack(char i, char j, std::vector<std::vector<char>> &chess_board) {
+  std::vector<std::vector<char>> possible_attacks;
+  int cod_piesa = chess_board[i][j];
+  switch (cod_piesa) {
+    case 1: // pawn
+      if (check_validity(i + 1, j + 1, chess_board) >= 2) {
+        possible_attacks.push_back(attacks(i + 1, j + 1, chess_board));
+      }
+      if (check_validity(i + 1, j - 1, chess_board) >= 2) {
+        possible_attacks.push_back(attacks(i + 1, j - 1, chess_board));
+      }
+      break;
+    
+    case 2: // rook
+      for(auto d : all_directions) {
+        if (d != up || d != dw || d != rg || d != lf) continue;
+        char x = d.first;
+        char y = d.second;
+        int ok = 0;
+        int temp = 1;
+        while(temp != 0 && ok == 0) {
+          temp = check_check_validity(i + x, j + y, chess_board);
+          if (temp == 2) {
+            possible_attacks.push_back(attacks(i + x, j + y, chess_board));
+            ok = 1;
+          } else if (temp == 0) {
+            break;
+          } else {
+            i += x;
+            j += y;
+          }
+        }
+      }
+      break;
+
+    case 3: // knight
+      if (check_validity(i + 1, j + 2, chess_board) >= 2) {
+        possible_attacks.push_back(attacks(i + 1, j + 2, chess_board));
+      }
+      if (check_validity(i + 2, j + 1, chess_board) >= 2) {
+       possible_attacks.push_back(attacks(i + 2, j + 1, chess_board));
+      }
+      if (check_validity(i + 1, j - 2, chess_board) >= 2) {
+        possible_attacks.push_back(attacks(i + 1, j - 2, chess_board));
+      }
+      if (check_validity(i + 2, j - 1, chess_board) >= 2) {
+        possible_attacks.push_back(attacks(i + 2, j - 1, chess_board));
+      }
+      if (check_validity(i - 1, j + 2, chess_board) >= 2) {
+        possible_attacks.push_back(attacks(i - 1, j + 2, chess_board));
+      }
+      if (check_validity(i - 2, j + 1, chess_board) >= 2) {
+        possible_attacks.push_back(attacks(i - 2, j + 1, chess_board));
+      }
+      if (check_validity(i - 1, j - 2, chess_board) >= 2) {
+        possible_attacks.push_back(attacks(i - 1, j - 2, chess_board));
+      }
+      if (check_validity(i - 2, j - 1, chess_board) >= 2) {
+        possible_attacks.push_back(attacks(i - 2, j - 1, chess_board));
+      }
+      break;
+
+    case 4: // black bishop
+    case 5: // white bishop
+      for(auto d : all_directions) {
+        if (d != ur || d != ul || d != dr || d != dl) continue;
+        char x = d.first;
+        char y = d.second;
+        int ok = 0;
+        int temp = 1;
+        while(temp != 0 && ok == 0) {
+          temp = check_check_validity(i + x, j + y, chess_board);
+          if (temp == 2) {
+            possible_attacks.push_back(attacks(i + x, j + y, chess_board));
+            ok = 1;
+          } else if (temp == 0) {
+            break;
+          } else {
+            i += x;
+            j += y;
+          }
+        }
+      }
+      break;
+
+    case 6: // queen
+      for(auto d : all_directions) {
+        char x = d.first;
+        char y = d.second;
+        int ok = 0;
+        int temp = 1;
+        while(temp != 0 && ok == 0) {
+          temp = check_check_validity(i + x, j + y, chess_board);
+          if (temp == 2) {
+            possible_attacks.push_back(attacks(i + x, j + y, chess_board));
+            ok = 1;
+          } else if (temp == 0) {
+            break;
+          } else {
+            i += x;
+            j += y;
+          }
+        }
+      }
+      break;
+
+    case 7: // king
+      for (auto d: all_directions) {
+        char x = d.first;
+        char y = d.second;
+        if ((check_check_validity(i + x, j + y, chess_board) == 2)) {
+            possible_attacks.push_back(attacks(i + x, j + y, chess_board));
+        }
+      }
+      break;
+    
+    default:
+      break;
+  }
+  return possible_attacks;
+}
+
+std::vector<char> attacks(char i, char j, std::vector<std::vector<char>> &chess_board) {
+  int type = chess_board[i][j];
+  std::vector<char> move;
+  move.push_back(i);
+  move.push_back(j);
+  move.push_back(type);
+  return move;
+}
+
 // 0 - safe king
 // 1 - king in danger
 int check_check(char i, char j, std::vector<std::vector<char>> &chess_board) {

@@ -72,4 +72,9 @@ std::vector<std::vector<char>> &h_board, std::vector<std::vector<char>> &h_piece
 int check_check(char i, char j, std::vector<std::vector<char>> &chess_board);
 int check_check_validity(char i, char j, std::vector<std::vector<char>> &chess_board);
 int check_knight(char i, char j, std::vector<std::vector<char>> &chess_board);
+
+// possible ways of what a piece can attack
+// return a vector of {x, y, piece type}
+std::vector<std::vector<char>> check_attack(char i, char j, std::vector<std::vector<char>> &chess_board);
+std::vector<char> attacks(char i, char j, std::vector<std::vector<char>> &chess_board);
 #endif // GAME_H
