@@ -3,10 +3,9 @@
 // ---------------------------------- MINIMAX --------------------------------
 
 int alphabeta_maxi(int depth, int alpha, int beta, Game &g) {
-  if (depth == 0 || g.game_over()) {
-    return evaluate();
+  if (depth == 0) {
+    return evaluate(g.m_board, g.m_pieces, g.e_board, g.e_pieces);
   }
-
   std::vector<std::vector<char>> all_moves = get_moves_m(g);
   // {src_x, src_y, dst_x, dst_y, piece_type, priority_code}
   for (auto &move : all_moves) {
@@ -35,10 +34,9 @@ int alphabeta_maxi(int depth, int alpha, int beta, Game &g) {
 
 
 int alphabeta_mini(int depth, int alpha, int beta, Game &g){
-  if (depth == 0 || g.game_over()) {
-    return -evaluate();
+  if (depth == 0) {
+    return -evaluate(g.e_board, g.e_pieces, g.m_board, g.m_pieces);
   }
-  
   std::vector<std::vector<char>> all_moves = get_moves_e(g);
   // {src_x, src_y, dst_x, dst_y, piece_type, priority_code}
   for (auto &move : all_moves) {
@@ -47,7 +45,7 @@ int alphabeta_mini(int depth, int alpha, int beta, Game &g){
     int score;
     
     if (g.is_check_e) {
-      score = HIGH + 1;
+      score = HIGH + 1; // not a good move for the mini part as it enters chess
     }else {
       score = alphabeta_maxi(depth - 1, alpha, beta, g);
     }
@@ -65,7 +63,15 @@ int alphabeta_mini(int depth, int alpha, int beta, Game &g){
   return beta;
 }
 
-// --------------------------------- GET_MOVES_X -----------------------------
+// ---------------------------------- EVALUATE --------------------------------
+
+int evaluate(std::vector<std::vector<char>> &p_board,std::vector<std::vector<char>> &p_pieces,
+std::vector<std::vector<char>> &h_board, std::vector<std::vector<char>> &h_pieces) {
+
+  return 0;
+}
+
+// --------------------------------- GET_MOVES_X ------------------------------
 
 // return vector structure: {src_x, src_y, dst_x, dst_y, piece_type, priority_code}
 std::vector<std::vector<char>> get_moves_m(Game &g) {
