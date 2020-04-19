@@ -72,16 +72,20 @@ std::vector<std::vector<char>> &h_board, std::vector<std::vector<char>> &h_piece
   int score_p = 0;
   int score_h = 0;
 
+  // sum of pieces in the game
+  // my pieces
   for (auto &v : p_pieces) {
     if (v[0] != PIECE_TAKEN && v[1] != PIECE_TAKEN) {
       score_p += get_score(v[2]);
     }
   }
+  // enemy's pieces
   for (auto &v : h_pieces) {
     if (v[0] != PIECE_TAKEN && v[1] != PIECE_TAKEN) {
       score_h += get_score(v[2]);
     }
   }
+
   
 
   return 0;
