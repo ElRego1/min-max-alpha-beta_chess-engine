@@ -25,6 +25,8 @@ class Game {
 
   void remake_print_board(char wb);
 
+  std::vector<char> find_next_move();
+
   // return value: {piece_taken} | info to undo the move
   std::vector<char> apply_move_m(std::vector<char> &move);
   // TODO
@@ -37,7 +39,6 @@ class Game {
   // parameters: {piece_taken}, {src_x, src_y, dst_x, dst_y, piece_type, priority_code}
   void undo_move_e(std::vector<char> &info, std::vector<char> &move);
 
-  bool game_over();
   bool is_check_m();
   bool is_check_e();
 };
