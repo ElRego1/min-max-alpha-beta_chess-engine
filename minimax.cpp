@@ -42,8 +42,8 @@ int alphabeta_mini(int depth, int alpha, int beta, Game &g){
   std::vector<std::vector<char>> all_moves = get_moves_e(g);
   std::sort(all_moves.begin(), all_moves.end(), order_moves_by_priority);
   for (auto &move : all_moves) {
-    g.apply_move_e(move);
-
+    std::vector<char> info = g.apply_move_e(move);
+    // holds info to undo the move later: {piece_taken}
     int score;
     
     if (g.is_check_e) {
@@ -59,8 +59,8 @@ int alphabeta_mini(int depth, int alpha, int beta, Game &g){
     if (score < beta) {
       beta = score;
     }
-    // TODO
-    // g.undo_move_e(move);
+    
+    g.undo_move_e(info, move);
   }
   return beta;
 }

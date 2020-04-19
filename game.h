@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include <bits/stdc++.h>
+#include "minimax.h"
 #include "init_game.h"
 #include "pieces.h"
 #include "matrix_transformation.h"
