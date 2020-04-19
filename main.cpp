@@ -92,7 +92,7 @@ white_engine:
 					get_matrix_coordonates(s, x_s, y_s, g); // now we have in x_s and y_s the coordonates of the source of the moved piece
 		    		s = s.substr(2, 2); // we take the chess destinations on the board
 		    		get_matrix_coordonates(s, x_d, y_d, g); // now we have in x_d and y_d the coordonates of the destination of the moved piece
-		    		move_piece(x_s, y_s, x_d, y_d, chess_board, playing_pieces_mine);
+		    		// move_piece(x_s, y_s, x_d, y_d, chess_board, playing_pieces_mine);
 					//std::cout << "move b6b5" << '\n';
 					idx_move++;
 
@@ -124,7 +124,7 @@ white_engine:
 	    	s = s.substr(2, 2); // we take the chess destinations on the board
 	    	get_matrix_coordonates(s, x_d, y_d, g); // now we have in x_d and y_d the coordonates of the destination of the moved piece
 	    	// std::cout << "# x_s: " << (int)x_s << " | y_s: " << (int)y_s << " | x_d: " << (int)x_d << " | y_d: " << (int)y_d << "\n";
-	    	move_piece(x_s, y_s, x_d, y_d, chess_board, playing_pieces_mine);
+	    	// move_piece(x_s, y_s, x_d, y_d, chess_board, playing_pieces_mine);
 
 				if (wb == 1) {
 		    	if (pawn_move != -1) {
@@ -152,11 +152,11 @@ white_engine:
 		    			log.write(get_chess_coordonates(pawn_moves[pawn_move].first, pawn_moves[pawn_move].second, g));
 		    			log.write("\n");
 
-		    			move_piece(playing_pieces_mine[0].second.first,
-		    				playing_pieces_mine[0].second.second,
-		    				pawn_moves[pawn_move].first,
-		    				pawn_moves[pawn_move].second,
-		    				chess_board, playing_pieces_mine);
+		    			// move_piece(playing_pieces_mine[0].second.first,
+		    			// 	playing_pieces_mine[0].second.second,
+		    			// 	pawn_moves[pawn_move].first,
+		    			// 	pawn_moves[pawn_move].second,
+		    			// 	chess_board, playing_pieces_mine);
 		    			++pawn_move;
 		    		} else if (!playing_pieces_mine.empty() && playing_pieces_mine[0].first == 3) { // we move the knight if exists
 pawn_cant_move:
@@ -168,11 +168,11 @@ pawn_cant_move:
 		    			log.write(get_chess_coordonates(knight_moves[knight_move].first, knight_moves[knight_move].second, g));
 		    			log.write("\n");
 
-		    			move_piece(playing_pieces_mine[0].second.first,
-		    				playing_pieces_mine[0].second.second,
-		    				knight_moves[knight_move].first,
-		    				knight_moves[knight_move].second,
-		    				chess_board, playing_pieces_mine);
+		    			// move_piece(playing_pieces_mine[0].second.first,
+		    			// 	playing_pieces_mine[0].second.second,
+		    			// 	knight_moves[knight_move].first,
+		    			// 	knight_moves[knight_move].second,
+		    			// 	chess_board, playing_pieces_mine);
 		    			++knight_move;
 		    		} else {
 		    			log.write("\n\tWOT???\n");
@@ -185,11 +185,11 @@ pawn_cant_move:
 		    		log.write(get_chess_coordonates(knight_moves[knight_move].first, knight_moves[knight_move].second, g));
 		    		log.write("\n");
 
-		    		move_piece(playing_pieces_mine[0].second.first,
-		    				playing_pieces_mine[0].second.second,
-		    				knight_moves[knight_move].first,
-		    				knight_moves[knight_move].second,
-		    				chess_board, playing_pieces_mine);
+		    		// move_piece(playing_pieces_mine[0].second.first,
+		    		// 		playing_pieces_mine[0].second.second,
+		    		// 		knight_moves[knight_move].first,
+		    		// 		knight_moves[knight_move].second,
+		    		// 		chess_board, playing_pieces_mine);
 		    			++knight_move;
 		    	} else {
 		    		log.write("resign\n");

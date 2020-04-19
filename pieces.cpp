@@ -14,7 +14,7 @@ int check_validity(char i, char j, std::vector<std::vector<char>> &chess_board) 
       if (chess_board[i][j] == 0) return 1; // empty cell
       if (chess_board[i][j] > 10) {
         int temp = chess_board[i][j];
-        if (temp == 14 || temp == 15) return 3; // << TODO: to be changed to return 3; to know it's check for the enemy | has to change the move functions from the bottom >>
+        if (temp == 14 || temp == 15) return 3;
         else if (temp == 12) return 4;
         else if (temp == 17) return 7;
         else if (temp == 16) return 6;
@@ -26,7 +26,7 @@ int check_validity(char i, char j, std::vector<std::vector<char>> &chess_board) 
 int check_validity_pawn(char i, char j, std::vector<std::vector<char>> &chess_board) {
     int temp = check_validity(i, j, chess_board);
     if (temp <= 1) return 0;
-    else return temp; // << TODO: to be changed to return the value of temp, but not all functions are ready to accept this return value | has to change the move functions from the bottom >>
+    else return temp;
 }
 
 std::vector<char> get_piece_position(char p, int d,
@@ -326,7 +326,7 @@ void check_move(char i, char j, int i_depl, int j_depl, std::vector<std::vector<
     }
   }
 
-// --------------------------------------------- diagonal moves --------------------------------
+// ------------------------------------------ Ollie's diagonal moves 8) --------------------------------
 
 void right_diag_up(char i, char j, std::vector<std::vector<char>> &possible_moves, std::vector<std::vector<char>> &chess_board) {
   while (true) {
