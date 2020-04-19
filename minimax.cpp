@@ -77,12 +77,28 @@ std::vector<std::vector<char>> &h_board, std::vector<std::vector<char>> &h_piece
   for (auto &v : p_pieces) {
     if (v[0] != PIECE_TAKEN && v[1] != PIECE_TAKEN) {
       score_p += get_score(v[2]);
+      // check if I am in check
+      if (v[2] == KING_M) {
+        if (check_check(v[0], v[1], p_board) == 0) {
+          score_p += SCORE_KING_SAFE;
+        } else {
+          score_p += SCORE_KING_THREATENED;
+        }
+      }
     }
   }
   // enemy's pieces
   for (auto &v : h_pieces) {
     if (v[0] != PIECE_TAKEN && v[1] != PIECE_TAKEN) {
       score_h += get_score(v[2]);
+      // check if the enemy is in check
+      if (v[2] == KING_M) {
+        if (check_check(v[0], v[1], h_board) == 0) {
+          score_h += SCORE_KING_SAFE;
+        } else {
+          score_h += SCORE_KING_THREATENED;
+        }
+      }
     }
   }
 

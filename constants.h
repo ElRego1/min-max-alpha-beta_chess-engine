@@ -51,6 +51,9 @@
 #define SCORE_QUEEN 900
 #define SCORE_KING 0 // schould be on the board
 
+#define SCORE_KING_SAFE 150
+#define SCORE_KING_THREATENED -150 
+
 #define SCORE_INV_PRO 250 // score invers proportional
 
 #endif // CONSTANTS_H
