@@ -20,12 +20,13 @@ int check_validity(char i, char j, std::vector<std::vector<char>> &chess_board) 
       if (chess_board[i][j] == 0) return 1; // empty cell
       if (chess_board[i][j] > 10) {
         int temp = chess_board[i][j];
-        if (temp == 11) return 3; // pawn
-        else if (temp == 12) return 6; // rook
-        else if (temp == 13) return 4; // knight
-        else if (temp == 14 || temp == 15) return 5; // bishop
-        else if (temp == 16) return 7; // queen
-        else if (temp == 17) return 2; // king
+        if (temp == PAWN_E) return PRIORITY_PAWN; // pawn
+        else if (temp == ROOK_E) return PRIORITY_ROOK; // rook
+        else if (temp == KNIGHT_E) return PRIORITY_KNIGHT; // knight
+        else if (temp == BLACK_BISHOP_E) return PRIORITY_BLACK_BISHOP; // black bishop
+        else if (temp == WHITE_BISHOP_E) return PRIORITY_WHITE_BISHOP; // white bishop
+        else if (temp == QUEEN_E) return PRIORITY_QUEEN; // queen
+        else if (temp == KING_E) return PRIORITY_KING; // king
         else return 2;
       }
       return 0;
