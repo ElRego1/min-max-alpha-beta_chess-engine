@@ -20,42 +20,45 @@ Game::Game(char wb) {
 
 // ------------------------- find next move for game --------------------------
 
-  std::vector<char> Game::find_next_move() {
+// return value: {src_x, src_y, dst_x, dst_y, piece_type, priority_code}
+// --> return value is an empty vector if no move that doesn't lead to checkmate is found >
+// --> In short we lose inevitably if 2 gods play so we have to give comand that we surender
+std::vector<char> Game::find_next_move() {
   // {src_x, src_y, dst_x, dst_y, piece_type, priority_code}
-    std::vector<std::vector<char>> all_moves = get_moves_m(*this);
-    std::sort(all_moves.begin(), all_moves.end(), order_moves_by_priority);
+  std::vector<std::vector<char>> all_moves = get_moves_m(*this);
+  std::sort(all_moves.begin(), all_moves.end(), order_moves_by_priority);
 
-    std::vector<char> chosen_move;
-    int alpha = LOW;
-    int beta = HIGH;
+  std::vector<char> chosen_move;
+  int alpha = LOW;
+  int beta = HIGH;
 
-    for (auto &move : all_moves) {
-      int score;
-      // holds info to undo the move later: {piece_taken}
-      std::vector<char> info = this->apply_move_m(move);
+  for (auto &move : all_moves) {
+    int score;
+    // holds info to undo the move later: {piece_taken}
+    std::vector<char> info = this->apply_move_m(move);
 
-      if (this->is_check_m) {
-        score = LOW - 1;
-      } else {
-        score = alphabeta_mini(DEPTH - 1, alpha, beta, *this);
-      }
-
-      if (score = HIGH) { // if we find this it means we will give checkmate
-        std::cout << "#ATENTIE: Am gasit un mod de a castiga cu miscarea: (" << move[0] << ", " << move[1] << ") -> (" << move[2] 
-          << ", " << move[3] << "); piece: " << this->m_board[move[0]][move[1]] << " -> " << this->m_board[move[2]][move[3]] << std::endl;
-          return move;
-      } else if (score > alpha) {
-        alpha = score;
-        chosen_move = move; // we found a better move than losing
-      }
-
-      this->undo_move_e(info, move);
+    if (this->is_check_m) {
+      score = LOW - 1;
+    } else {
+      score = alphabeta_mini(DEPTH - 1, alpha, beta, *this);
     }
-    if (chosen_move.size() == 0) {
-      std::cout << "#ATENTION: We couldn't find a move that saves our ass and we will get chechmated :(" << std::endl;
+
+    if (score = HIGH) { // if we find this it means we will give checkmate
+      std::cout << "#ATENTIE: Am gasit un mod de a castiga cu miscarea: (" << move[0] << ", " << move[1] << ") -> (" << move[2] 
+        << ", " << move[3] << "); piece: " << this->m_board[move[0]][move[1]] << " -> " << this->m_board[move[2]][move[3]] << std::endl;
+        return move;
+    } else if (score > alpha) {
+      alpha = score;
+      chosen_move = move; // we found a better move than losing
     }
-    return chosen_move;
+
+    this->undo_move_e(info, move);
   }
+  if (chosen_move.size() == 0) {
+    std::cout << "#ATENTION: We couldn't find a move that saves our ass and we will get chechmated :(" << std::endl;
+  }
+  return chosen_move;
+}
 
 
 // --------------------------- apply move functions ---------------------------
