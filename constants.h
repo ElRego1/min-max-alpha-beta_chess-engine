@@ -34,6 +34,8 @@
 #define LOW -10000
 #define HIGH 10000
 
+#define DEPTH 4
+
 #define PRIORITY_EMPTY_CELL 1
 #define PRIORITY_PAWN 3
 #define PRIORITY_ROOK 6
@@ -43,12 +45,17 @@
 #define PRIORITY_QUEEN 7
 #define PRIORITY_KING 2
 
-#define SCORE_PAWN 10
-#define SCORE_ROOK 50
-#define SCORE_KNIGHT 30
-#define SCORE_WHITE_BISHOP 30
-#define SCORE_BLACK_BISHOP 30
-#define SCORE_QUEEN 90
+#define SCORE_PAWN 100
+#define SCORE_ROOK 500
+#define SCORE_KNIGHT 300
+#define SCORE_WHITE_BISHOP 300
+#define SCORE_BLACK_BISHOP 300
+#define SCORE_QUEEN 900
 #define SCORE_KING 0 // schould be on the board
+
+#define SCORE_KING_SAFE 150
+#define SCORE_KING_THREATENED -150 
+
+#define SCORE_INV_PRO 250 // score invers proportional
 
 #endif // CONSTANTS_H

@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include <bits/stdc++.h>
+#include "minimax.h"
 #include "init_game.h"
 #include "pieces.h"
 #include "matrix_transformation.h"
@@ -25,6 +26,12 @@ class Game {
 
   void remake_print_board(char wb);
 
+  // to be called in order to start the minimax
+  // return value: {src_x, src_y, dst_x, dst_y, piece_type, priority_code}
+  // --> return value is an empty vector if no move that doesn't lead to checkmate is found >
+  // --> In short we lose inevitably if 2 gods play so we have to give comand that we surender
+  std::vector<char> find_next_move();
+
   // return value: {piece_taken} | info to undo the move
   std::vector<char> apply_move_m(std::vector<char> &move);
   // TODO
@@ -37,7 +44,6 @@ class Game {
   // parameters: {piece_taken}, {src_x, src_y, dst_x, dst_y, piece_type, priority_code}
   void undo_move_e(std::vector<char> &info, std::vector<char> &move);
 
-  bool game_over();
   bool is_check_m();
   bool is_check_e();
 };

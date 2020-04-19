@@ -42,8 +42,8 @@ int alphabeta_mini(int depth, int alpha, int beta, Game &g){
   std::vector<std::vector<char>> all_moves = get_moves_e(g);
   std::sort(all_moves.begin(), all_moves.end(), order_moves_by_priority);
   for (auto &move : all_moves) {
-    g.apply_move_e(move);
-
+    std::vector<char> info = g.apply_move_e(move);
+    // holds info to undo the move later: {piece_taken}
     int score;
     
     if (g.is_check_e) {
@@ -59,8 +59,8 @@ int alphabeta_mini(int depth, int alpha, int beta, Game &g){
     if (score < beta) {
       beta = score;
     }
-    // TODO
-    // g.undo_move_e(move);
+    
+    g.undo_move_e(info, move);
   }
   return beta;
 }
@@ -72,19 +72,61 @@ std::vector<std::vector<char>> &h_board, std::vector<std::vector<char>> &h_piece
   int score_p = 0;
   int score_h = 0;
 
+  // sum of pieces in the game
+  // my pieces
   for (auto &v : p_pieces) {
     if (v[0] != PIECE_TAKEN && v[1] != PIECE_TAKEN) {
       score_p += get_score(v[2]);
+      // check if I am in check
+      if (v[2] == KING_M) {
+        if (check_check(v[0], v[1], p_board) == 0) {
+          score_p += SCORE_KING_SAFE;
+        } else {
+          score_p += SCORE_KING_THREATENED;
+        }
+      }
     }
   }
+  // enemy's pieces
   for (auto &v : h_pieces) {
     if (v[0] != PIECE_TAKEN && v[1] != PIECE_TAKEN) {
       score_h += get_score(v[2]);
+      // check if the enemy is in check
+      if (v[2] == KING_M) {
+        if (check_check(v[0], v[1], h_board) == 0) {
+          score_h += SCORE_KING_SAFE;
+        } else {
+          score_h += SCORE_KING_THREATENED;
+        }
+      }
     }
   }
-  
 
-  return 0;
+  // pieces that i can attack
+  for (auto &v : p_pieces) {
+    if (v[0] != PIECE_TAKEN && v[1] != PIECE_TAKEN) {
+      // a vector of {x, y, piece type}
+      std::vector<std::vector<char>> victims = check_attack(v[0], v[1], p_board);
+      for (auto &victim : victims) {
+        int victim_piece = victim[2] - 10;
+        score_p += get_score(victim_piece) * (SCORE_INV_PRO / v[2]);
+      }
+    }
+  }
+
+  // pieces that are in danger
+  for (auto &v : p_pieces) {
+    if (v[0] != PIECE_TAKEN && v[1] != PIECE_TAKEN) {
+      // a vector of {x, y, piece type}
+      std::vector<std::vector<char>> perpetrators = check_attackers(v[0], v[1], p_board);
+      for (auto &perpetrator : perpetrators) {
+        int perpetrator_piece = perpetrator[2] - 10;
+        score_p -= get_score(v[2]) * (SCORE_INV_PRO / perpetrator_piece);
+      }
+    }
+  }
+
+  return (score_p - score_h);
 }
 
 int get_score(const int &piece_type) {
