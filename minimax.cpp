@@ -23,6 +23,7 @@ int alphabeta_maxi(int depth, int alpha, int beta, Game &g) {
 
     // partea de alpha-beta
     if (score >= beta) {
+      g.undo_move_m(info, move);
       return beta;
     }
     if (score > alpha) {
@@ -40,28 +41,34 @@ int alphabeta_mini(int depth, int alpha, int beta, Game &g){
   if (depth == 0) {
     return -evaluate(g.e_board, g.e_pieces, g.m_board, g.m_pieces);
   }
-  std::cout<<"# am trecut de evaluate" << "\n";
+  // std::cout<<"# am trecut de evaluate" << "\n";
   // {src_x, src_y, dst_x, dst_y, piece_type, priority_code}
   std::vector<std::vector<char>> all_moves = get_moves_e(g);
   std::sort(all_moves.begin(), all_moves.end(), order_moves_by_priority);
-  std::cout<<"# am trecut de sort get_moves_e" << "\n";
+  // std::cout<<"# am trecut de sort get_moves_e" << "\n";
   for (auto &move : all_moves) {
+    std::cout << "# Inainte sa faca miscarea" << std::endl;
+    g.print();
     std::vector<char> info = g.apply_move_e(move);
+    std::cout << "# Dupa ce a facut miscarea" << std::endl;
+    g.print();
+
     // holds info to undo the move later: {piece_taken}
     int score;
-    std::cout<<"# am trecut de apply_moves_e" << "\n";
+    // std::cout<<"# am trecut de apply_moves_e" << "\n";
 
     if (g.is_check_e()) {
-      std::cout<<"# am intrat in check" << "\n";
+      // std::cout<<"# am intrat in check" << "\n";
       score = HIGH + 1; // not a good move for the mini part as it enters chess
     }else {
-      std::cout<<"# am intrat in check" << "\n";
+      // std::cout<<"# am intrat in check" << "\n";
       score = alphabeta_maxi(depth - 1, alpha, beta, g);
     }
     std::cout<<"# am trecut de alphabeta_maxi" << "\n";
 
     // partea de alpha-beta
     if (score <= alpha) {
+      g.undo_move_e(info, move);
       return alpha;
     }
     if (score < beta) {

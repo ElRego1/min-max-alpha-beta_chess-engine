@@ -35,7 +35,10 @@ std::vector<char> Game::find_next_move() {
   for (auto &move : all_moves) {
     int score;
     // holds info to undo the move later: {piece_taken}
+    std::cout << "# find_next_move inainte de move" << std::endl;
     std::vector<char> info = this->apply_move_m(move);
+    std::cout << "# find_next_move dupa move" << std::endl;
+    this->print();
 
     if (this->is_check_m()) {
       score = LOW - 1;
@@ -44,15 +47,20 @@ std::vector<char> Game::find_next_move() {
     }
     std::cout<<"# am trecut de alphabeta_mini din game" << "\n";
     if (score == HIGH) { // if we find this it means we will give checkmate
-      std::cout << "#ATENTIE: Am gasit un mod de a castiga cu miscarea: (" << move[0] << ", " << move[1] << ") -> (" << move[2]
-        << ", " << move[3] << "); piece: " << this->m_board[move[0]][move[1]] << " -> " << this->m_board[move[2]][move[3]] << std::endl;
+      std::cout << "#ATENTIE: Am gasit un mod de a castiga cu miscarea: (" << (int) move[0] << ", " << (int) move[1] << ") -> (" << (int) move[2]
+        << ", " << (int) move[3] << "); piece: " << (int) this->m_board[move[0]][move[1]] << " -> " << (int) this->m_board[move[2]][move[3]] << std::endl;
+        this->undo_move_m(info, move);
         return move;
     } else if (score > alpha) {
       alpha = score;
       chosen_move = move; // we found a better move than losing
     }
 
-    this->undo_move_e(info, move);
+    std::cout << "# find_next_move inainte de undo" << std::endl;
+    this->print();
+    this->undo_move_m(info, move);
+    std::cout << "# find_next_move dupa undo" << std::endl;
+    this->print();
   }
   if (chosen_move.size() == 0) {
     std::cout << "#ATENTION: We couldn't find a move that saves our ass and we will get chechmated :(" << std::endl;
@@ -78,11 +86,12 @@ std::vector<char> Game::apply_move_e(std::vector<char> &move) {
 std::vector<char> apply_move(std::vector<char> &move, std::vector<std::vector<char>> &p_board,std::vector<std::vector<char>> &p_pieces,
 std::vector<std::vector<char>> &h_board, std::vector<std::vector<char>> &h_pieces) {
   // structure of move: {src_x, src_y, dst_x, dst_y, piece_type, priority_code} | only the first 4 fields in the vector are mandatory
-  char src_x = move[0];
-  char src_y = move[1];
-  char dst_x = move[2];
-  char dst_y = move[3];
+  char src_x = move[0]; // 1
+  char src_y = move[1]; // 0
+  char dst_x = move[2]; // 2
+  char dst_y = move[3]; // 0
   std::vector<char> info;
+
 
   // change the personal vector of pieces
   for (auto &v : p_pieces) {
@@ -105,6 +114,7 @@ std::vector<std::vector<char>> &h_board, std::vector<std::vector<char>> &h_piece
   change_coordonates(dst_x, dst_y, ep_dst_x, ep_dst_y); // get the destination coordonates from the enemy's perspective
 
   // change enemy's board
+  info.push_back(h_board[ep_dst_x][ep_dst_y]);
   h_board[ep_dst_x][ep_dst_y] = h_board[ep_src_x][ep_src_y];
   h_board[ep_src_x][ep_src_y] = EMPTY_CELL;
 
@@ -157,7 +167,7 @@ std::vector<std::vector<char>> &h_board, std::vector<std::vector<char>> &h_piece
   }
   // change our board
   p_board[src_x][src_y] = p_board[dst_x][dst_y];
-  p_board[dst_x][dst_y] = info[0]; // save enemy's information
+  p_board[dst_x][dst_y] = info[0]; // load saved information
 
 
   // prepare to change the enemy's information
@@ -169,7 +179,7 @@ std::vector<std::vector<char>> &h_board, std::vector<std::vector<char>> &h_piece
 
   // change enemy's board
   h_board[ep_src_x][ep_src_y] = h_board[ep_dst_x][ep_dst_y];
-  h_board[ep_dst_x][ep_dst_y] = info[0];
+  h_board[ep_dst_x][ep_dst_y] = info[1];
 
   // if one of enemy's pieces was taken, now we put it's info back in the enemy's vector of pieces at the first aviable spot
   if (info[0] > 10) {
@@ -521,4 +531,37 @@ int check_check_validity(char i, char j, std::vector<std::vector<char>> &chess_b
 void Game::remake_print_board(char wb) {
   m_color = wb;
   make_print_board_matrix(*this, wb);
+}
+
+
+// ------------------------- PRINT ---------------------------------------
+
+void Game::print() {
+  std::cout << "# Matricea mea:" << std::endl;
+  for (int i = 7; i >= 0; --i) {
+    std::cout << "#";
+    for (int j = 0; j < 8; ++j) {
+      std::cout << std::setw(3) << (int) m_board[i][j];
+    }
+    std::cout << std::endl;
+  }
+  std::cout << "# Vectorul meu de piese:" << std::endl;
+  for (auto &x : m_pieces) {
+    std::cout << "# " << (int) x[0] << " " << (int) x[1] << " " << (int) x[2] << std::endl;
+  }
+  std::cout << "#" << std::endl;
+  
+  // std::cout << "# Matricea inamicului:" << std::endl;
+  // for (int i = 7; i >= 0; --i) {
+  //   std::cout << "#";
+  //   for (int j = 0; j < 8; ++j) {
+  //     std::cout << std::setw(3) << (int) e_board[i][j];
+  //   }
+  //   std::cout << std::endl;
+  // }
+  // std::cout << "# Vectorul inamicului de piese:" << std::endl;
+  // for (auto &x : e_pieces) {
+  //   std::cout << "# " << (int) x[0] << " " << (int) x[1] << " " << (int) x[2] << std::endl;
+  // }
+  // std::cout << "#" << std::endl;
 }

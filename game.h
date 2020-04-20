@@ -24,6 +24,8 @@ class Game {
 
   Game(char wb);
 
+  void print();
+
   void remake_print_board(char wb);
 
   // to be called in order to start the minimax
