@@ -21,6 +21,8 @@ color: 0 - white
 #include "constants.h"
 #include "game.h"
 
+class Game;
+
 // the matrix that is the actual board
 std::vector<std::vector<char>> get_initial_board_matrix(char _color);
 

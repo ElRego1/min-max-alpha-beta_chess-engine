@@ -37,13 +37,13 @@ std::vector<char> Game::find_next_move() {
     // holds info to undo the move later: {piece_taken}
     std::vector<char> info = this->apply_move_m(move);
 
-    if (this->is_check_m) {
+    if (this->is_check_m()) {
       score = LOW - 1;
     } else {
       score = alphabeta_mini(DEPTH - 1, alpha, beta, *this);
     }
 
-    if (score = HIGH) { // if we find this it means we will give checkmate
+    if (score == HIGH) { // if we find this it means we will give checkmate
       std::cout << "#ATENTIE: Am gasit un mod de a castiga cu miscarea: (" << move[0] << ", " << move[1] << ") -> (" << move[2] 
         << ", " << move[3] << "); piece: " << this->m_board[move[0]][move[1]] << " -> " << this->m_board[move[2]][move[3]] << std::endl;
         return move;
@@ -482,6 +482,7 @@ std::vector<std::vector<char>> check_attackers(char i, char j, std::vector<std::
         possible_attackers.push_back(attacks(i + x, j + y, chess_board));
     }
   }
+  return possible_attackers;
 }
 
 // possible ways of what a piece can attack
@@ -618,13 +619,18 @@ std::vector<char> attacks(char i, char j, std::vector<std::vector<char>> &chess_
 }
 
 bool Game::is_check_m() {
-  char x, y;
+  char x = -1, y = -1;
   for (auto &v : m_pieces) {
     if (v[2] == 7) {  // my king position
       x = v[0];
       y = v[1];
       break;
     }
+  }
+
+  if (x == -1 && y == -1) {
+    std::cout << "#EROARE: We did not find the king in my vector" << std::endl;
+    return false;
   }
 
   // true - check
@@ -635,13 +641,18 @@ bool Game::is_check_m() {
 }
 
 bool Game::is_check_e() {
-  char x, y;
+  char x = -1, y = -1;
   for (auto &v : e_pieces) {
     if (v[2] == 7) {  // my king position
       x = v[0];
       y = v[1];
       break;
     }
+  }
+
+  if (x == -1 && y == -1) {
+    std::cout << "#EROARE: We did not find the king in the enemy's vector" << std::endl;
+    return 0;
   }
 
   // true - check

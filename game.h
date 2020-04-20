@@ -28,7 +28,7 @@ class Game {
 
   // to be called in order to start the minimax
   // return value: {src_x, src_y, dst_x, dst_y, piece_type, priority_code}
-  // --> return value is an empty vector if no move that doesn't lead to checkmate is found >
+  // --> return value is an empty vector if no move that doesn't lead to checkmate is found
   // --> In short we lose inevitably if 2 gods play so we have to give comand that we surender
   std::vector<char> find_next_move();
 
