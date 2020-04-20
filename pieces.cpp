@@ -18,6 +18,7 @@
 int check_validity(char i, char j, std::vector<std::vector<char>> &chess_board) {
       if (i < 0 || i >= BOX_LENGTH || j < 0 || j >= BOX_LENGTH) return 0;
       if (chess_board[i][j] == 0) return 1; // empty cell
+      if (chess_board[i][j] < 10) return 0; // my piece
       if (chess_board[i][j] > 10) {
         int temp = chess_board[i][j];
         if (temp == PAWN_E) return PRIORITY_PAWN; // pawn
