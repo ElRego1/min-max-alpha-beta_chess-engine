@@ -10,46 +10,44 @@ recognized 'normal' (-1) as variant normal
 GameEnds(0, (null), 2)
 shuffleOpenings = 0
 StartChildProcess (dir="/media/sf_min-max") ./main
-262 >first : xboard
+282 >first : xboard
 protover 2
-270 <first : feature sigint=0  colors=1  done=1 
-270 >first : accepted sigint
-270 >first : accepted colors
-271 >first : accepted done
-272 >first : new
+290 <first : #h8 g8 f8 e8 d8 c8 b8 a8 
+290 <first : #h7 g7 f7 e7 d7 c7 b7 a7 
+291 <first : #h6 g6 f6 e6 d6 c6 b6 a6 
+291 <first : #h5 g5 f5 e5 d5 c5 b5 a5 
+291 <first : #h4 g4 f4 e4 d4 c4 b4 a4 
+291 <first : #h3 g3 f3 e3 d3 c3 b3 a3 
+291 <first : #h2 g2 f2 e2 d2 c2 b2 a2 
+291 <first : #h1 g1 f1 e1 d1 c1 b1 a1 
+291 <first : #
+291 <first : #         
+291 <first : #         
+291 <first : # 
+292 <first : # 
+292 <first : # 
+292 <first : # 
+292 <first : #         
+292 <first : #  
+292 <first : #
+292 <first : #         
+292 <first : #         
+292 <first : # 
+292 <first : # 
+293 <first : # 
+293 <first : # 
+293 <first : #         
+293 <first : #  
+293 <first : feature sigint=0  colors=1  done=1 
+293 >first : accepted sigint
+293 >first : accepted colors
+293 >first : accepted done
+294 >first : new
 random
-272 >first : level 40 5 0
-272 >first : post
-272 >first : hard
-nps: w=-1, b=-1
-nps: w=-1, b=-1
-1904 >first : time 30000
-1905 >first : otim 30000
-book hit = (NULL)
-1906 >first : e2e3
-1979 <first : # inainte de find
-1980 <first : # am ajuns in knight
-1982 <first : # am trecut de validity1
-1982 <first : # am trecut de validity2
-1982 <first : # am trecut de validity3
-1982 <first : # am trecut de validity4
-1982 <first : # la la la
-1982 <first : # am trecut de validity5
-1982 <first : # am trecut de validity6
-1982 <first : # am trecut de validity7
-1983 <first : # am trecut de validity8
-1983 <first : # aici trece de check_knight
-1983 <first : # am ajuns in alphabeta_mini
-1983 <first : # am trecut de evaluate
-1983 <first : # am trecut de sort get_moves_e
-1983 <first : # am trecut de apply_moves_e
-1983 <first : # aici
-1983 <first : # am ajuns in knight
-1983 <first : # am trecut de validity1
-1983 <first : # am trecut de validity2
-1983 <first : # am trecut de validity3
-1983 <first : # am trecut de validity4
+295 >first : level 40 5 0
+295 >first : post
+295 >first : hard
 GameEnds(29, xboard exit, 2)
-16843 >first : result * {xboard exit}
-16844 >first : force
-16844 >first : quit
+2656 >first : result * {xboard exit}
+2656 >first : force
+2656 >first : quit

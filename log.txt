@@ -6,6 +6,6 @@ Received:  new random level 40 5 0 post hard
 	*****
 
 passes: 0
-time
-30000 otim 30000 Received: we got the move e2e3
-move 
+result
+
+passes: 

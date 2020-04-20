@@ -17,6 +17,32 @@ int main() {
 	int pawn_move = 0, knight_move = 0; // we start to move with the pawn
 
 	Game g(wb);
+	for (int i = 0; i < 8; i++) {
+		cout<< "#";
+		for (int j = 0; j < 8; j++) {
+			cout<< g._print_board[i][j]<< " ";
+		}
+		std::cout << "\n";
+	}
+
+	cout<< "#"<< "\n";
+
+	for (int i = 0; i < 8; ++i) {
+    std::cout << "# ";
+    for (int j = 0; j < 8; ++j) {
+      std::cout << g.m_board[i][j]<< " ";
+    }
+    std::cout << std::endl;
+  }
+
+	cout<< "#"<< "\n";
+  for (int i = 0; i < 8; ++i) {
+    std::cout << "# ";
+    for (int j = 0; j < 8; ++j) {
+      std::cout << g.e_board[i][j]<< " ";
+    }
+    std::cout << std::endl;
+  }
 
 	std::vector<std::vector<char>> chess_board = g.m_board;
 	std::vector<std::vector<char>> positions = g.m_pieces;
