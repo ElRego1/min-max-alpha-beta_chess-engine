@@ -14,7 +14,7 @@ int alphabeta_maxi(int depth, int alpha, int beta, Game &g) {
     // holds info to undo the move later: {piece_taken}
     std::vector<char> info = g.apply_move_m(move);
 
-    if (g.is_check_m) {
+    if (g.is_check_m()) {
       score = LOW - 1;
     } else {
       score = alphabeta_mini(depth - 1, alpha, beta, g);
@@ -46,7 +46,7 @@ int alphabeta_mini(int depth, int alpha, int beta, Game &g){
     // holds info to undo the move later: {piece_taken}
     int score;
 
-    if (g.is_check_e) {
+    if (g.is_check_e()) {
       score = HIGH + 1; // not a good move for the mini part as it enters chess
     }else {
       score = alphabeta_maxi(depth - 1, alpha, beta, g);

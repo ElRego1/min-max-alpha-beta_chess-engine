@@ -37,7 +37,7 @@ std::vector<char> Game::find_next_move() {
     // holds info to undo the move later: {piece_taken}
     std::vector<char> info = this->apply_move_m(move);
 
-    if (this->is_check_m) {
+    if (this->is_check_m()) {
       score = LOW - 1;
     } else {
       score = alphabeta_mini(DEPTH - 1, alpha, beta, *this);
@@ -273,6 +273,7 @@ std::vector<std::vector<char>> check_attackers(char i, char j, std::vector<std::
         possible_attackers.push_back(attacks(i + x, j + y, chess_board));
     }
   }
+  return possible_attackers;
 }
 
 // possible ways of what a piece can attack
