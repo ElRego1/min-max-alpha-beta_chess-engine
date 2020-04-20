@@ -1,34 +1,17 @@
 Received: xboard protover 2
-Sent: feature sigint=0Sent:  colors=1Sent:  done=1Received: new random
-Received: level 0
-Received: 5 2
-Received:  post hard force accepted sigint accepted colors accepted
+Sent: feature sigint=0Sent:  colors=1Sent:  done=1Received: accepted sigint
+Received: accepted colors
+Received: accepted done
+Received:  new random level 0 5 2 post hard
 	*****
 
 passes: 0
-done
-
+time
+30000 otim 30200 Received: we got the move e2e4
+move 
 passes: 0
 
 passes: 1
-computer
-
-passes: 1
-
-passes: 2
-black
-
-passes: 2
-
-passes: 3
 time
-30000 otim 30000 
-passes: 3
-
-passes: 4
-go
-
-passes: 4
-
-passes: 5
-result
+28810 otim 28752 Received: we got the move d2d3
+move resign
