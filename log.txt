@@ -6,6 +6,18 @@ Received:  new random level 40 5 0 post hard
 	*****
 
 passes: 0
-result
+time
+30000 otim 30000 Received: we got the move c2c4
+move 
+passes: 0
 
-passes: 
+passes: 1
+time
+29944 otim 29891 Received: we got the move f2f3
+move 
+passes: 1
+
+passes: 2
+time
+29890 otim 28471 Received: we got the move f3f4
+move resign

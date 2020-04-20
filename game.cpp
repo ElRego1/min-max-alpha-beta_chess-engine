@@ -44,8 +44,8 @@ std::vector<char> Game::find_next_move() {
     }
     std::cout<<"# am trecut de alphabeta_mini din game" << "\n";
     if (score == HIGH) { // if we find this it means we will give checkmate
-      std::cout << "#ATENTIE: Am gasit un mod de a castiga cu miscarea: (" << move[0] << ", " << move[1] << ") -> (" << move[2]
-        << ", " << move[3] << "); piece: " << this->m_board[move[0]][move[1]] << " -> " << this->m_board[move[2]][move[3]] << std::endl;
+      std::cout << "#ATENTIE: Am gasit un mod de a castiga cu miscarea: (" <<(int) move[0] << ", " << (int) move[1] << ") -> (" << (int) move[2]
+        << ", " << (int) move[3] << "); piece: " << (int) this->m_board[move[0]][move[1]] << " -> " << (int) this->m_board[move[2]][move[3]] << std::endl;
         return move;
     } else if (score > alpha) {
       alpha = score;
@@ -194,12 +194,13 @@ std::vector<std::vector<char>> &h_board, std::vector<std::vector<char>> &h_piece
 std::vector<std::vector<char>> control_zones(std::vector<std::vector<char>> &chess_board, std::vector<std::vector<char>> &pieces_vector) {
   std::vector<std::vector<char>> my_zone;
   for (auto piece : pieces_vector) {
-    char x = piece[1];
-    char y = piece[2];
-    int cod_piesa = piece[3];
+    char x = piece[0];
+    char y = piece[1];
+    char cod_piesa = piece[2];
+    int temp;
     switch(cod_piesa) {
       case 1: // pawn
-        int temp = check_check_validity(x + 1, y + 1, chess_board);
+        temp = check_check_validity(x + 1, y + 1, chess_board);
         if (temp != 0 && temp != 1) { // if it's on the board and it's not one of our pieces
           if (temp == 2) { // if there is an enemy on that place we keep the info
             my_zone.push_back(zones(x + 1, y + 1, 1, x, y, cod_piesa, chess_board));
@@ -223,7 +224,7 @@ std::vector<std::vector<char>> control_zones(std::vector<std::vector<char>> &che
           char i = d.first;
           char j = d.second;
           int ok = 0;
-          int temp = 1;
+          temp = 1;
           while(temp != 0 && ok == 0) {
             temp = check_check_validity(x + i, y + j, chess_board);
             if (temp == 2) {
@@ -241,71 +242,71 @@ std::vector<std::vector<char>> control_zones(std::vector<std::vector<char>> &che
         break;
       
       case 3: // knight
-      int temp = check_check_validity(x + 1, y + 2, chess_board);
-      if (temp != 0 && temp != 1) {
-          if (temp == 2) {
-            my_zone.push_back(zones(x + 1, y + 2, 1, x, y, cod_piesa, chess_board));
-          } else {
-            my_zone.push_back(zones(x + 1, y + 2, 0, x, y, cod_piesa, chess_board));
-          }
-      }
-      temp = check_check_validity(x + 2, y + 1, chess_board);
-      if (temp != 0 && temp != 1) {
-          if (temp == 2) {
-            my_zone.push_back(zones(x + 1, y + 2, 1, x, y, cod_piesa, chess_board));
-          } else {
-            my_zone.push_back(zones(x + 1, y + 2, 0, x, y, cod_piesa, chess_board));
-          }
-      }
-      temp = check_check_validity(x + 1, y - 2, chess_board);
-      if (temp != 0 && temp != 1) {
-          if (temp == 2) {
-            my_zone.push_back(zones(x + 1, y + 2, 1, x, y, cod_piesa, chess_board));
-          } else {
-            my_zone.push_back(zones(x + 1, y + 2, 0, x, y, cod_piesa, chess_board));
-          }
-      }
-      temp = check_check_validity(x + 2, y - 1, chess_board);
-      if (temp != 0 && temp != 1) {
-          if (temp == 2) {
-            my_zone.push_back(zones(x + 1, y + 2, 1, x, y, cod_piesa, chess_board));
-          } else {
-            my_zone.push_back(zones(x + 1, y + 2, 0, x, y, cod_piesa, chess_board));
-          }
-      }
-      temp = check_check_validity(x - 1, y + 2, chess_board);
-      if (temp != 0 && temp != 1) {
-          if (temp == 2) {
-            my_zone.push_back(zones(x + 1, y + 2, 1, x, y, cod_piesa, chess_board));
-          } else {
-            my_zone.push_back(zones(x + 1, y + 2, 0, x, y, cod_piesa, chess_board));
-          }
-      }
-      temp = check_check_validity(x - 2, y + 1, chess_board);
-      if (temp != 0 && temp != 1) {
-          if (temp == 2) {
-            my_zone.push_back(zones(x + 1, y + 2, 1, x, y, cod_piesa, chess_board));
-          } else {
-            my_zone.push_back(zones(x + 1, y + 2, 0, x, y, cod_piesa, chess_board));
-          }
-      }
-      temp = check_check_validity(x - 1, y - 2, chess_board);
-      if (temp != 0 && temp != 1) {
-          if (temp == 2) {
-            my_zone.push_back(zones(x + 1, y + 2, 1, x, y, cod_piesa, chess_board));
-          } else {
-            my_zone.push_back(zones(x + 1, y + 2, 0, x, y, cod_piesa, chess_board));
-          }
-      }
-      temp = check_check_validity(x - 2, y - 1, chess_board);
-      if (temp != 0 && temp != 1) {
-          if (temp == 2) {
-            my_zone.push_back(zones(x + 1, y + 2, 1, x, y, cod_piesa, chess_board));
-          } else {
-            my_zone.push_back(zones(x + 1, y + 2, 0, x, y, cod_piesa, chess_board));
-          }
-      }
-        break;
+        temp = check_check_validity(x + 1, y + 2, chess_board);
+        if (temp != 0 && temp != 1) {
+            if (temp == 2) {
+              my_zone.push_back(zones(x + 1, y + 2, 1, x, y, cod_piesa, chess_board));
+            } else {
+              my_zone.push_back(zones(x + 1, y + 2, 0, x, y, cod_piesa, chess_board));
+            }
+        }
+        temp = check_check_validity(x + 2, y + 1, chess_board);
+        if (temp != 0 && temp != 1) {
+            if (temp == 2) {
+              my_zone.push_back(zones(x + 1, y + 2, 1, x, y, cod_piesa, chess_board));
+            } else {
+              my_zone.push_back(zones(x + 1, y + 2, 0, x, y, cod_piesa, chess_board));
+            }
+        }
+        temp = check_check_validity(x + 1, y - 2, chess_board);
+        if (temp != 0 && temp != 1) {
+            if (temp == 2) {
+              my_zone.push_back(zones(x + 1, y + 2, 1, x, y, cod_piesa, chess_board));
+            } else {
+              my_zone.push_back(zones(x + 1, y + 2, 0, x, y, cod_piesa, chess_board));
+            }
+        }
+        temp = check_check_validity(x + 2, y - 1, chess_board);
+        if (temp != 0 && temp != 1) {
+            if (temp == 2) {
+              my_zone.push_back(zones(x + 1, y + 2, 1, x, y, cod_piesa, chess_board));
+            } else {
+              my_zone.push_back(zones(x + 1, y + 2, 0, x, y, cod_piesa, chess_board));
+            }
+        }
+        temp = check_check_validity(x - 1, y + 2, chess_board);
+        if (temp != 0 && temp != 1) {
+            if (temp == 2) {
+              my_zone.push_back(zones(x + 1, y + 2, 1, x, y, cod_piesa, chess_board));
+            } else {
+              my_zone.push_back(zones(x + 1, y + 2, 0, x, y, cod_piesa, chess_board));
+            }
+        }
+        temp = check_check_validity(x - 2, y + 1, chess_board);
+        if (temp != 0 && temp != 1) {
+            if (temp == 2) {
+              my_zone.push_back(zones(x + 1, y + 2, 1, x, y, cod_piesa, chess_board));
+            } else {
+              my_zone.push_back(zones(x + 1, y + 2, 0, x, y, cod_piesa, chess_board));
+            }
+        }
+        temp = check_check_validity(x - 1, y - 2, chess_board);
+        if (temp != 0 && temp != 1) {
+            if (temp == 2) {
+              my_zone.push_back(zones(x + 1, y + 2, 1, x, y, cod_piesa, chess_board));
+            } else {
+              my_zone.push_back(zones(x + 1, y + 2, 0, x, y, cod_piesa, chess_board));
+            }
+        }
+        temp = check_check_validity(x - 2, y - 1, chess_board);
+        if (temp != 0 && temp != 1) {
+            if (temp == 2) {
+              my_zone.push_back(zones(x + 1, y + 2, 1, x, y, cod_piesa, chess_board));
+            } else {
+              my_zone.push_back(zones(x + 1, y + 2, 0, x, y, cod_piesa, chess_board));
+            }
+        }
+          break;
 
       case 4: // black bishop
       case 5: // white bishop
