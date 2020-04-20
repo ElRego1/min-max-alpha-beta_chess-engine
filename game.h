@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include <bits/stdc++.h>
+#include "minimax.h"
 #include "init_game.h"
 #include "pieces.h"
 #include "matrix_transformation.h"
@@ -25,21 +26,24 @@ class Game {
 
   void remake_print_board(char wb);
 
-  // TODO
-  // returns info to undo the move
-  // return value: {src_x, src_y, dst_x, dst_y, piece_taken}
+  // to be called in order to start the minimax
+  // return value: {src_x, src_y, dst_x, dst_y, piece_type, priority_code}
+  // --> return value is an empty vector if no move that doesn't lead to checkmate is found >
+  // --> In short we lose inevitably if 2 gods play so we have to give comand that we surender
+  std::vector<char> find_next_move();
+
+  // return value: {piece_taken} | info to undo the move
   std::vector<char> apply_move_m(std::vector<char> &move);
   // TODO
+  // parameters: {piece_taken}, {src_x, src_y, dst_x, dst_y, piece_type, priority_code}
   void undo_move_m(std::vector<char> &info, std::vector<char> &move);
 
-  // TODO
-  // returns info to undo the move
-  // return value: {src_x, src_y, dst_x, dst_y, piece_taken}
+  // return value: {piece_taken} | info to undo the move
   std::vector<char> apply_move_e(std::vector<char> &move);
   // TODO
+  // parameters: {piece_taken}, {src_x, src_y, dst_x, dst_y, piece_type, priority_code}
   void undo_move_e(std::vector<char> &info, std::vector<char> &move);
 
-  bool game_over();
   bool is_check_m();
   bool is_check_e();
 };
@@ -58,7 +62,30 @@ class Game {
 std::vector<char> apply_move(std::vector<char> &move, std::vector<std::vector<char>> &p_board,std::vector<std::vector<char>> &p_pieces,
 std::vector<std::vector<char>> &h_board, std::vector<std::vector<char>> &h_pieces);
 
+// MODIFIES the internal state of the game !!!
+// structure of info: {piece_taken}
+// --> piece_taken - the codification is for an enemy piece (11 - 17 with 0 for no piece taken) as the piece is relative to the attacker
+// structure of move: {src_x, src_y, dst_x, dst_y, piece_type, priority_code}
+// --> src_x, src_y, dst_x, dst_y - src and dst are as we are making the move so we want to move from dst to the src position the piece
+// p_board - personal chess board 
+// p_pieces - personal vector with pieces
+// h_board - hostile chess board
+// h_pieces - hostile vector with pieces
+void undo_move(std::vector<char> &info, std::vector<char> &move,
+std::vector<std::vector<char>> &p_board,std::vector<std::vector<char>> &p_pieces,
+std::vector<std::vector<char>> &h_board, std::vector<std::vector<char>> &h_pieces);
+
+// checks if the king is safe or not
 int check_check(char i, char j, std::vector<std::vector<char>> &chess_board);
 int check_check_validity(char i, char j, std::vector<std::vector<char>> &chess_board);
 int check_knight(char i, char j, std::vector<std::vector<char>> &chess_board);
+
+// possible ways of what a piece can attack
+// return a vector of {x, y, piece type}
+std::vector<std::vector<char>> check_attack(char i, char j, std::vector<std::vector<char>> &chess_board);
+std::vector<char> attacks(char i, char j, std::vector<std::vector<char>> &chess_board);
+
+// all pieces that can attack my piece
+// return a vector of {x, y, piece type}
+std::vector<std::vector<char>> check_attackers(char i, char j, std::vector<std::vector<char>> &chess_board);
 #endif // GAME_H

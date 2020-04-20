@@ -9,15 +9,24 @@
 // 0 - invalid move
 // 1 - empty cell
 // x - enemy piece and we give a score accordinglly to the importance of the piece << TODO >>
+// 2 - king
+// 3 - pawn
+// 4 - knight
+// 5 - bishop
+// 6 - rook
+// 7 - queen
 int check_validity(char i, char j, std::vector<std::vector<char>> &chess_board) {
       if (i < 0 || i >= BOX_LENGTH || j < 0 || j >= BOX_LENGTH) return 0;
       if (chess_board[i][j] == 0) return 1; // empty cell
       if (chess_board[i][j] > 10) {
         int temp = chess_board[i][j];
-        if (temp == 14 || temp == 15) return 3; // << TODO: to be changed to return 3; to know it's check for the enemy | has to change the move functions from the bottom >>
-        else if (temp == 12) return 4;
-        else if (temp == 17) return 7;
-        else if (temp == 16) return 6;
+        if (temp == PAWN_E) return PRIORITY_PAWN; // pawn
+        else if (temp == ROOK_E) return PRIORITY_ROOK; // rook
+        else if (temp == KNIGHT_E) return PRIORITY_KNIGHT; // knight
+        else if (temp == BLACK_BISHOP_E) return PRIORITY_BLACK_BISHOP; // black bishop
+        else if (temp == WHITE_BISHOP_E) return PRIORITY_WHITE_BISHOP; // white bishop
+        else if (temp == QUEEN_E) return PRIORITY_QUEEN; // queen
+        else if (temp == KING_E) return PRIORITY_KING; // king
         else return 2;
       }
       return 0;
@@ -26,7 +35,7 @@ int check_validity(char i, char j, std::vector<std::vector<char>> &chess_board) 
 int check_validity_pawn(char i, char j, std::vector<std::vector<char>> &chess_board) {
     int temp = check_validity(i, j, chess_board);
     if (temp <= 1) return 0;
-    else return temp; // << TODO: to be changed to return the value of temp, but not all functions are ready to accept this return value | has to change the move functions from the bottom >>
+    else return temp;
 }
 
 std::vector<char> get_piece_position(char p, int d,
@@ -54,7 +63,6 @@ std::vector<std::vector<char>> &positions) {
 
 // return vector structure: {x, y, "check_validity" return value}
 std::vector<std::vector<char>> get_piece_directions(char i, char j, std::vector<std::vector<char>> &chess_board) {
-    // !!!!!!! NU E MEREU ESTE PUS SI VALOAREA DE RETURN AL LUI check_validity IN POSSIBLE_MOVES !!!!!!
     std::vector<std::vector<char>> possible_moves;
     char piece_type = chess_board[i][j];
     switch (piece_type) {
@@ -326,7 +334,7 @@ void check_move(char i, char j, int i_depl, int j_depl, std::vector<std::vector<
     }
   }
 
-// --------------------------------------------- diagonal moves --------------------------------
+// ------------------------------------------ Ollie's diagonal moves 8) --------------------------------
 
 void right_diag_up(char i, char j, std::vector<std::vector<char>> &possible_moves, std::vector<std::vector<char>> &chess_board) {
   while (true) {
