@@ -18,7 +18,7 @@ std::vector<std::vector<char>> get_moves(std::vector<std::vector<char>> &pieces,
 // order descending by the priority of the piece that can be taken and if priority is equal, order ascending by the type of piece doing the attack
 bool order_moves_by_priority(const std::vector<char> &a, const std::vector<char> &b);
 
-// p_board - personal chess board 
+// p_board - personal chess board
 // p_pieces - personal vector with pieces
 // h_board - hostile chess board
 // h_pieces - hostile vector with pieces
