@@ -1,0 +1,53 @@
+locale = LC_CTYPE=en_US.UTF-8;LC_NUMERIC=ro_RO.UTF-8;LC_TIME=ro_RO.UTF-8;LC_COLLATE=C;LC_MONETARY=ro_RO.UTF-8;LC_MESSAGES=en_US.UTF-8;LC_PAPER=ro_RO.UTF-8;LC_NAME=ro_RO.UTF-8;LC_ADDRESS=ro_RO.UTF-8;LC_TELEPHONE=ro_RO.UTF-8;LC_MEASUREMENT=ro_RO.UTF-8;LC_IDENTIFICATION=ro_RO.UTF-8
+recognized 'normal' (-1) as variant normal
+recognized 'normal' (-1) as variant normal
+recognized 'normal' (-1) as variant normal
+shuffleOpenings = 0
+shuffleOpenings = 0
+Version: xboard 4.9.1 + main ()
+Reset(1, 0) from gameMode 0
+recognized 'normal' (-1) as variant normal
+GameEnds(0, (null), 2)
+shuffleOpenings = 0
+StartChildProcess (dir="/media/sf_min-max") ./main
+282 >first : xboard
+protover 2
+290 <first : #h8 g8 f8 e8 d8 c8 b8 a8 
+290 <first : #h7 g7 f7 e7 d7 c7 b7 a7 
+291 <first : #h6 g6 f6 e6 d6 c6 b6 a6 
+291 <first : #h5 g5 f5 e5 d5 c5 b5 a5 
+291 <first : #h4 g4 f4 e4 d4 c4 b4 a4 
+291 <first : #h3 g3 f3 e3 d3 c3 b3 a3 
+291 <first : #h2 g2 f2 e2 d2 c2 b2 a2 
+291 <first : #h1 g1 f1 e1 d1 c1 b1 a1 
+291 <first : #
+291 <first : #         
+291 <first : #         
+291 <first : # 
+292 <first : # 
+292 <first : # 
+292 <first : # 
+292 <first : #         
+292 <first : #  
+292 <first : #
+292 <first : #         
+292 <first : #         
+292 <first : # 
+292 <first : # 
+293 <first : # 
+293 <first : # 
+293 <first : #         
+293 <first : #  
+293 <first : feature sigint=0  colors=1  done=1 
+293 >first : accepted sigint
+293 >first : accepted colors
+293 >first : accepted done
+294 >first : new
+random
+295 >first : level 40 5 0
+295 >first : post
+295 >first : hard
+GameEnds(29, xboard exit, 2)
+2656 >first : result * {xboard exit}
+2656 >first : force
+2656 >first : quit

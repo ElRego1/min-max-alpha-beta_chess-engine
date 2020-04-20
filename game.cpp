@@ -42,9 +42,9 @@ std::vector<char> Game::find_next_move() {
     } else {
       score = alphabeta_mini(DEPTH - 1, alpha, beta, *this);
     }
-
+    std::cout<<"# am trecut de alphabeta_mini din game" << "\n";
     if (score == HIGH) { // if we find this it means we will give checkmate
-      std::cout << "#ATENTIE: Am gasit un mod de a castiga cu miscarea: (" << move[0] << ", " << move[1] << ") -> (" << move[2] 
+      std::cout << "#ATENTIE: Am gasit un mod de a castiga cu miscarea: (" << move[0] << ", " << move[1] << ") -> (" << move[2]
         << ", " << move[3] << "); piece: " << this->m_board[move[0]][move[1]] << " -> " << this->m_board[move[2]][move[3]] << std::endl;
         return move;
     } else if (score > alpha) {
@@ -429,7 +429,7 @@ std::vector<std::vector<char>> check_attackers(char i, char j, std::vector<std::
       }
     }
   }
-  // knight 
+  // knight
   if (check_check_validity(i + 1, j + 2, chess_board) == 2 && chess_board[i + 1][j + 2] == 13) {
     possible_attackers.push_back(attacks(i + 1, j + 2, chess_board));
   }
@@ -474,7 +474,7 @@ std::vector<std::vector<char>> check_attackers(char i, char j, std::vector<std::
       }
     }
   }
-  // king 
+  // king
   for (auto d: all_directions) {
     char x = d.first;
     char y = d.second;
@@ -499,7 +499,7 @@ std::vector<std::vector<char>> check_attack(char i, char j, std::vector<std::vec
         possible_attacks.push_back(attacks(i + 1, j - 1, chess_board));
       }
       break;
-    
+
     case 2: // rook
       for(auto d : all_directions) {
         if (d != up || d != dw || d != rg || d != lf) continue;
@@ -602,7 +602,7 @@ std::vector<std::vector<char>> check_attack(char i, char j, std::vector<std::vec
         }
       }
       break;
-    
+
     default:
       break;
   }
@@ -649,6 +649,7 @@ bool Game::is_check_e() {
       break;
     }
   }
+  std::cout<<"# aici" << "\n";
 
   if (x == -1 && y == -1) {
     std::cout << "#EROARE: We did not find the king in the enemy's vector" << std::endl;
@@ -658,6 +659,7 @@ bool Game::is_check_e() {
   // true - check
   // false - king is safe
   int valid = check_check(x, y, e_board);
+  std::cout<<"# aici2" << "\n";
   if (valid != 0) return true;
   return false;
 }
@@ -666,12 +668,12 @@ bool Game::is_check_e() {
 // 1 - king in danger
 int check_check(char i, char j, std::vector<std::vector<char>> &chess_board) {
   // check pawn attack
-  
   if (check_validity(i + 1, j + 1, chess_board) == PRIORITY_PAWN) return 1;
   if (check_validity(i + 1, j - 1, chess_board) == PRIORITY_PAWN) return 1;
 
   // check knight attack
   int temp = check_knight(i, j, chess_board);
+  std::cout<<"# aici trece de check_knight" << "\n";
   if (temp == 1) return 1;
 
   int old_i = i, old_j = j;
@@ -701,22 +703,16 @@ int check_check(char i, char j, std::vector<std::vector<char>> &chess_board) {
 // 0 - safe king
 // 1 - king in danger
 int check_knight(char i, char j, std::vector<std::vector<char>> &chess_board) {
-  int cod_piesa = chess_board[i + 1][j + 2];
-  if (check_validity(i + 1, j + 2, chess_board) == 2 && cod_piesa == 13) return 1;
-  cod_piesa = chess_board[i + 2][j + 1];
-  if (check_validity(i + 2, j + 1, chess_board) == 2 && cod_piesa == 13) return 1;
-  cod_piesa = chess_board[i + 1][j - 2];
-  if (check_validity(i + 1, j - 2, chess_board) == 2 && cod_piesa == 13) return 1;
-  cod_piesa = chess_board[i + 2][j - 1];
-  if (check_validity(i + 2, j - 1, chess_board) == 2 && cod_piesa == 13) return 1;
-  cod_piesa = chess_board[i - 1][j + 2];
-  if (check_validity(i - 1, j + 2, chess_board) == 2 && cod_piesa == 13) return 1;
-  cod_piesa = chess_board[i - 2][j + 1];
-  if (check_validity(i - 2, j + 1, chess_board) == 2 && cod_piesa == 13) return 1;
-  cod_piesa = chess_board[i - 1][j - 2];
-  if (check_validity(i - 1, j - 2, chess_board) == 2 && cod_piesa == 13) return 1;
-  cod_piesa = chess_board[i - 2][j - 1];
-  if (check_validity(i - 2, j - 1, chess_board) == 2 && cod_piesa == 13) return 1;
+  std::cout<<"# am ajuns in knight" << "\n";
+  if (check_validity(i + 1, j + 2, chess_board) == PRIORITY_KNIGHT) return 1;
+  if (check_validity(i + 2, j + 1, chess_board) == PRIORITY_KNIGHT) return 1;
+  if (check_validity(i + 1, j - 2, chess_board) == PRIORITY_KNIGHT) return 1;
+  if (check_validity(i + 2, j - 1, chess_board) == PRIORITY_KNIGHT) return 1;
+  if (check_validity(i - 1, j + 2, chess_board) == PRIORITY_KNIGHT) return 1;
+  if (check_validity(i - 2, j + 1, chess_board) == PRIORITY_KNIGHT) return 1;
+  if (check_validity(i - 1, j - 2, chess_board) == PRIORITY_KNIGHT) return 1;
+  if (check_validity(i - 2, j - 1, chess_board) == PRIORITY_KNIGHT) return 1;
+  std::cout<<"# am trecut de validity8" << "\n";
   return 0;
 }
 

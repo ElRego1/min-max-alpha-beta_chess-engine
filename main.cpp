@@ -17,6 +17,32 @@ int main() {
 	int pawn_move = 0, knight_move = 0; // we start to move with the pawn
 
 	Game g(wb);
+	for (int i = 0; i < 8; i++) {
+		cout<< "#";
+		for (int j = 0; j < 8; j++) {
+			cout<< g._print_board[i][j]<< " ";
+		}
+		std::cout << "\n";
+	}
+
+	cout<< "#"<< "\n";
+
+	for (int i = 0; i < 8; ++i) {
+    std::cout << "# ";
+    for (int j = 0; j < 8; ++j) {
+      std::cout << g.m_board[i][j]<< " ";
+    }
+    std::cout << std::endl;
+  }
+
+	cout<< "#"<< "\n";
+  for (int i = 0; i < 8; ++i) {
+    std::cout << "# ";
+    for (int j = 0; j < 8; ++j) {
+      std::cout << g.e_board[i][j]<< " ";
+    }
+    std::cout << std::endl;
+  }
 
 	// for (int i = 0; i < 8; ++i) {
 	// 	std::cout << "# ";
@@ -120,7 +146,6 @@ white_engine:
 				if (s.compare("black") == 0){
 					goto black_engine;
 				}
-
 	    	log.write("Received: we got the move ");
 	    	log.write(s);
 	    	log.write("\nmove ");
@@ -136,17 +161,19 @@ white_engine:
 				mymove_chr.push_back(y_s);
 				mymove_chr.push_back(x_d);
 				mymove_chr.push_back(y_d);
-				g.apply_move_e(mymove_chr);
+				g.apply_move_m(mymove_chr);
 				std::vector<char> mymove;
+				std::cout<<"# inainte de find" << "\n";
 				mymove = g.find_next_move();
+				std::cout<<"# am ajuns aici" << "\n";
 				if (mymove.size() != 0) {
 
-					std::vector<char> mymove_chr;
-					mymove_chr.push_back(mymove[0]);
-					mymove_chr.push_back(mymove[1]);
-					mymove_chr.push_back(mymove[2]);
-					mymove_chr.push_back(mymove[3]);
-					g.apply_move_m(mymove_chr);
+					std::vector<char> mymove_chr2;
+					mymove_chr2.push_back(mymove[0]);
+					mymove_chr2.push_back(mymove[1]);
+					mymove_chr2.push_back(mymove[2]);
+					mymove_chr2.push_back(mymove[3]);
+					g.apply_move_m(mymove_chr2);
 
 					std::string mymove_str = get_chess_coordonates(mymove[0], mymove[1], g) + get_chess_coordonates(mymove[2], mymove[3], g);
 					std::string mymove_command = "move " + mymove_str;
