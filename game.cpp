@@ -666,29 +666,30 @@ bool Game::is_check_e() {
 // 1 - king in danger
 int check_check(char i, char j, std::vector<std::vector<char>> &chess_board) {
   // check pawn attack
-  int cod_piesa = chess_board[i + 1][j + 1];
-  if (cod_piesa == 11) return 1;
-  cod_piesa = chess_board[i + 1][j - 1];
-  if (cod_piesa == 11) return 1;
+  
+  if (check_validity(i + 1, j + 1, chess_board) == PRIORITY_PAWN) return 1;
+  if (check_validity(i + 1, j - 1, chess_board) == PRIORITY_PAWN) return 1;
 
   // check knight attack
   int temp = check_knight(i, j, chess_board);
   if (temp == 1) return 1;
 
+  int old_i = i, old_j = j;
+
   for(auto d : all_directions) {
+    i = old_i;
+    j = old_j;
     char x = d.first;
     char y = d.second;
     while (true) {
-      temp = check_check_validity(i + x, j + y, chess_board);
-      if (temp == 0) return 0; // free way or out of board
-      if (temp == 1) return 0; // one of my pieces
-      if (temp == 2) {  // enemy piece
-        cod_piesa = chess_board[i + x][j + y];
+      temp = check_validity(i + x, j + y, chess_board);
+      if (temp == 0) break; // invalid move
+      if (temp >= 2) {  // enemy piece
         // check diagonal for queen and bishop attack
-        if ((d == ur || d == ul || d == dr || d == dl) && (cod_piesa == 14 || cod_piesa == 15 || cod_piesa == 16)) return 1;
+        if ((d == ur || d == ul || d == dr || d == dl) && (temp == PRIORITY_BLACK_BISHOP || temp == PRIORITY_WHITE_BISHOP || temp == PRIORITY_QUEEN)) return 1;
         // check lines for queen and rook attack
-        if ((d == up || d == dw || d == rg || d == lf) && (cod_piesa == 12 || cod_piesa == 16)) return 1;
-        return 0;
+        if ((d == up || d == dw || d == rg || d == lf) && (temp == PRIORITY_ROOK || temp == PRIORITY_QUEEN)) return 1;
+        break;
       }
       i += x;
       j += y;
