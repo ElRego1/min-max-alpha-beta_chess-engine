@@ -457,10 +457,9 @@ bool Game::is_check_e() {
 // 1 - king in danger
 int check_check(char i, char j, std::vector<std::vector<char>> &chess_board) {
   // check pawn attack
-  int cod_piesa = chess_board[i + 1][j + 1];
-  if (cod_piesa == 11) return 1;
-  cod_piesa = chess_board[i + 1][j - 1];
-  if (cod_piesa == 11) return 1;
+  
+  if (check_validity(i + 1, j + 1, chess_board) == PRIORITY_PAWN) return 1;
+  if (check_validity(i + 1, j - 1, chess_board) == PRIORITY_PAWN) return 1;
 
   // check knight attack
   int temp = check_knight(i, j, chess_board);
