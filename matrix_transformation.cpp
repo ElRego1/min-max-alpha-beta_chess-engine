@@ -9,7 +9,7 @@ void get_matrix_coordonates(std::string &input, char &x, char &y, Game &g) {
   	y = input[0] - 'a';
 
 	// if we are playing black, we have to convert to the black coordonates
-	if (g.m_color == 1) {
+	if (g.m_color == WHITE) {
 		x = 7 - x;
 		y = 7 - y;
 	}

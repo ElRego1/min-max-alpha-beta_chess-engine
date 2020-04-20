@@ -13,36 +13,28 @@ int main() {
 	cout.setf(ios::unitbuf);
 	Log log;
 
-	char wb = 1, force = 0, x_s = 0, y_s = 0, x_d = 0, y_d = 0; // engine default is black
+	char wb = BLACK, force = 0, x_s = 0, y_s = 0, x_d = 0, y_d = 0; // engine default is black
 	int pawn_move = 0, knight_move = 0; // we start to move with the pawn
 
 	Game g(wb);
-	for (int i = 0; i < 8; i++) {
-		cout<< "#";
-		for (int j = 0; j < 8; j++) {
-			cout<< g._print_board[i][j]<< " ";
-		}
-		std::cout << "\n";
-	}
 
-	cout<< "#"<< "\n";
 
-	for (int i = 0; i < 8; ++i) {
-    std::cout << "# ";
-    for (int j = 0; j < 8; ++j) {
-      std::cout << std::setw(3) << (int)g.m_board[i][j]<< " ";
-    }
-    std::cout << std::endl;
-  }
 
-	cout<< "#"<< "\n";
-  for (int i = 0; i < 8; ++i) {
-    std::cout << "# ";
-    for (int j = 0; j < 8; ++j) {
-      std::cout << std::setw(3) << (int)g.e_board[i][j]<< " ";
-    }
-    std::cout << std::endl;
-  }
+	// for (int i = 0; i < 8; ++i) {
+	// 	std::cout << "# ";
+	// 	for (int j = 0; j < 8; ++j) {
+	// 		std::cout << std::setw(3) << g.m_board[i][j];
+	// 	}
+	// 	std::cout << std::endl;
+	// }
+
+	// for (int i = 0; i < 8; ++i) {
+	// 	std::cout << "# ";
+	// 	for (int j = 0; j < 8; ++j) {
+	// 		std::cout << std::setw(3) << g.e_board[i][j];
+	// 	}
+	// 	std::cout << std::endl;
+	// }
 
 	// for (int i = 0; i < 8; ++i) {
 	// 	std::cout << "# ";
@@ -146,14 +138,21 @@ white_engine:
 				if (s.compare("black") == 0){
 					goto black_engine;
 				}
+
 	    	log.write("Received: we got the move ");
 	    	log.write(s);
 	    	log.write("\nmove ");
+
+				std::cout << "# Culoarea noastra e: " << (int) g.m_color << std::endl;
+
+				std::cout << "# we got the move: " << s << std::endl;
 	    	get_matrix_coordonates(s, x_s, y_s, g); // now we have in x_s and y_s the coordonates of the source of the moved piece
 	    	s = s.substr(2, 2); // we take the chess destinations on the board
 	    	get_matrix_coordonates(s, x_d, y_d, g); // now we have in x_d and y_d the coordonates of the destination of the moved piece
 	    	// std::cout << "# x_s: " << (int)x_s << " | y_s: " << (int)y_s << " | x_d: " << (int)x_d << " | y_d: " << (int)y_d << "\n";
 	    	// move_piece(x_s, y_s, x_d, y_d, chess_board, playing_pieces_mine);
+
+				std::cout << "# x_s: " << (int) x_s << " | y_s" << (int) y_s << "# x_d: " << (int) x_d << " | y_d" << (int) y_d << std::endl;
 
 				++idx_move;
 				std::vector<char> mymove_chr;
@@ -161,50 +160,19 @@ white_engine:
 				mymove_chr.push_back(y_s);
 				mymove_chr.push_back(x_d);
 				mymove_chr.push_back(y_d);
-				g.apply_move_m(mymove_chr);
-
-std::cout<< "#"<< "\n";
-
-	for (int i = 0; i < 8; ++i) {
-    std::cout << "# ";
-    for (int j = 0; j < 8; ++j) {
-      std::cout << std::setw(3) << (int)g.m_board[i][j]<< " ";
-    }
-    std::cout << std::endl;
-  }
-
-  for (auto d : g.m_pieces) {
-	  std::cout <<"#" << (int) d[0] << " " << (int) d[1] << " "<< (int) d[2] << std::endl;
-  }
-  std::cout << std::endl;
-
-	std::cout<< "#"<< "\n";
-  for (int i = 0; i < 8; ++i) {
-    std::cout << "# ";
-    for (int j = 0; j < 8; ++j) {
-      std::cout << std::setw(3) << (int)g.e_board[i][j]<< " ";
-    }
-    std::cout << std::endl;
-  }
-
-  for (auto d : g.e_pieces) {
-	  std::cout <<"#" << (int) d[0] << " " << (int) d[1] << " "<< (int) d[2] << std::endl;
-  }
-  std::cout << std::endl;
-
-
+				g.print();
+				g.apply_move_e(mymove_chr);
+				g.print();
 				std::vector<char> mymove;
-				std::cout<<"# inainte de find" << "\n";
 				mymove = g.find_next_move();
-				std::cout<<"# am ajuns aici" << "\n";
 				if (mymove.size() != 0) {
 
-					std::vector<char> mymove_chr2;
-					mymove_chr2.push_back(mymove[0]);
-					mymove_chr2.push_back(mymove[1]);
-					mymove_chr2.push_back(mymove[2]);
-					mymove_chr2.push_back(mymove[3]);
-					g.apply_move_m(mymove_chr2);
+					std::vector<char> mymove_chr;
+					mymove_chr.push_back(mymove[0]);
+					mymove_chr.push_back(mymove[1]);
+					mymove_chr.push_back(mymove[2]);
+					mymove_chr.push_back(mymove[3]);
+					g.apply_move_m(mymove_chr);
 
 std::cout<< "#"<< "\n";
 

@@ -16,21 +16,21 @@
 // 6 - rook
 // 7 - queen
 int check_validity(char i, char j, std::vector<std::vector<char>> &chess_board) {
-      if (i < 0 || i >= BOX_LENGTH || j < 0 || j >= BOX_LENGTH) return 0;
-      if (chess_board[i][j] == 0) return 1; // empty cell
-      if (chess_board[i][j] < 10) return 0; // my piece
-      if (chess_board[i][j] > 10) {
-        int temp = chess_board[i][j];
-        if (temp == PAWN_E) return PRIORITY_PAWN; // pawn
-        else if (temp == ROOK_E) return PRIORITY_ROOK; // rook
-        else if (temp == KNIGHT_E) return PRIORITY_KNIGHT; // knight
-        else if (temp == BLACK_BISHOP_E) return PRIORITY_BLACK_BISHOP; // black bishop
-        else if (temp == WHITE_BISHOP_E) return PRIORITY_WHITE_BISHOP; // white bishop
-        else if (temp == QUEEN_E) return PRIORITY_QUEEN; // queen
-        else if (temp == KING_E) return PRIORITY_KING; // king
-        else return 2;
-      }
-      return 0; // my piece
+  if (i < 0 || i >= BOX_LENGTH || j < 0 || j >= BOX_LENGTH) return 0;
+  if (chess_board[i][j] == 0) return 1; // empty cell
+  if (chess_board[i][j] < 10) return 0; // my piece
+  if (chess_board[i][j] > 10) {
+    int temp = chess_board[i][j];
+    if (temp == PAWN_E) return PRIORITY_PAWN; // pawn
+    else if (temp == ROOK_E) return PRIORITY_ROOK; // rook
+    else if (temp == KNIGHT_E) return PRIORITY_KNIGHT; // knight
+    else if (temp == BLACK_BISHOP_E) return PRIORITY_BLACK_BISHOP; // black bishop
+    else if (temp == WHITE_BISHOP_E) return PRIORITY_WHITE_BISHOP; // white bishop
+    else if (temp == QUEEN_E) return PRIORITY_QUEEN; // queen
+    else if (temp == KING_E) return PRIORITY_KING; // king
+    else return 2;
+  }
+  return 0; // my piece
 }
 
 int check_validity_pawn(char i, char j, std::vector<std::vector<char>> &chess_board) {
@@ -68,14 +68,14 @@ std::vector<std::vector<char>> get_piece_directions(char i, char j, std::vector<
     char piece_type = chess_board[i][j];
     switch (piece_type) {
         case 1: {// pawn
-            if (i == 1 && chess_board[2][j] == 0) { // pt cand pionul se misca 2 patratele
+            if (i == 1 && chess_board[2][j] == EMPTY_CELL) { // pt cand pionul se misca 2 patratele
                 check_move(i, j, 2, 0, possible_moves, chess_board);
             }
 
             check_move(i, j, 1, 0, possible_moves, chess_board);
 
             int temp = check_validity_pawn(i + 1, j - 1, chess_board); // adversar pe diagonala stanga
-            if (temp) {
+            if (temp >= 2) {
                 std::vector<char> move;
                 move.push_back(i + 1);
                 move.push_back(j - 1);
@@ -83,7 +83,7 @@ std::vector<std::vector<char>> get_piece_directions(char i, char j, std::vector<
                 possible_moves.push_back(move);
             }
             temp = check_validity_pawn(i + 1, j + 1, chess_board); // adversar pe diagonala dreapta
-            if (temp) {
+            if (temp >= 2) {
                 std::vector<char> move;
                 move.push_back(i + 1);
                 move.push_back(j + 1);
@@ -327,6 +327,9 @@ void check_move(char i, char j, int i_depl, int j_depl, std::vector<std::vector<
   std::vector<std::vector<char>> &chess_board) {
     int temp = check_validity(i + i_depl, j + j_depl, chess_board);
     if (temp) {
+      if (chess_board[i][j] == PAWN_M && temp != 1) {
+        return;
+      }
       std::vector<char> move;
       move.push_back(i + i_depl);
       move.push_back(j + j_depl);
