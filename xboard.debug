@@ -1,0 +1,55 @@
+locale = LC_CTYPE=en_US.UTF-8;LC_NUMERIC=ro_RO.UTF-8;LC_TIME=ro_RO.UTF-8;LC_COLLATE=C;LC_MONETARY=ro_RO.UTF-8;LC_MESSAGES=en_US.UTF-8;LC_PAPER=ro_RO.UTF-8;LC_NAME=ro_RO.UTF-8;LC_ADDRESS=ro_RO.UTF-8;LC_TELEPHONE=ro_RO.UTF-8;LC_MEASUREMENT=ro_RO.UTF-8;LC_IDENTIFICATION=ro_RO.UTF-8
+recognized 'normal' (-1) as variant normal
+recognized 'normal' (-1) as variant normal
+recognized 'normal' (-1) as variant normal
+shuffleOpenings = 0
+shuffleOpenings = 0
+Version: xboard 4.9.1 + main ()
+Reset(1, 0) from gameMode 0
+recognized 'normal' (-1) as variant normal
+GameEnds(0, (null), 2)
+shuffleOpenings = 0
+StartChildProcess (dir="/media/sf_min-max") ./main
+262 >first : xboard
+protover 2
+270 <first : feature sigint=0  colors=1  done=1 
+270 >first : accepted sigint
+270 >first : accepted colors
+271 >first : accepted done
+272 >first : new
+random
+272 >first : level 40 5 0
+272 >first : post
+272 >first : hard
+nps: w=-1, b=-1
+nps: w=-1, b=-1
+1904 >first : time 30000
+1905 >first : otim 30000
+book hit = (NULL)
+1906 >first : e2e3
+1979 <first : # inainte de find
+1980 <first : # am ajuns in knight
+1982 <first : # am trecut de validity1
+1982 <first : # am trecut de validity2
+1982 <first : # am trecut de validity3
+1982 <first : # am trecut de validity4
+1982 <first : # la la la
+1982 <first : # am trecut de validity5
+1982 <first : # am trecut de validity6
+1982 <first : # am trecut de validity7
+1983 <first : # am trecut de validity8
+1983 <first : # aici trece de check_knight
+1983 <first : # am ajuns in alphabeta_mini
+1983 <first : # am trecut de evaluate
+1983 <first : # am trecut de sort get_moves_e
+1983 <first : # am trecut de apply_moves_e
+1983 <first : # aici
+1983 <first : # am ajuns in knight
+1983 <first : # am trecut de validity1
+1983 <first : # am trecut de validity2
+1983 <first : # am trecut de validity3
+1983 <first : # am trecut de validity4
+GameEnds(29, xboard exit, 2)
+16843 >first : result * {xboard exit}
+16844 >first : force
+16844 >first : quit

@@ -104,7 +104,6 @@ white_engine:
 				if (s.compare("black") == 0){
 					goto black_engine;
 				}
-
 	    	log.write("Received: we got the move ");
 	    	log.write(s);
 	    	log.write("\nmove ");
@@ -120,17 +119,19 @@ white_engine:
 				mymove_chr.push_back(y_s);
 				mymove_chr.push_back(x_d);
 				mymove_chr.push_back(y_d);
-				g.apply_move_e(mymove_chr);
+				g.apply_move_m(mymove_chr);
 				std::vector<char> mymove;
+				std::cout<<"# inainte de find" << "\n";
 				mymove = g.find_next_move();
+				std::cout<<"# am ajuns aici" << "\n";
 				if (mymove.size() != 0) {
 
-					std::vector<char> mymove_chr;
-					mymove_chr.push_back(mymove[0]);
-					mymove_chr.push_back(mymove[1]);
-					mymove_chr.push_back(mymove[2]);
-					mymove_chr.push_back(mymove[3]);
-					g.apply_move_m(mymove_chr);
+					std::vector<char> mymove_chr2;
+					mymove_chr2.push_back(mymove[0]);
+					mymove_chr2.push_back(mymove[1]);
+					mymove_chr2.push_back(mymove[2]);
+					mymove_chr2.push_back(mymove[3]);
+					g.apply_move_m(mymove_chr2);
 
 					std::string mymove_str = get_chess_coordonates(mymove[0], mymove[1], g) + get_chess_coordonates(mymove[2], mymove[3], g);
 					std::string mymove_command = "move " + mymove_str;

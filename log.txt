@@ -1,0 +1,11 @@
+Received: xboard protover 2
+Sent: feature sigint=0Sent:  colors=1Sent:  done=1Received: accepted sigint
+Received: accepted colors
+Received: accepted done
+Received:  new random level 40 5 0 post hard
+	*****
+
+passes: 0
+time
+30000 otim 30000 Received: we got the move e2e3
+move 
