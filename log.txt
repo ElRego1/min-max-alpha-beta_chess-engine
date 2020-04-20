@@ -7,11 +7,131 @@ Received:  new random level 0 5 2 post hard
 
 passes: 0
 time
-30000 otim 30200 Received: we got the move e2e4
+30000 otim 30200 Received: we got the move b2b4
 move 
 passes: 0
 
 passes: 1
 time
-28810 otim 28752 Received: we got the move d2d3
+29694 otim 30248 Received: we got the move b4a5
+move 
+passes: 1
+
+passes: 2
+time
+29007 otim 30103 Received: we got the move b1c3
+move 
+passes: 2
+
+passes: 3
+time
+27536 otim 29511 Received: we got the move e2e3
+move 
+passes: 3
+
+passes: 4
+time
+27442 otim 29181 Received: we got the move e3d4
+move 
+passes: 4
+
+passes: 5
+time
+26583 otim 29031 Received: we got the move a5a6
+move 
+passes: 5
+
+passes: 6
+time
+26383 otim 28994 Received: we got the move a1b1
+move 
+passes: 6
+
+passes: 7
+time
+23010 otim 28465 Received: we got the move c3a4
+move 
+passes: 7
+
+passes: 8
+time
+20132 otim 28307 Received: we got the move b1b8
+move 
+passes: 8
+
+passes: 9
+time
+19174 otim 27343 Received: we got the move g2g3
+move 
+passes: 9
+
+passes: 10
+time
+18576 otim 25686 Received: we got the move f1e2
+move 
+passes: 10
+
+passes: 11
+time
+18232 otim 25431 Received: we got the move g3g4
+move 
+passes: 11
+
+passes: 12
+time
+18143 otim 25066 Received: we got the move d1d2
+move 
+passes: 12
+
+passes: 13
+time
+17094 otim 24634 Received: we got the move e2c4
+move 
+passes: 13
+
+passes: 14
+time
+15335 otim 23342 Received: we got the move c4b5
+move 
+passes: 14
+
+passes: 15
+time
+15213 otim 23261 Received: we got the move b8f8
+move 
+passes: 15
+
+passes: 16
+time
+15155 otim 22600 Received: we got the move d2c3
+move 
+passes: 16
+
+passes: 17
+time
+15171 otim 22238 Received: we got the move f8c8
+move 
+passes: 17
+
+passes: 18
+time
+13606 otim 21193 Received: we got the move b5d3
+move 
+passes: 18
+
+passes: 19
+time
+13102 otim 20906 Received: we got the move d3e4
+move 
+passes: 19
+
+passes: 20
+time
+12288 otim 20583 Received: we got the move f2f3
+move 
+passes: 20
+
+passes: 21
+time
+10083 otim 19857 Received: we got the move c3c7
 move resign

@@ -158,6 +158,8 @@ white_engine:
 
 				std::cout << "# x_s: " << (int) x_s << " | y_s" << (int) y_s << "# x_d: " << (int) x_d << " | y_d" << (int) y_d << std::endl;
 
+				std::cout << "#----------------------------------------" << std::endl;
+
 				++idx_move;
 				std::vector<char> mymove_chr;
 				mymove_chr.push_back(x_s);

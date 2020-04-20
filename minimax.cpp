@@ -63,6 +63,7 @@ int alphabeta_mini(int depth, int alpha, int beta, Game &g){
     }else {
       // std::cout<<"# am intrat in check" << "\n";
       score = alphabeta_maxi(depth - 1, alpha, beta, g);
+      std::cout << "# score mini: " << score << std::endl;
     }
     std::cout<<"# am trecut de alphabeta_maxi" << "\n";
 
