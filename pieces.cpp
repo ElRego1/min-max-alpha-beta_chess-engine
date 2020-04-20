@@ -6,7 +6,7 @@
 // 11 - 17 - enemy pieces
 
 // return values:
-// 0 - invalid move
+// 0 - invalid move (out of board or my piece)
 // 1 - empty cell
 // x - enemy piece and we give a score accordinglly to the importance of the piece << TODO >>
 // 2 - king
@@ -29,7 +29,7 @@ int check_validity(char i, char j, std::vector<std::vector<char>> &chess_board) 
         else if (temp == KING_E) return PRIORITY_KING; // king
         else return 2;
       }
-      return 0;
+      return 0; // my piece
 }
 
 int check_validity_pawn(char i, char j, std::vector<std::vector<char>> &chess_board) {
