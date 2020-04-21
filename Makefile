@@ -1,8 +1,8 @@
 CC=g++ -std=c++11
 CFLAGS=-Wall -Wextra
 CFLAGS_OPTIM=-funit-at-a-time
-CFLAGS_TEMP=-Og
-CFILES=communications.cpp pieces.cpp game.cpp main.cpp
+CFLAGS_TEMP=-O2
+CFILES=communications.cpp game.cpp init_game.cpp matrix_transformation.cpp minimax.cpp pieces.cpp main.cpp
 
 OUT_NAME=main
 

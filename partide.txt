@@ -1,0 +1,33 @@
+[Event "Computer Chess Game"]
+[Site "uso"]
+[Date "2020.04.21"]
+[Round "-"]
+[White "student"]
+[Black "main"]
+[Result "1/2-1/2"]
+[TimeControl "300+2"]
+
+1. h3 Nc6 2. h4 Nh6 3. h5 Nd4 4. e3 Nhf5 5. exd4 c5 6. dxc5 g6 7. c6 Bh6 8.
+c7 Qxc7 9. g4 Qe5+ 10. Be2 Nd4 11. Nf3 Qxe2+ 12. Qxe2 Be3 13. Qxe3 Nxc2+
+14. Kd1 f5 15. Kxc2 b5 16. Kd1 b4 17. Qb3 a5 18. Qa4 e5 19. Qxa5 Rxa5 20.
+b3 Rxa2 21. Rxa2 e4 22. Ra4 Ba6 23. Rxa6 Rg8 24. Nh4 d5 25. gxf5 d4 26.
+hxg6 e3 27. dxe3 Kd8 28. Ke1 Re8 29. Kf1 d3 30. Ba3 d2 31. Nc3 hxg6 32. Ke2
+d1=Q+ 33. Kxd1 Re7 34. f6 Rd7+ 35. Kc2 g5 36. Bxb4 Kc7 37. Ra7+ Kc6 38.
+Ra6+ Kc7 39. Ra7+ Kc6 40. Ra6+ Kc7 41. Ra7+ Kc6 42. Ra6+ Kc7 43. Ra7+ Kc6
+44. Ra6+ Kc7 45. Ra7+ Kc6 46. Ra6+ Kc7
+{XBoard adjudication: repetition draw} 1/2-1/2
+
+[Event "Computer Chess Game"]
+[Site "uso"]
+[Date "2020.04.21"]
+[Round "-"]
+[White "student"]
+[Black "main"]
+[Result "0-1"]
+[TimeControl "300+2"]
+
+1. f4 Nf6 2. g3 e5 3. fxe5 Ne4 4. d3 Bb4+ 5. Qd2 Nc6 6. Qxb4 Nxb4 7. a3
+Nxc2+ 8. Kd1 Nd4 9. dxe4 f6 10. e3 d5 11. exd4 Bg4+ 12. Kd2 c5 13. dxc5
+Qa5+ 14. Kd3 Qb5+ 15. Kd4 Qa4+ 16. Kxd5 Rd8#
+{Xboard adjudication: Checkmate} 0-1
+

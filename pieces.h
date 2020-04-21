@@ -15,22 +15,46 @@
 #define PIECES_H
 
 #include <bits/stdc++.h>
+#include "constants.h"
+static std::pair<char, char> lp_m( 1, -1);
+static std::pair<char, char> rp_m( 1,  1);
+static std::vector<std::pair<char, char>> m_pawn_attack_directions{lp_m, rp_m};
+static std::pair<char, char> lp_e(-1, -1);
+static std::pair<char, char> rp_e(-1,  1);
+static std::vector<std::pair<char, char>> e_pawn_attack_directions{lp_e, rp_e};
+// | ++++ | ++++ | ++++ | ++++ | ++++ |
+// |      |      |      |      |      |
+// |      |      |      | PAWN |      | --> enemy pawn
+// |      |      | lp_e |      | rp_e | --> attack positions
+// |      |      |      |      |      |
+// |      |      |      |      |      |
+// |      |      |      |      |      |
+// |      |      |      |      |      |
+// | lp_m |      | rp_m |      |      | --> attack positions
+// |      | pawn |      |      |      | --> my pawn
+// |      |      |      |      |      |
+// | ++++ | ++++ | ++++ | ++++ | ++++ |
 
-#define BOX_SQUARES 64
-#define BOX_LENGTH 8
+static std::pair<char, char> ur_k( 2,  1); // explanation of the positions by name
+static std::pair<char, char> ru_k( 1,  2); // | ++++ | ++++ | ++++ | ++++ | ++++ |
+static std::pair<char, char> rd_k(-1,  2); // |      | ul_k |      | ur_k |      |
+static std::pair<char, char> dr_k(-2,  1); // | lu_k |      |      |      | ru_k |
+static std::pair<char, char> dl_k(-2, -1); // |      |      |knight|      |      |
+static std::pair<char, char> ld_k(-1, -2); // | ld_k |      |      |      | rd_k |
+static std::pair<char, char> lu_k( 1, -2); // |      | dl_k |      | dr_k |      |
+static std::pair<char, char> ul_k( 2, -1); // | ++++ | ++++ | ++++ | ++++ | ++++ |
+static std::vector<std::pair<char, char>> knight_directions{ur_k, ru_k, rd_k, dr_k, dl_k, ld_k, lu_k, ul_k};
 
-extern std::vector<std::vector<char>> positions;
+static std::pair<char, char> up( 1,  0); // up
+static std::pair<char, char> dw(-1,  0); // down
+static std::pair<char, char> rg( 0,  1); // right
+static std::pair<char, char> lf( 0, -1); // left
+static std::pair<char, char> ur( 1,  1); // up-right
+static std::pair<char, char> ul( 1, -1); // up-left
+static std::pair<char, char> dr(-1,  1); // down-right
+static std::pair<char, char> dl(-1, -1); // down-left
+static std::vector<std::pair<char, char>> all_directions{up, dw, rg, lf, ur, ul, dr, dl};
 
-std::vector<std::pair<char, char>> all_directions{up, dw, rg, lf, ur, ul, dr, dl};
-
-std::pair<char, char> up( 1,  0); // up
-std::pair<char, char> dw(-1,  0); // down
-std::pair<char, char> rg( 0,  1); // right
-std::pair<char, char> lf( 0, -1); // left
-std::pair<char, char> ur( 1,  1); // up-right
-std::pair<char, char> ul( 1, -1); // up-left
-std::pair<char, char> dr(-1,  1); // down-right
-std::pair<char, char> dl(-1, -1); // down-left
 
 int check_validity(char i, char j, std::vector<std::vector<char>> &chess_board);
 int check_validity_pawn(char i, char j, std::vector<std::vector<char>> &chess_board);
@@ -38,10 +62,10 @@ int check_validity_pawn(char i, char j, std::vector<std::vector<char>> &chess_bo
 std::vector<char> get_piece_position(char p, int d, std::vector<std::vector<char>> &positions);
 std::vector<std::vector<char>> get_piece_directions(char i, char j, std::vector<std::vector<char>> &chess_board);
 
-std::vector<char> move_piece(char x_s, char y_s, char x_d, char y_d,
-        std::vector<std::vector<char>> &positions,
-        std::vector<std::vector<char>> &e_positions,
-        std::vector<std::vector<char>> &chess_board);
+// std::vector<char> move_piece(char x_s, char y_s, char x_d, char y_d,
+//         std::vector<std::vector<char>> &positions,
+//         std::vector<std::vector<char>> &e_positions,
+//         std::vector<std::vector<char>> &chess_board);
 
 // --------------------------------------------- Robert's attemp --------------------------------
 void rook_moves(char &i, char &j, std::vector<std::vector<char>> &possible_moves, std::vector<std::vector<char>> &chess_board);
