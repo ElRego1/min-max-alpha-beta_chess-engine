@@ -28,6 +28,8 @@ std::vector<char> Game::find_next_move() {
   std::vector<std::vector<char>> all_moves = get_moves_m(*this);
   std::sort(all_moves.begin(), all_moves.end(), order_moves_by_priority);
 
+  std::cout << "#Miscari gasite: " << all_moves.size() << std::endl;
+
   std::vector<char> chosen_move;
   int alpha = LOW;
   int beta = HIGH;
@@ -44,6 +46,7 @@ std::vector<char> Game::find_next_move() {
       score = LOW - 1;
     } else {
       score = alphabeta_mini(DEPTH - 1, alpha, beta, *this);
+      std::cout << "# score find: " << score << std::endl;
     }
     std::cout<<"# am trecut de alphabeta_mini din game" << "\n";
     if (score == HIGH) { // if we find this it means we will give checkmate
@@ -119,7 +122,7 @@ std::vector<std::vector<char>> &h_board, std::vector<std::vector<char>> &h_piece
   h_board[ep_src_x][ep_src_y] = EMPTY_CELL;
 
   // if an enemy piece was taken we update his vector of pieces
-  if (info[0] > 10) {
+  if (info[1] > 0) {
     // change the enemy's vector of pieces
     for (auto &v : h_pieces) {
       if (v[0] == ep_dst_x && v[1] == ep_dst_y) {
@@ -145,7 +148,7 @@ void Game::undo_move_m(std::vector<char> &info, std::vector<char> &move) {
 
 //calls undo_move
 void Game::undo_move_e(std::vector<char> &info, std::vector<char> &move) {
-  undo_move(info, move, e_board, e_pieces, m_board, e_pieces);
+  undo_move(info, move, e_board, e_pieces, m_board, m_pieces);
 }
 
 // more info about the funtion in the header file
@@ -169,7 +172,7 @@ std::vector<std::vector<char>> &h_board, std::vector<std::vector<char>> &h_piece
   p_board[src_x][src_y] = p_board[dst_x][dst_y];
   p_board[dst_x][dst_y] = info[0]; // load saved information
 
-
+  // std::cout << "# undo -> info[0]: " << (int) info[0] << " | info[1]: " << (int) info[1] << std::endl;
   // prepare to change the enemy's information
   char ep_src_x, ep_src_y; // enemy's perspective source x/y
   change_coordonates(src_x, src_y, ep_src_x, ep_src_y); // get the source coordonates from the enemy's perspective
@@ -182,10 +185,10 @@ std::vector<std::vector<char>> &h_board, std::vector<std::vector<char>> &h_piece
   h_board[ep_dst_x][ep_dst_y] = info[1];
 
   // if one of enemy's pieces was taken, now we put it's info back in the enemy's vector of pieces at the first aviable spot
-  if (info[0] > 10) {
+  if (info[1] > 0) {
     // restitute the enemy's vector of pieces
     for (auto &v : h_pieces) {
-      if (v[0] == -1 && v[1] == -1 && v[2] == ep_taken_piece) {
+      if (v[0] == -1 && v[1] == -1 && v[2] == info[1]) {
         v[0] = ep_dst_x;
         v[1] = ep_dst_y;
         break;
@@ -647,7 +650,10 @@ bool Game::is_check_m() {
   // true - check
   // false - king is safe
   int valid = check_check(x, y, m_board);
-  if (valid != 0) return true;
+  if (valid != 0) {
+    std::cout << "#Sunt in sah" << std::endl;
+    return true;
+  }
   return false;
 }
 
@@ -671,7 +677,10 @@ bool Game::is_check_e() {
   // false - king is safe
   int valid = check_check(x, y, e_board);
   std::cout<<"# aici2" << "\n";
-  if (valid != 0) return true;
+  if (valid != 0) {
+    std::cout << "#Inamicul e in sah" << std::endl;
+    return true;
+  }
   return false;
 }
 
@@ -714,7 +723,6 @@ int check_check(char i, char j, std::vector<std::vector<char>> &chess_board) {
 // 0 - safe king
 // 1 - king in danger
 int check_knight(char i, char j, std::vector<std::vector<char>> &chess_board) {
-  std::cout<<"# am ajuns in knight" << "\n";
   if (check_validity(i + 1, j + 2, chess_board) == PRIORITY_KNIGHT) return 1;
   if (check_validity(i + 2, j + 1, chess_board) == PRIORITY_KNIGHT) return 1;
   if (check_validity(i + 1, j - 2, chess_board) == PRIORITY_KNIGHT) return 1;
@@ -723,7 +731,6 @@ int check_knight(char i, char j, std::vector<std::vector<char>> &chess_board) {
   if (check_validity(i - 2, j + 1, chess_board) == PRIORITY_KNIGHT) return 1;
   if (check_validity(i - 1, j - 2, chess_board) == PRIORITY_KNIGHT) return 1;
   if (check_validity(i - 2, j - 1, chess_board) == PRIORITY_KNIGHT) return 1;
-  std::cout<<"# am trecut de validity8" << "\n";
   return 0;
 }
 
@@ -739,8 +746,21 @@ int check_check_validity(char i, char j, std::vector<std::vector<char>> &chess_b
 }
 
 void Game::remake_print_board(char wb) {
-  m_color = wb;
   make_print_board_matrix(*this, wb);
+
+  // init my color, board and vector of pieces
+  m_color = wb;
+  m_board = get_initial_board_matrix(m_color);
+	m_pieces = get_initial_positions(m_color);
+
+  // init enemy's color, board and vector of pieces
+  if (wb == WHITE) { // if we are white
+    e_color = BLACK; // enemy is black
+  } else {       // if we are black
+    e_color = WHITE; // enemy is white
+  }
+  e_board = get_initial_board_matrix(e_color);
+  e_pieces = get_initial_positions(e_color);
 }
 
 

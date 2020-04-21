@@ -31,8 +31,8 @@
 #define KING_E 17
 
 // minimax
-#define LOW -10000
-#define HIGH 10000
+#define LOW -1000000
+#define HIGH 1000000
 
 #define DEPTH 2
 
