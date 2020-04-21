@@ -7,11 +7,23 @@ Received:  new random level 0 5 2 post hard
 
 passes: 0
 time
-30000 otim 30200 Received: we got the move e2e4
+30000 otim 30200 Received: we got the move g1f3
 move 
 passes: 0
 
 passes: 1
 time
-28810 otim 28752 Received: we got the move d2d3
+29945 otim 30159 Received: we got the move f3d4
+move 
+passes: 1
+
+passes: 2
+time
+29824 otim 30021 Received: we got the move b1c3
+move 
+passes: 2
+
+passes: 3
+time
+29842 otim 30039 Received: we got the move c3b5
 move resign
