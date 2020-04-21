@@ -214,16 +214,16 @@ std::vector<std::vector<char>> control_zones(std::vector<std::vector<char>> &che
     switch(cod_piesa) {
       case 1: // pawn
         temp = check_check_validity(x + 1, y + 1, chess_board);
-        if (temp != 0 && temp != 1) { // if it's on the board and it's not one of our pieces
-          if (temp == 2) { // if there is an enemy on that place we keep the info
+        if (temp != 0) { // if it's on the board
+          if (temp == 2 || temp == 1) { // if there is an enemy on that place or my piece we keep the info
             my_zone.push_back(zones(x + 1, y + 1, 1, x, y, cod_piesa, chess_board));
           } else {
             my_zone.push_back(zones(x + 1, y + 1, 0, x, y, cod_piesa, chess_board));
           }
         }
         temp = check_check_validity(x + 1, y - 1, chess_board);
-        if (temp != 0 && temp != 1) {
-          if (temp == 2) {
+        if (temp != 0) {
+          if (temp == 2 || temp == 1) {
             my_zone.push_back(zones(x + 1, y - 1, 1, x, y, cod_piesa, chess_board));
           } else {
             my_zone.push_back(zones(x + 1, y - 1, 0, x, y, cod_piesa, chess_board));
@@ -240,14 +240,14 @@ std::vector<std::vector<char>> control_zones(std::vector<std::vector<char>> &che
           temp = 1;
           while(temp != 0 && ok == 0) {
             temp = check_check_validity(x + i, y + j, chess_board);
-            if (temp == 2) {
+            if (temp == 2 || temp == 1) {
               my_zone.push_back(zones(x + i, y + j, 1, x, y, cod_piesa, chess_board));
               ok = 1;
-            } else if (temp != 0 && temp != 1) {
+            } else if (temp != 0) {
               my_zone.push_back(zones(x + i, y + j, 0, x, y, cod_piesa, chess_board));
               x += i;
               y += j;
-            } else if (temp == 0 || temp == 1) {
+            } else if (temp == 0) {
               break;
             }
           }
@@ -256,64 +256,64 @@ std::vector<std::vector<char>> control_zones(std::vector<std::vector<char>> &che
       
       case 3: // knight
         temp = check_check_validity(x + 1, y + 2, chess_board);
-        if (temp != 0 && temp != 1) {
-            if (temp == 2) {
+        if (temp != 0) {
+            if (temp == 2 || temp == 1) {
               my_zone.push_back(zones(x + 1, y + 2, 1, x, y, cod_piesa, chess_board));
             } else {
               my_zone.push_back(zones(x + 1, y + 2, 0, x, y, cod_piesa, chess_board));
             }
         }
         temp = check_check_validity(x + 2, y + 1, chess_board);
-        if (temp != 0 && temp != 1) {
-            if (temp == 2) {
+        if (temp != 0) {
+            if (temp == 2 || temp == 1) {
               my_zone.push_back(zones(x + 1, y + 2, 1, x, y, cod_piesa, chess_board));
             } else {
               my_zone.push_back(zones(x + 1, y + 2, 0, x, y, cod_piesa, chess_board));
             }
         }
         temp = check_check_validity(x + 1, y - 2, chess_board);
-        if (temp != 0 && temp != 1) {
-            if (temp == 2) {
+        if (temp != 0) {
+            if (temp == 2 || temp == 1) {
               my_zone.push_back(zones(x + 1, y + 2, 1, x, y, cod_piesa, chess_board));
             } else {
               my_zone.push_back(zones(x + 1, y + 2, 0, x, y, cod_piesa, chess_board));
             }
         }
         temp = check_check_validity(x + 2, y - 1, chess_board);
-        if (temp != 0 && temp != 1) {
-            if (temp == 2) {
+        if (temp != 0) {
+            if (temp == 2 || temp == 1) {
               my_zone.push_back(zones(x + 1, y + 2, 1, x, y, cod_piesa, chess_board));
             } else {
               my_zone.push_back(zones(x + 1, y + 2, 0, x, y, cod_piesa, chess_board));
             }
         }
         temp = check_check_validity(x - 1, y + 2, chess_board);
-        if (temp != 0 && temp != 1) {
-            if (temp == 2) {
+        if (temp != 0) {
+            if (temp == 2 || temp == 1) {
               my_zone.push_back(zones(x + 1, y + 2, 1, x, y, cod_piesa, chess_board));
             } else {
               my_zone.push_back(zones(x + 1, y + 2, 0, x, y, cod_piesa, chess_board));
             }
         }
         temp = check_check_validity(x - 2, y + 1, chess_board);
-        if (temp != 0 && temp != 1) {
-            if (temp == 2) {
+        if (temp != 0) {
+            if (temp == 2 || temp == 1) {
               my_zone.push_back(zones(x + 1, y + 2, 1, x, y, cod_piesa, chess_board));
             } else {
               my_zone.push_back(zones(x + 1, y + 2, 0, x, y, cod_piesa, chess_board));
             }
         }
         temp = check_check_validity(x - 1, y - 2, chess_board);
-        if (temp != 0 && temp != 1) {
-            if (temp == 2) {
+        if (temp != 0) {
+            if (temp == 2 || temp == 1) {
               my_zone.push_back(zones(x + 1, y + 2, 1, x, y, cod_piesa, chess_board));
             } else {
               my_zone.push_back(zones(x + 1, y + 2, 0, x, y, cod_piesa, chess_board));
             }
         }
         temp = check_check_validity(x - 2, y - 1, chess_board);
-        if (temp != 0 && temp != 1) {
-            if (temp == 2) {
+        if (temp != 0) {
+            if (temp == 2 || temp == 1) {
               my_zone.push_back(zones(x + 1, y + 2, 1, x, y, cod_piesa, chess_board));
             } else {
               my_zone.push_back(zones(x + 1, y + 2, 0, x, y, cod_piesa, chess_board));
@@ -331,14 +331,14 @@ std::vector<std::vector<char>> control_zones(std::vector<std::vector<char>> &che
           int temp = 1;
           while(temp != 0 && ok == 0) {
             temp = check_check_validity(x + i, y + j, chess_board);
-            if (temp == 2) {
+            if (temp == 2 || temp == 1) {
               my_zone.push_back(zones(x + i, y + j, 1, x, y, cod_piesa, chess_board));
               ok = 1;
-            } else if (temp != 0 && temp != 1) {
+            } else if (temp != 0) {
               my_zone.push_back(zones(x + i, y + j, 0, x, y, cod_piesa, chess_board));
               x += i;
               y += j;
-            } else if (temp == 0 || temp == 1) {
+            } else if (temp == 0) {
               break;
             }
           }
@@ -353,14 +353,14 @@ std::vector<std::vector<char>> control_zones(std::vector<std::vector<char>> &che
           int temp = 1;
           while(temp != 0 && ok == 0) {
             temp = check_check_validity(x + i, y + j, chess_board);
-            if (temp == 2) {
+            if (temp == 2 || temp == 1) {
               my_zone.push_back(zones(x + i, y + j, 1, x, y, cod_piesa, chess_board));
               ok = 1;
-            } else if (temp != 0 && temp != 1) {
+            } else if (temp != 0) {
               my_zone.push_back(zones(x + i, y + j, 0, x, y, cod_piesa, chess_board));
               x += i;
               y += j;
-            } else if (temp == 0 || temp == 1) {
+            } else if (temp == 0) {
               break;
             }
           }
@@ -372,11 +372,11 @@ std::vector<std::vector<char>> control_zones(std::vector<std::vector<char>> &che
           char i = d.first;
           char j = d.second;
           int temp = check_check_validity(x + i, y + j, chess_board);
-          if (temp == 2) {
+          if (temp == 2 || temp == 1) {
             my_zone.push_back(zones(x + i, y + j, 1, x, y, cod_piesa, chess_board));
-          } else if (temp != 0 && temp != 1) {
+          } else if (temp != 0) {
             my_zone.push_back(zones(x + i, y + j, 0, x, y, cod_piesa, chess_board));
-          } else if (temp == 0 || temp == 1) continue;
+          } else if (temp == 0) continue;
         }
         break;
     }
@@ -393,7 +393,7 @@ int get_control_zones (std::vector<std::vector<char>> &chess_board, std::vector<
 
 // {x_des, y_des, type_dest, x_src, y_src, type_src}
 // type_dest = 0 - free place
-// type_dest > 0 - enemy there
+// type_dest > 0 - enemy there or my piece
 std::vector<char> zones(char i, char j, int cod_e, char x, char y, int cod_piesa, std::vector<std::vector<char>> &chess_board) {
   int type;
   if (cod_e == 0) {
