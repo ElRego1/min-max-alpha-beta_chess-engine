@@ -151,9 +151,8 @@ black_engine:
 				mymove_chr.push_back(y_s);
 				mymove_chr.push_back(x_d);
 				mymove_chr.push_back(y_d);
-				g.print();
+				
 				g.apply_move_e(mymove_chr);
-				g.print();
 
 				std::vector<char> mymove;
 				mymove = g.find_next_move();
