@@ -31,10 +31,10 @@
 #define KING_E 17
 
 // minimax
-#define LOW -10000
-#define HIGH 10000
+#define LOW -1000000
+#define HIGH 1000000
 
-#define DEPTH 4
+#define DEPTH 2
 
 #define PRIORITY_EMPTY_CELL 1
 #define PRIORITY_PAWN 3
@@ -54,7 +54,7 @@
 #define SCORE_KING 0 // schould be on the board
 
 #define SCORE_KING_SAFE 150
-#define SCORE_KING_THREATENED -150 
+#define SCORE_KING_THREATENED -150
 
 #define SCORE_INV_PRO 250 // score invers proportional
 
