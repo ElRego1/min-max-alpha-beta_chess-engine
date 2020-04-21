@@ -1,0 +1,211 @@
+Received: xboard protover 2
+Sent: feature sigint=0Sent:  colors=1Sent:  done=1Received: accepted sigint
+Received: accepted colors
+Received: accepted done
+Received:  new random level 0 5 2 post hard
+	*****
+
+passes: 0
+time
+30000 otim 30200 Received: we got the move d2d4
+move 
+passes: 0
+
+passes: 1
+time
+30105 otim 30254 Received: we got the move e2e4
+move 
+passes: 1
+
+passes: 2
+time
+30139 otim 30308 Received: we got the move c2c4
+move 
+passes: 2
+
+passes: 3
+time
+30163 otim 30392 Received: we got the move f2f3
+move 
+passes: 3
+
+passes: 4
+time
+30114 otim 30254 Received: we got the move b2b3
+move 
+passes: 4
+
+passes: 5
+time
+30130 otim 30036 Received: we got the move e4e5
+move 
+passes: 5
+
+passes: 6
+time
+30165 otim 29065 Received: we got the move d4d5
+move 
+passes: 6
+
+passes: 7
+time
+30230 otim 26926 Received: we got the move c1f4
+move 
+passes: 7
+
+passes: 8
+time
+30330 otim 26542 Received: we got the move f4e3
+move 
+passes: 8
+
+passes: 9
+time
+30153 otim 26597 Received: we got the move f3g4
+move 
+passes: 9
+
+passes: 10
+time
+30207 otim 26314 Received: we got the move g1f3
+move 
+passes: 10
+
+passes: 11
+time
+30285 otim 26261 Received: we got the move e5f6
+move 
+passes: 11
+
+passes: 12
+time
+30252 otim 25936 Received: we got the move d5e6
+move 
+passes: 12
+
+passes: 13
+time
+30365 otim 25653 Received: we got the move f3e5
+move 
+passes: 13
+
+passes: 14
+time
+30470 otim 24276 Received: we got the move e5c6
+move 
+passes: 14
+
+passes: 15
+time
+30506 otim 22721 Received: we got the move d1d8
+move 
+passes: 15
+
+passes: 16
+time
+30647 otim 22205 Received: we got the move e3h6
+move 
+passes: 16
+
+passes: 17
+time
+30618 otim 21731 Received: we got the move b1d2
+move 
+passes: 17
+
+passes: 18
+time
+30510 otim 21730 Received: we got the move d2e4
+move 
+passes: 18
+
+passes: 19
+time
+30584 otim 21695 Received: we got the move h1g1
+move 
+passes: 19
+
+passes: 20
+time
+30230 otim 21535 Received: we got the move e4g5
+move 
+passes: 20
+
+passes: 21
+time
+30303 otim 20193 Received: we got the move g5e6
+move 
+passes: 21
+
+passes: 22
+time
+29861 otim 16116 Received: we got the move e1c1
+move 
+passes: 22
+
+passes: 23
+time
+29599 otim 15512 Received: we got the move d1d2
+move 
+passes: 23
+
+passes: 24
+time
+29620 otim 14047 Received: we got the move f1d3
+move 
+passes: 24
+
+passes: 25
+time
+29709 otim 13863 Received: we got the move d3e4
+move 
+passes: 25
+
+passes: 26
+time
+29743 otim 13699 Received: we got the move e4a8
+move 
+passes: 26
+
+passes: 27
+time
+29733 otim 13380 Received: we got the move g1e1
+move 
+passes: 27
+
+passes: 28
+time
+29625 otim 11641 Received: we got the move g2g3
+move 
+passes: 28
+
+passes: 29
+time
+29328 otim 11302 Received: we got the move e1e3
+move 
+passes: 29
+
+passes: 30
+time
+29232 otim 11300 Received: we got the move e3e6
+move 
+passes: 30
+
+passes: 31
+time
+29297 otim 10975 Received: we got the move e6b6
+move 
+passes: 31
+
+passes: 32
+time
+29253 otim 9929 Received: we got the move d2b2
+move 
+passes: 32
+
+passes: 33
+result
+
+passes: 33
+
+passes: 34

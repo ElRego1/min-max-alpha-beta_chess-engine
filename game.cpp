@@ -286,6 +286,216 @@ std::vector<std::vector<char>> &h_board) {
 
 // --------------------------- chess check and attack funcitons --------------------------
 
+// returns how many control zones we have
+// returns a vector of {x_des, y_des, type_dest, x_src, y_src, type_src}
+// {x, y, piece_type} pieces_vector
+std::vector<std::vector<char>> control_zones(std::vector<std::vector<char>> &chess_board, std::vector<std::vector<char>> &pieces_vector) {
+  std::vector<std::vector<char>> my_zone;
+  for (auto piece : pieces_vector) {
+    char x = piece[0];
+    char y = piece[1];
+    char cod_piesa = piece[2];
+    int temp;
+    switch(cod_piesa) {
+      case 1: // pawn
+        temp = check_check_validity(x + 1, y + 1, chess_board);
+        if (temp != 0) { // if it's on the board
+          if (temp == 2 || temp == 1) { // if there is an enemy on that place or my piece we keep the info
+            my_zone.push_back(zones(x + 1, y + 1, 1, x, y, cod_piesa, chess_board));
+          } else {
+            my_zone.push_back(zones(x + 1, y + 1, 0, x, y, cod_piesa, chess_board));
+          }
+        }
+        temp = check_check_validity(x + 1, y - 1, chess_board);
+        if (temp != 0) {
+          if (temp == 2 || temp == 1) {
+            my_zone.push_back(zones(x + 1, y - 1, 1, x, y, cod_piesa, chess_board));
+          } else {
+            my_zone.push_back(zones(x + 1, y - 1, 0, x, y, cod_piesa, chess_board));
+          }
+        }
+        break;
+
+      case 2: //rook
+        for (auto d : all_directions) {
+          if (d != up || d != dw || d != rg || d != lf) continue;
+          char i = d.first;
+          char j = d.second;
+          int ok = 0;
+          temp = 1;
+          while(temp != 0 && ok == 0) {
+            temp = check_check_validity(x + i, y + j, chess_board);
+            if (temp == 2 || temp == 1) {
+              my_zone.push_back(zones(x + i, y + j, 1, x, y, cod_piesa, chess_board));
+              ok = 1;
+            } else if (temp != 0) {
+              my_zone.push_back(zones(x + i, y + j, 0, x, y, cod_piesa, chess_board));
+              x += i;
+              y += j;
+            } else if (temp == 0) {
+              break;
+            }
+          }
+        }
+        break;
+      
+      case 3: // knight
+        temp = check_check_validity(x + 1, y + 2, chess_board);
+        if (temp != 0) {
+            if (temp == 2 || temp == 1) {
+              my_zone.push_back(zones(x + 1, y + 2, 1, x, y, cod_piesa, chess_board));
+            } else {
+              my_zone.push_back(zones(x + 1, y + 2, 0, x, y, cod_piesa, chess_board));
+            }
+        }
+        temp = check_check_validity(x + 2, y + 1, chess_board);
+        if (temp != 0) {
+            if (temp == 2 || temp == 1) {
+              my_zone.push_back(zones(x + 1, y + 2, 1, x, y, cod_piesa, chess_board));
+            } else {
+              my_zone.push_back(zones(x + 1, y + 2, 0, x, y, cod_piesa, chess_board));
+            }
+        }
+        temp = check_check_validity(x + 1, y - 2, chess_board);
+        if (temp != 0) {
+            if (temp == 2 || temp == 1) {
+              my_zone.push_back(zones(x + 1, y + 2, 1, x, y, cod_piesa, chess_board));
+            } else {
+              my_zone.push_back(zones(x + 1, y + 2, 0, x, y, cod_piesa, chess_board));
+            }
+        }
+        temp = check_check_validity(x + 2, y - 1, chess_board);
+        if (temp != 0) {
+            if (temp == 2 || temp == 1) {
+              my_zone.push_back(zones(x + 1, y + 2, 1, x, y, cod_piesa, chess_board));
+            } else {
+              my_zone.push_back(zones(x + 1, y + 2, 0, x, y, cod_piesa, chess_board));
+            }
+        }
+        temp = check_check_validity(x - 1, y + 2, chess_board);
+        if (temp != 0) {
+            if (temp == 2 || temp == 1) {
+              my_zone.push_back(zones(x + 1, y + 2, 1, x, y, cod_piesa, chess_board));
+            } else {
+              my_zone.push_back(zones(x + 1, y + 2, 0, x, y, cod_piesa, chess_board));
+            }
+        }
+        temp = check_check_validity(x - 2, y + 1, chess_board);
+        if (temp != 0) {
+            if (temp == 2 || temp == 1) {
+              my_zone.push_back(zones(x + 1, y + 2, 1, x, y, cod_piesa, chess_board));
+            } else {
+              my_zone.push_back(zones(x + 1, y + 2, 0, x, y, cod_piesa, chess_board));
+            }
+        }
+        temp = check_check_validity(x - 1, y - 2, chess_board);
+        if (temp != 0) {
+            if (temp == 2 || temp == 1) {
+              my_zone.push_back(zones(x + 1, y + 2, 1, x, y, cod_piesa, chess_board));
+            } else {
+              my_zone.push_back(zones(x + 1, y + 2, 0, x, y, cod_piesa, chess_board));
+            }
+        }
+        temp = check_check_validity(x - 2, y - 1, chess_board);
+        if (temp != 0) {
+            if (temp == 2 || temp == 1) {
+              my_zone.push_back(zones(x + 1, y + 2, 1, x, y, cod_piesa, chess_board));
+            } else {
+              my_zone.push_back(zones(x + 1, y + 2, 0, x, y, cod_piesa, chess_board));
+            }
+        }
+          break;
+
+      case 4: // black bishop
+      case 5: // white bishop
+        for (auto d : all_directions) {
+          if (d != ur || d != ul || d != dr || d != dl) continue;
+          char i = d.first;
+          char j = d.second;
+          int ok = 0;
+          int temp = 1;
+          while(temp != 0 && ok == 0) {
+            temp = check_check_validity(x + i, y + j, chess_board);
+            if (temp == 2 || temp == 1) {
+              my_zone.push_back(zones(x + i, y + j, 1, x, y, cod_piesa, chess_board));
+              ok = 1;
+            } else if (temp != 0) {
+              my_zone.push_back(zones(x + i, y + j, 0, x, y, cod_piesa, chess_board));
+              x += i;
+              y += j;
+            } else if (temp == 0) {
+              break;
+            }
+          }
+        }
+        break;
+
+      case 6: //queen
+        for (auto d : all_directions) {
+          char i = d.first;
+          char j = d.second;
+          int ok = 0;
+          int temp = 1;
+          while(temp != 0 && ok == 0) {
+            temp = check_check_validity(x + i, y + j, chess_board);
+            if (temp == 2 || temp == 1) {
+              my_zone.push_back(zones(x + i, y + j, 1, x, y, cod_piesa, chess_board));
+              ok = 1;
+            } else if (temp != 0) {
+              my_zone.push_back(zones(x + i, y + j, 0, x, y, cod_piesa, chess_board));
+              x += i;
+              y += j;
+            } else if (temp == 0) {
+              break;
+            }
+          }
+        }
+        break;
+
+      case 7: // king
+        for (auto d : all_directions) {
+          char i = d.first;
+          char j = d.second;
+          int temp = check_check_validity(x + i, y + j, chess_board);
+          if (temp == 2 || temp == 1) {
+            my_zone.push_back(zones(x + i, y + j, 1, x, y, cod_piesa, chess_board));
+          } else if (temp != 0) {
+            my_zone.push_back(zones(x + i, y + j, 0, x, y, cod_piesa, chess_board));
+          } else if (temp == 0) continue;
+        }
+        break;
+    }
+  }
+  return my_zone;
+}
+
+// number of control zones
+int get_control_zones (std::vector<std::vector<char>> &chess_board, std::vector<std::vector<char>> &pieces_vector) {
+  std::vector<std::vector<char>> nr_zones;
+  nr_zones = control_zones(chess_board, pieces_vector);
+  return nr_zones.size();
+}
+
+// {x_des, y_des, type_dest, x_src, y_src, type_src}
+// type_dest = 0 - free place
+// type_dest > 0 - enemy there or my piece
+std::vector<char> zones(char i, char j, int cod_e, char x, char y, int cod_piesa, std::vector<std::vector<char>> &chess_board) {
+  int type;
+  if (cod_e == 0) {
+    type = 0;
+  } else {
+    type = chess_board[i][j];
+  }
+  std::vector<char> move;
+  move.push_back(i);
+  move.push_back(j);
+  move.push_back(type);
+  move.push_back(x);
+  move.push_back(y);
+  move.push_back(cod_piesa);
+  return move;
+}
+
 // all pieces that can attack my piece
 // return a vector of {x, y, piece type}
 std::vector<std::vector<char>> check_attackers(char i, char j, std::vector<std::vector<char>> &chess_board) {

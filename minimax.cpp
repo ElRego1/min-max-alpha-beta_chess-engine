@@ -13,6 +13,34 @@ int alphabeta_maxi(int depth, int alpha, int beta, Game &g) {
     int score;
     // holds info to undo the move later: {piece_taken}
     std::vector<char> info = g.apply_move_m(move);
+    std::cout << "# MAXI COUT 1" << std::endl;
+    std::cout<< "#"<< "\n";
+
+	for (int i = 0; i < 8; ++i) {
+    std::cout << "# ";
+    for (int j = 0; j < 8; ++j) {
+      std::cout << std::setw(3) << (int)g.m_board[i][j]<< " ";
+    }
+    std::cout << std::endl;
+  }
+
+  for (auto d : g.m_pieces) {
+	  std::cout <<"#" << (int) d[0] << " " << (int) d[1] << " "<< (int) d[2] << std::endl;
+  }
+  std::cout << std::endl;
+
+	std::cout<< "#"<< "\n";
+  for (int i = 0; i < 8; ++i) {
+    std::cout << "# ";
+    for (int j = 0; j < 8; ++j) {
+      std::cout << std::setw(3) << (int)g.e_board[i][j]<< " ";
+    }
+    std::cout << std::endl;
+  }
+
+  for (auto d : g.e_pieces) {
+	  std::cout <<"#" << (int) d[0] << " " << (int) d[1] << " "<< (int) d[2] << std::endl;
+  }
 
     if (g.is_check_m()) {
       score = LOW - 1;
@@ -30,6 +58,34 @@ int alphabeta_maxi(int depth, int alpha, int beta, Game &g) {
     }
 
     g.undo_move_m(info, move);
+    std::cout << "# MAXI COUT 2" << std::endl;
+    std::cout<< "#"<< "\n";
+
+	for (int i = 0; i < 8; ++i) {
+    std::cout << "# ";
+    for (int j = 0; j < 8; ++j) {
+      std::cout << std::setw(3) << (int)g.m_board[i][j]<< " ";
+    }
+    std::cout << std::endl;
+  }
+
+  for (auto d : g.m_pieces) {
+	  std::cout <<"#" << (int) d[0] << " " << (int) d[1] << " "<< (int) d[2] << std::endl;
+  }
+  std::cout << std::endl;
+
+	std::cout<< "#"<< "\n";
+  for (int i = 0; i < 8; ++i) {
+    std::cout << "# ";
+    for (int j = 0; j < 8; ++j) {
+      std::cout << std::setw(3) << (int)g.e_board[i][j]<< " ";
+    }
+    std::cout << std::endl;
+  }
+
+  for (auto d : g.e_pieces) {
+	  std::cout <<"#" << (int) d[0] << " " << (int) d[1] << " "<< (int) d[2] << std::endl;
+  }
   }
   return alpha;
 }
@@ -64,6 +120,34 @@ int alphabeta_mini(int depth, int alpha, int beta, Game &g){
     }
 
     g.undo_move_e(info, move);
+    std::cout << "# MINI COUT 4" << std::endl;
+    std::cout<< "#"<< "\n";
+
+	for (int i = 0; i < 8; ++i) {
+    std::cout << "# ";
+    for (int j = 0; j < 8; ++j) {
+      std::cout << std::setw(3) << (int)g.m_board[i][j]<< " ";
+    }
+    std::cout << std::endl;
+  }
+
+  for (auto d : g.m_pieces) {
+	  std::cout <<"#" << (int) d[0] << " " << (int) d[1] << " "<< (int) d[2] << std::endl;
+  }
+  std::cout << std::endl;
+
+	std::cout<< "#"<< "\n";
+  for (int i = 0; i < 8; ++i) {
+    std::cout << "# ";
+    for (int j = 0; j < 8; ++j) {
+      std::cout << std::setw(3) << (int)g.e_board[i][j]<< " ";
+    }
+    std::cout << std::endl;
+  }
+
+  for (auto d : g.e_pieces) {
+	  std::cout <<"#" << (int) d[0] << " " << (int) d[1] << " "<< (int) d[2] << std::endl;
+  }
   }
   return beta;
 }

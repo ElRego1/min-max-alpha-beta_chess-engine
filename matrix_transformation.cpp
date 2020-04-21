@@ -6,7 +6,7 @@ std::string get_chess_coordonates(char x, char y, Game &g) {
 
 void get_matrix_coordonates(std::string &input, char &x, char &y, Game &g) {
 	x = input[1] - '1';
-  y = input[0] - 'a';
+  	y = input[0] - 'a';
 
 	// if we are playing black, we have to convert to the black coordonates
 	if (g.m_color == WHITE) {

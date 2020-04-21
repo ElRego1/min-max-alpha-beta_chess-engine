@@ -111,4 +111,11 @@ std::vector<std::vector<char>> check_attackers(char i, char j, std::vector<std::
 
 // a helper function to change info in the vector of pieces
 inline void mv_piece_by_pos(const char old_x, const char old_y, const char new_x, const char new_y, std::vector<std::vector<char>> pieces);
+
+// returns how many control zones we have
+// returns a vector of {x_des, y_des, type_dest, x_src, y_src, type_src}
+// get_control_zones returns the number of control zones
+std::vector<std::vector<char>> control_zones(std::vector<std::vector<char>> &chess_board, std::vector<std::vector<char>> &pieces_vector);
+std::vector<char> zones(char i, char j, int cod_e, char x, char y, int cod_piesa, std::vector<std::vector<char>> &chess_board);
+int get_control_zones (std::vector<std::vector<char>> &chess_board, std::vector<std::vector<char>> &pieces_vector);
 #endif // GAME_H

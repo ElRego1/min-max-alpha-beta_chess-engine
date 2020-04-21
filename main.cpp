@@ -165,6 +165,26 @@ black_engine:
 					mymove_chr2.push_back(mymove[3]);
 					g.apply_move_m(mymove_chr2);
 
+std::cout<< "#"<< "\n";
+
+	for (int i = 0; i < 8; ++i) {
+    std::cout << "# ";
+    for (int j = 0; j < 8; ++j) {
+      std::cout << std::setw(3) << (int)g.m_board[i][j]<< " ";
+    }
+    std::cout << std::endl;
+  }
+
+	cout<< "#"<< "\n";
+  for (int i = 0; i < 8; ++i) {
+    std::cout << "# ";
+    for (int j = 0; j < 8; ++j) {
+      std::cout << std::setw(3) << (int)g.e_board[i][j]<< " ";
+    }
+    std::cout << std::endl;
+  }
+
+
 					std::string mymove_str = get_chess_coordonates(mymove[0], mymove[1], g) + get_chess_coordonates(mymove[2], mymove[3], g);
 					std::string mymove_command = "move " + mymove_str;
 					std::cout<<mymove_command<<std::endl;
