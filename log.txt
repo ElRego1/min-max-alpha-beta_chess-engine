@@ -6,132 +6,192 @@ Received:  new random level 0 5 2 post hard
 	*****
 
 passes: 0
-time
-30000 otim 30200 Received: we got the move b2b4
-move 
+force
+
 passes: 0
 
 passes: 1
-time
-29694 otim 30248 Received: we got the move b4a5
-move 
+computer
+
 passes: 1
 
 passes: 2
 time
-29007 otim 30103 Received: we got the move b1c3
+30000 otim 30199 Received: we got the move f2f3
 move 
 passes: 2
 
 passes: 3
-time
-27536 otim 29511 Received: we got the move e2e3
-move 
+black
+
 passes: 3
 
 passes: 4
-time
-27442 otim 29181 Received: we got the move e3d4
-move 
+go
+
 passes: 4
 
 passes: 5
 time
-26583 otim 29031 Received: we got the move a5a6
+30176 otim 30392 Received: we got the move c2c4
 move 
 passes: 5
 
 passes: 6
 time
-26383 otim 28994 Received: we got the move a1b1
+30348 otim 30584 Received: we got the move d1b3
 move 
 passes: 6
 
 passes: 7
 time
-23010 otim 28465 Received: we got the move c3a4
+30525 otim 30775 Received: we got the move b1c3
 move 
 passes: 7
 
 passes: 8
 time
-20132 otim 28307 Received: we got the move b1b8
+30698 otim 30967 Received: we got the move d2d4
 move 
 passes: 8
 
 passes: 9
 time
-19174 otim 27343 Received: we got the move g2g3
+30872 otim 31159 Received: we got the move c1f4
 move 
 passes: 9
 
 passes: 10
 time
-18576 otim 25686 Received: we got the move f1e2
+31024 otim 31351 Received: we got the move f4e5
 move 
 passes: 10
 
 passes: 11
 time
-18232 otim 25431 Received: we got the move g3g4
+31203 otim 31543 Received: we got the move e5g3
 move 
 passes: 11
 
 passes: 12
 time
-18143 otim 25066 Received: we got the move d1d2
+31374 otim 31735 Received: we got the move f3g4
 move 
 passes: 12
 
 passes: 13
 time
-17094 otim 24634 Received: we got the move e2c4
+31543 otim 31926 Received: we got the move g3e5
 move 
 passes: 13
 
 passes: 14
 time
-15335 otim 23342 Received: we got the move c4b5
+31721 otim 32118 Received: we got the move e5h8
 move 
 passes: 14
 
 passes: 15
 time
-15213 otim 23261 Received: we got the move b8f8
+31880 otim 32310 Received: we got the move h2g3
 move 
 passes: 15
 
 passes: 16
 time
-15155 otim 22600 Received: we got the move d2c3
+32026 otim 32503 Received: we got the move e1c1
 move 
 passes: 16
 
 passes: 17
 time
-15171 otim 22238 Received: we got the move f8c8
+32179 otim 32693 Received: we got the move d1d2
 move 
 passes: 17
 
 passes: 18
 time
-13606 otim 21193 Received: we got the move b5d3
+32345 otim 32885 Received: we got the move c3a4
 move 
 passes: 18
 
 passes: 19
 time
-13102 otim 20906 Received: we got the move d3e4
+32521 otim 33078 Received: we got the move a4b6
 move 
 passes: 19
 
 passes: 20
 time
-12288 otim 20583 Received: we got the move f2f3
+32682 otim 33270 Received: we got the move b6c8
 move 
 passes: 20
 
 passes: 21
 time
-10083 otim 19857 Received: we got the move c3c7
-move resign
+32839 otim 33461 Received: we got the move c4b5
+move 
+passes: 21
+
+passes: 22
+time
+32973 otim 33654 Received: we got the move g1h3
+move 
+passes: 22
+
+passes: 23
+time
+33110 otim 33846 Received: we got the move h8f6
+move 
+passes: 23
+
+passes: 24
+time
+33289 otim 34037 Received: we got the move c8b6
+move 
+passes: 24
+
+passes: 25
+time
+33474 otim 34229 Received: we got the move b3e6
+move 
+passes: 25
+
+passes: 26
+time
+33648 otim 34419 Received: we got the move e6g8
+move 
+passes: 26
+
+passes: 27
+time
+33833 otim 34610 Received: we got the move c1c2
+move 
+passes: 27
+
+passes: 28
+time
+34005 otim 34802 Received: we got the move g8f8
+move 
+passes: 28
+
+passes: 29
+time
+34189 otim 34993 Received: we got the move f8d8
+move 
+passes: 29
+
+passes: 30
+time
+34375 otim 35185 Received: we got the move d8d7
+move 
+passes: 30
+
+passes: 31
+time
+34554 otim 35377 Received: we got the move d7c6
+move 
+passes: 31
+
+passes: 32
+result
