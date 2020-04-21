@@ -24,7 +24,7 @@ class Game {
 
   Game(char wb);
 
-  void print();
+void print();
 
   void remake_print_board(char wb);
 
@@ -59,14 +59,16 @@ class Game {
 // p_pieces - personal vector with pieces
 // h_board - hostile chess board
 // h_pieces - hostile vector with pieces
-// return value: {piece_taken} | we use a vector for return if we want to expand later
-// --> piece_taken - the codification is for an enemy piece (11 - 17 with 0 for no piece taken) as the piece is relative to the attacker
+// return value: {piece_taken_my_codification, piece_taken_enemy_codification, promotion?} | we use a vector for return if we want to expand later
+// --> piece_taken_my_codification - the codification is for an enemy piece (11 - 17 with 0 for no piece taken) as the piece is relative to the attacker
+// --> promotion? - if there was a promotion of a pawn | info to undo the move later
 std::vector<char> apply_move(std::vector<char> &move, std::vector<std::vector<char>> &p_board,std::vector<std::vector<char>> &p_pieces,
 std::vector<std::vector<char>> &h_board, std::vector<std::vector<char>> &h_pieces);
 
 // MODIFIES the internal state of the game !!!
-// structure of info: {piece_taken}
-// --> piece_taken - the codification is for an enemy piece (11 - 17 with 0 for no piece taken) as the piece is relative to the attacker
+// structure of info: {piece_taken_my_codification, piece_taken_enemy_codification, promotion?}
+// --> piece_taken_my_codification - the codification is for an enemy piece (11 - 17 with 0 for no piece taken) as the piece is relative to the attacker
+// --> promotion? - if there was a promotion of a pawn
 // structure of move: {src_x, src_y, dst_x, dst_y, piece_type, priority_code}
 // --> src_x, src_y, dst_x, dst_y - src and dst are as we are making the move so we want to move from dst to the src position the piece
 // p_board - personal chess board 
@@ -76,6 +78,17 @@ std::vector<std::vector<char>> &h_board, std::vector<std::vector<char>> &h_piece
 void undo_move(std::vector<char> &info, std::vector<char> &move,
 std::vector<std::vector<char>> &p_board,std::vector<std::vector<char>> &p_pieces,
 std::vector<std::vector<char>> &h_board, std::vector<std::vector<char>> &h_pieces);
+
+// check for the promotion of pawns
+inline
+void check_promotion(std::vector<char> &info, std::vector<char> &move,
+std::vector<std::vector<char>> &p_board,std::vector<std::vector<char>> &p_pieces,
+std::vector<std::vector<char>> &h_board);
+
+inline
+void undo_promotion(std::vector<char> &info, std::vector<char> &move,
+std::vector<std::vector<char>> &p_board,std::vector<std::vector<char>> &p_pieces,
+std::vector<std::vector<char>> &h_board);
 
 // checks if the king is safe or not
 int check_check(char i, char j, std::vector<std::vector<char>> &chess_board);

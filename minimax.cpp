@@ -123,10 +123,15 @@ std::vector<std::vector<char>> &h_board, std::vector<std::vector<char>> &h_piece
     if (v[0] != PIECE_TAKEN && v[1] != PIECE_TAKEN) {
       // a vector of {x, y, piece type}
       std::vector<std::vector<char>> victims = check_attack(v[0], v[1], p_board);
+      int past_maxi_score = 0;
       for (auto &victim : victims) {
         int victim_piece = victim[2] - 10;
-        score_p += get_score(victim_piece) * (SCORE_INV_PRO / v[2]);
+        int victim_score = get_score(victim_piece);
+        if (victim_score > past_maxi_score) {
+          past_maxi_score = victim_score;
+        }
       }
+      score_p += past_maxi_score - get_score(v[2]);
     }
   }
 

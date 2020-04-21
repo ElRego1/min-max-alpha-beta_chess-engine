@@ -34,7 +34,7 @@
 #define LOW -1000000
 #define HIGH 1000000
 
-#define DEPTH 2
+#define DEPTH 3
 
 #define PRIORITY_EMPTY_CELL 1
 #define PRIORITY_PAWN 3

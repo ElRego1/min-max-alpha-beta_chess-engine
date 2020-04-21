@@ -136,6 +136,8 @@ std::vector<std::vector<char>> &h_board, std::vector<std::vector<char>> &h_piece
     info.push_back(-1);
   }
 
+  check_promotion(info, move, p_board, p_pieces, h_board);
+
   return info;
 }
 
@@ -155,6 +157,10 @@ void Game::undo_move_e(std::vector<char> &info, std::vector<char> &move) {
 void undo_move(std::vector<char> &info, std::vector<char> &move, std::vector<std::vector<char>> &p_board,std::vector<std::vector<char>> &p_pieces,
 std::vector<std::vector<char>> &h_board, std::vector<std::vector<char>> &h_pieces) {
   // structure of move: {src_x, src_y, dst_x, dst_y, piece_type, priority_code} | only the first 4 fields in the vector are mandatory
+
+  // check if we have to undo a promotion
+  undo_promotion(info, move, p_board, p_pieces, h_board);
+
   char src_x = move[0];
   char src_y = move[1];
   char dst_x = move[2];
@@ -196,6 +202,53 @@ std::vector<std::vector<char>> &h_board, std::vector<std::vector<char>> &h_piece
     }
   } else if (info[0] != EMPTY_CELL) {
     std::cout << "#ERROR: undo_move illogical value in info: " << info[0] << std::endl;
+  }
+}
+
+// -------------------------------------- check promotions ------------------------------
+inline
+void check_promotion(std::vector<char> &info, std::vector<char> &move,
+std::vector<std::vector<char>> &p_board,std::vector<std::vector<char>> &p_pieces,
+std::vector<std::vector<char>> &h_board) {
+  char dst_x = move[2];
+  char dst_y = move[3];
+
+  if (dst_x == BOX_LENGTH - 1 && p_board[dst_x][dst_y] == PAWN_M) { // daca e un pion bun de promotie
+    info.push_back(1);
+    p_board[dst_x][dst_y] = QUEEN_M;
+    for (auto &v : p_pieces) {
+      if (v[0] == dst_x && v[1] == dst_y) {
+        v[2] = QUEEN_M;
+      }
+    }
+    char ep_dst_x, ep_dst_y; // enemy's perspective destination x/y
+    change_coordonates(dst_x, dst_y, ep_dst_x, ep_dst_y); // get the destination coordonates from the enemy's perspective
+
+    h_board[ep_dst_x][ep_dst_y] = QUEEN_E; // in the enemy's board we put an enemy queen
+  } else {
+    info.push_back(0);
+  }
+}
+
+inline
+void undo_promotion(std::vector<char> &info, std::vector<char> &move,
+std::vector<std::vector<char>> &p_board,std::vector<std::vector<char>> &p_pieces,
+std::vector<std::vector<char>> &h_board) {
+  // if info[2] == 1 => we had a promotion that we have to undo
+  if (info[2] == 1) {
+    char dst_x = move[2];
+    char dst_y = move[3];
+
+    p_board[dst_x][dst_y] = PAWN_M;
+    for (auto &v : p_pieces) {
+      if (v[0] == dst_x && v[1] == dst_y) {
+        v[2] = PAWN_M;
+      }
+    }
+    char ep_dst_x, ep_dst_y; // enemy's perspective destination x/y
+    change_coordonates(dst_x, dst_y, ep_dst_x, ep_dst_y); // get the destination coordonates from the enemy's perspective
+
+     h_board[ep_dst_x][ep_dst_y] = PAWN_E; // in the enemy's board we put back the pawn
   }
 }
 
