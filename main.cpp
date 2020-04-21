@@ -37,22 +37,6 @@ int main() {
 	// 	std::cout << std::endl;
 	// }
 
-	// for (int i = 0; i < 8; ++i) {
-	// 	std::cout << "# ";
-	// 	for (int j = 0; j < 8; ++j) {
-	// 		std::cout << std::setw(3) << g.m_board[i][j];
-	// 	}
-	// 	std::cout << std::endl;
-	// }
-
-	// for (int i = 0; i < 8; ++i) {
-	// 	std::cout << "# ";
-	// 	for (int j = 0; j < 8; ++j) {
-	// 		std::cout << std::setw(3) << g.e_board[i][j];
-	// 	}
-	// 	std::cout << std::endl;
-	// }
-
 	std::vector<std::vector<char>> chess_board = g.m_board;
 	std::vector<std::vector<char>> positions = g.m_pieces;
 
