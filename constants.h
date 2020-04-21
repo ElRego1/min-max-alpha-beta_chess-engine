@@ -14,6 +14,13 @@
 
 #define EMPTY_CELL 0
 
+#define KING_WHITE_DEFAULT_POS_Y 4
+#define KING_BLACK_DEFAULT_POS_Y 3
+
+#define ROOK_DEFAULT_POS_X 0
+#define ROOK_LEFT_DEFAULT_POS_Y 0
+#define ROOK_RIGHT_DEFAULT_POS_Y 7
+
 #define PAWN_M 1
 #define ROOK_M 2
 #define KNIGHT_M 3
@@ -34,7 +41,7 @@
 #define LOW -1000000
 #define HIGH 1000000
 
-#define DEPTH 3
+#define DEPTH 5
 
 #define PRIORITY_EMPTY_CELL 1
 #define PRIORITY_PAWN 3

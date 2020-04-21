@@ -62,7 +62,7 @@ void print();
 // return value: {piece_taken_my_codification, piece_taken_enemy_codification, promotion?} | we use a vector for return if we want to expand later
 // --> piece_taken_my_codification - the codification is for an enemy piece (11 - 17 with 0 for no piece taken) as the piece is relative to the attacker
 // --> promotion? - if there was a promotion of a pawn | info to undo the move later
-std::vector<char> apply_move(std::vector<char> &move, std::vector<std::vector<char>> &p_board,std::vector<std::vector<char>> &p_pieces,
+inline std::vector<char> apply_move(std::vector<char> &move, std::vector<std::vector<char>> &p_board,std::vector<std::vector<char>> &p_pieces,
 std::vector<std::vector<char>> &h_board, std::vector<std::vector<char>> &h_pieces);
 
 // MODIFIES the internal state of the game !!!
@@ -75,7 +75,7 @@ std::vector<std::vector<char>> &h_board, std::vector<std::vector<char>> &h_piece
 // p_pieces - personal vector with pieces
 // h_board - hostile chess board
 // h_pieces - hostile vector with pieces
-void undo_move(std::vector<char> &info, std::vector<char> &move,
+inline void undo_move(std::vector<char> &info, std::vector<char> &move,
 std::vector<std::vector<char>> &p_board,std::vector<std::vector<char>> &p_pieces,
 std::vector<std::vector<char>> &h_board, std::vector<std::vector<char>> &h_pieces);
 
@@ -87,6 +87,11 @@ std::vector<std::vector<char>> &h_board);
 
 inline
 void undo_promotion(std::vector<char> &info, std::vector<char> &move,
+std::vector<std::vector<char>> &p_board,std::vector<std::vector<char>> &p_pieces,
+std::vector<std::vector<char>> &h_board);
+
+inline
+void check_king_rook_swap(std::vector<char> &move,
 std::vector<std::vector<char>> &p_board,std::vector<std::vector<char>> &p_pieces,
 std::vector<std::vector<char>> &h_board);
 
@@ -103,4 +108,7 @@ std::vector<char> attacks(char i, char j, std::vector<std::vector<char>> &chess_
 // all pieces that can attack my piece
 // return a vector of {x, y, piece type}
 std::vector<std::vector<char>> check_attackers(char i, char j, std::vector<std::vector<char>> &chess_board);
+
+// a helper function to change info in the vector of pieces
+inline void mv_piece_by_pos(const char old_x, const char old_y, const char new_x, const char new_y, std::vector<std::vector<char>> pieces);
 #endif // GAME_H

@@ -37,18 +37,13 @@ std::vector<char> Game::find_next_move() {
   for (auto &move : all_moves) {
     int score;
     // holds info to undo the move later: {piece_taken}
-    std::cout << "# find_next_move inainte de move" << std::endl;
     std::vector<char> info = this->apply_move_m(move);
-    std::cout << "# find_next_move dupa move" << std::endl;
-    this->print();
 
     if (this->is_check_m()) {
       score = LOW - 1;
     } else {
       score = alphabeta_mini(DEPTH - 1, alpha, beta, *this);
-      std::cout << "# score find: " << score << std::endl;
     }
-    std::cout<<"# am trecut de alphabeta_mini din game" << "\n";
     if (score == HIGH) { // if we find this it means we will give checkmate
       std::cout << "#ATENTIE: Am gasit un mod de a castiga cu miscarea: (" << (int) move[0] << ", " << (int) move[1] << ") -> (" << (int) move[2]
         << ", " << (int) move[3] << "); piece: " << (int) this->m_board[move[0]][move[1]] << " -> " << (int) this->m_board[move[2]][move[3]] << std::endl;
@@ -58,12 +53,7 @@ std::vector<char> Game::find_next_move() {
       alpha = score;
       chosen_move = move; // we found a better move than losing
     }
-
-    std::cout << "# find_next_move inainte de undo" << std::endl;
-    this->print();
     this->undo_move_m(info, move);
-    std::cout << "# find_next_move dupa undo" << std::endl;
-    this->print();
   }
   if (chosen_move.size() == 0) {
     std::cout << "#ATENTION: We couldn't find a move that saves our ass and we will get chechmated :(" << std::endl;
@@ -138,6 +128,9 @@ std::vector<std::vector<char>> &h_board, std::vector<std::vector<char>> &h_piece
 
   check_promotion(info, move, p_board, p_pieces, h_board);
 
+  // TODO: implement the addition of the move in info when we will make "get_moves" get this swap move
+  check_king_rook_swap(move, p_board, p_pieces, h_board);
+
   return info;
 }
 
@@ -178,13 +171,12 @@ std::vector<std::vector<char>> &h_board, std::vector<std::vector<char>> &h_piece
   p_board[src_x][src_y] = p_board[dst_x][dst_y];
   p_board[dst_x][dst_y] = info[0]; // load saved information
 
-  // std::cout << "# undo -> info[0]: " << (int) info[0] << " | info[1]: " << (int) info[1] << std::endl;
   // prepare to change the enemy's information
   char ep_src_x, ep_src_y; // enemy's perspective source x/y
   change_coordonates(src_x, src_y, ep_src_x, ep_src_y); // get the source coordonates from the enemy's perspective
   char ep_dst_x, ep_dst_y; // enemy's perspective destination x/y
   change_coordonates(dst_x, dst_y, ep_dst_x, ep_dst_y); // get the destination coordonates from the enemy's perspective
-  char ep_taken_piece = info[0] - 10;
+  // char ep_taken_piece = info[0] - 10;
 
   // change enemy's board
   h_board[ep_src_x][ep_src_y] = h_board[ep_dst_x][ep_dst_y];
@@ -205,7 +197,9 @@ std::vector<std::vector<char>> &h_board, std::vector<std::vector<char>> &h_piece
   }
 }
 
-// -------------------------------------- check promotions ------------------------------
+// -------------------------------------- check functions ------------------------------
+
+// check the promotion of a piece from pawn to queen
 inline
 void check_promotion(std::vector<char> &info, std::vector<char> &move,
 std::vector<std::vector<char>> &p_board,std::vector<std::vector<char>> &p_pieces,
@@ -230,6 +224,7 @@ std::vector<std::vector<char>> &h_board) {
   }
 }
 
+// undo the promotion of a piece from pawn to queen
 inline
 void undo_promotion(std::vector<char> &info, std::vector<char> &move,
 std::vector<std::vector<char>> &p_board,std::vector<std::vector<char>> &p_pieces,
@@ -252,13 +247,49 @@ std::vector<std::vector<char>> &h_board) {
   }
 }
 
+// check swap of king and rook
+inline
+void check_king_rook_swap(std::vector<char> &move,
+std::vector<std::vector<char>> &p_board,std::vector<std::vector<char>> &p_pieces,
+std::vector<std::vector<char>> &h_board) {
+  // char src_x = move[0];
+  char src_y = move[1];
+  char dst_x = move[2];
+  char dst_y = move[3];
+  
+  if (p_board[dst_x][dst_y] == KING_M && ((dst_y - src_y) == 2 || (dst_y - src_y) == -2)) {
+    // we do not check if we can do it because we receive comand from a thrustworthy source
+    // Now we have to move the rook
+    char ep_src_x, ep_src_y, ep_dst_x, ep_dst_y;
+    char rook_src_y, rook_dst_y;
+
+    if (dst_y < KING_WHITE_DEFAULT_POS_Y) { // swap to the left
+      rook_src_y = ROOK_LEFT_DEFAULT_POS_Y;
+      rook_dst_y = dst_y + 1;
+    } else { // swap to the right
+      rook_src_y = ROOK_RIGHT_DEFAULT_POS_Y;
+      rook_dst_y = dst_y - 1;
+    }
+
+    // change my board
+    p_board[dst_x][rook_dst_y] = p_board[ROOK_DEFAULT_POS_X][rook_src_y];
+    p_board[ROOK_DEFAULT_POS_X][rook_src_y] = EMPTY_CELL;
+    mv_piece_by_pos(ROOK_DEFAULT_POS_X, rook_src_y, dst_x, rook_dst_y, p_pieces);
+
+    // change enemy's board
+    change_coordonates(ROOK_DEFAULT_POS_X, rook_src_y, ep_src_x, ep_src_y);
+    change_coordonates(ROOK_DEFAULT_POS_X, rook_dst_y, ep_dst_x, ep_dst_y);
+    h_board[ep_dst_x][ep_dst_y] = h_board[ep_src_x][ep_src_y];
+    h_board[ep_src_x][ep_src_y] = EMPTY_CELL;
+  }
+}
+
 // --------------------------- chess check and attack funcitons --------------------------
 
 // all pieces that can attack my piece
 // return a vector of {x, y, piece type}
 std::vector<std::vector<char>> check_attackers(char i, char j, std::vector<std::vector<char>> &chess_board) {
   std::vector<std::vector<char>> possible_attackers;
-  int cod_piesa = chess_board[i][j];
   // pawn
   if (check_check_validity(i + 1, j + 1, chess_board) == 2 && chess_board[i + 1][j + 1] == 11) {
     possible_attackers.push_back(attacks(i + 1, j + 1, chess_board));
@@ -494,7 +525,6 @@ bool Game::is_check_m() {
   // false - king is safe
   int valid = check_check(x, y, m_board);
   if (valid != 0) {
-    std::cout << "#Sunt in sah" << std::endl;
     return true;
   }
   return false;
@@ -509,7 +539,6 @@ bool Game::is_check_e() {
       break;
     }
   }
-  std::cout<<"# aici" << "\n";
 
   if (x == -1 && y == -1) {
     std::cout << "#EROARE: We did not find the king in the enemy's vector" << std::endl;
@@ -519,9 +548,7 @@ bool Game::is_check_e() {
   // true - check
   // false - king is safe
   int valid = check_check(x, y, e_board);
-  std::cout<<"# aici2" << "\n";
   if (valid != 0) {
-    std::cout << "#Inamicul e in sah" << std::endl;
     return true;
   }
   return false;
@@ -536,7 +563,6 @@ int check_check(char i, char j, std::vector<std::vector<char>> &chess_board) {
 
   // check knight attack
   int temp = check_knight(i, j, chess_board);
-  std::cout<<"# aici trece de check_knight" << "\n";
   if (temp == 1) return 1;
 
   int old_i = i, old_j = j;
@@ -606,8 +632,19 @@ void Game::remake_print_board(char wb) {
   e_pieces = get_initial_positions(e_color);
 }
 
+// --------------------------------- HELPER FUNCTIONS -------------------------
 
-// ------------------------- PRINT ---------------------------------------
+inline void mv_piece_by_pos(const char old_x, const char old_y, const char new_x, const char new_y, std::vector<std::vector<char>> pieces) {
+  for (auto &v : pieces) {
+    if (v[0] == old_x && v[1] == old_y) {
+      v[0] = new_x;
+      v[1] = new_y;
+      break;
+    }
+  }
+}
+
+// ------------------------- PRINT --------------------------------------------
 
 void Game::print() {
   std::cout << "# Matricea mea:" << std::endl;

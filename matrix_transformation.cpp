@@ -20,7 +20,7 @@ void get_matrix_coordonates(std::string &input, char &x, char &y, Game &g) {
 }
 
 // changes the matrix coordonates from the personal point of view to enemy's point of view and vice versa
-void change_coordonates(const char &fst_x, const char &fst_y, char &snd_x, char &snd_y) {
+void change_coordonates(const char fst_x, const char fst_y, char &snd_x, char &snd_y) {
 	snd_x = 7 - fst_x;
 	snd_y = 7 - fst_y;
 }
